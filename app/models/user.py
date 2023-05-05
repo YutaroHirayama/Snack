@@ -1,7 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-
+from .membership import memberships
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -12,7 +12,23 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
+    first_name = db.Column(db.String(50), nullable=False)
+    last_name = db.Column(db.String(50), nullable=False)
+    profile_pic = db.Column(db.String(255))
     hashed_password = db.Column(db.String(255), nullable=False)
+
+    channels_owned = db.relationship("Channel", back_populates="owner")
+    messages = db.relationship('Message', back_populates='user')
+    reactions = db.relationship('Reaction', back_populates='user')
+
+    channels = db.relationship(
+        "User",
+        secondary=memberships,
+        back_populates="members"
+    )
+
+    threads = db.relationship("Thread", back_populates="user")
+
 
     @property
     def password(self):
@@ -29,5 +45,21 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'firstName': self.first_name,
+            'lastName': self.last_name,
+            'profilePic': self.profile_pic,
+            'channels': [channel.to_dict_no_ref() for channel in self.channels],
+            'channelsOwned': [channel.to_dict_no_ref() for channel in self.channels_owned],
+            'messages': [message.to_dict_no_ref() for message in self.messages]
+        }
+
+    def to_dict_no_ref(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'firstName': self.first_name,
+            'lastName': self.last_name,
+            'profilePic': self.profile_pic
         }
