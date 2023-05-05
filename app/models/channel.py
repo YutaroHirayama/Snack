@@ -13,12 +13,13 @@ class Channel(db.Model):
     is_dm = db.Column(db.Boolean, nullable=False)
 
     owner = db.relationship("User", back_populates="channels_owned")
-    messages = db.relationship('Message', back_populates='channel')
+    messages = db.relationship('Message', back_populates='channel', cascade="all, delete")
 
     members = db.relationship(
         "User",
         secondary=memberships,
-        back_populates="channels"
+        back_populates="channels",
+        cascade="all, delete"
     )
 
     def to_dict(self):

@@ -9,7 +9,7 @@ class Reaction(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
-    message_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("messages.id")), nullable=False)
+    message_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("messages.id"), ondelete="CASCADE"), nullable=False)
     reaction = db.Column(db.String, nullable=False)
 
     user = db.relationship("User", back_populates="reactions")
