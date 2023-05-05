@@ -8,7 +8,7 @@ class Message(db.Model):
 
       id = db.Column(db.Integer, primary_key=True)
       user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-      channel_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('channels.id'), nullable=False))
+      channel_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('channels.id')), nullable=False)
       message = db.Column(db.String, nullable=False)
       created_at = db.Column(db.DateTime, nullable=False)
 

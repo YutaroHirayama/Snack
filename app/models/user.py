@@ -22,7 +22,7 @@ class User(db.Model, UserMixin):
     reactions = db.relationship('Reaction', back_populates='user')
 
     channels = db.relationship(
-        "User",
+        "Channel",
         secondary=memberships,
         back_populates="members"
     )
