@@ -83,7 +83,6 @@ function SignupFormModal() {
 						type="text"
 						value={profilePic}
 						onChange={(e) => setProfilePic(e.target.value)}
-						required
 					/>
 				</label>
 				<label>
