@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import "./Channels.css";
 
 const Channels = () => {
-    const user = useSelector(state => state.session.user);
+
     // const channels = useSelector(state => state.channels);
     // fill the channels state with all channels current User is a member of OR owns
     // convert channels into an array
