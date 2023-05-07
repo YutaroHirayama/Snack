@@ -1,0 +1,11 @@
+.signup-container {
+    margin: 0 auto;
+    height: 500px;
+    width: 600px;
+    text-align: center;
+}
+
+.signup-container input {
+    width: 400px;
+    height: 25px;
+}

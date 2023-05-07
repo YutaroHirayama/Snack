@@ -9,7 +9,7 @@ import LandingPage from "./components/LandingPage";
 import HomePage from "./components/HomePage";
 
 function App() {
-  // const sessionUser = useSelector((state) => state.session.user)
+  const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
@@ -18,14 +18,17 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route path="/">
-              <LandingPage />
+          <Route exact path="/">
+
+            {sessionUser ? <HomePage user={sessionUser} isLoaded={isLoaded}/> :  <LandingPage isLoaded={isLoaded} />}
           </Route>
-          <Route path="/home">
-            <HomePage />
+          <Route path="/signup">
+            <SignupFormPage />
+          </Route>
+          <Route path="/login">
+            <LoginFormPage />
           </Route>
         </Switch>
       )}

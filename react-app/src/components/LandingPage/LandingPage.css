@@ -1,0 +1,83 @@
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+section {
+    background-color: #D9E0E7;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+section {
+    padding: 40px 20px;
+}
+
+section h1 {
+    font-size: 50px;
+}
+
+.hero-h2 {
+    font-size: 50px;
+    color: sandybrown;
+    margin-bottom: 20px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Hero section styles */
+#hero {
+    background-image: url("./images/slack-back.png");
+    background-size: cover;
+    color: #fff;
+    text-align: center;
+    padding: 200px 20px;
+}
+
+.hero-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Button style */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #D9E0E7;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    margin-left: 15px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056B3;
+}
