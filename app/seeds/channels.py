@@ -15,7 +15,7 @@ def seed_channels():
     )
     channel4 = Channel(
         owner_id=2,
-        channel_name="The Other Group Doing Slack Project That Is Not As Good As The Snack Team, Group 10, That Is",
+        channel_name="The Other Group Doing Slack Project",
         is_dm=False
     )
 
