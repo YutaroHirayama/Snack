@@ -1,8 +1,8 @@
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux"
 import "./Channels.css";
 
-const Channels = () => {
+const Channels = ({ channels, selectChannel }) => {
 
     // const channels = useSelector(state => state.channels);
     // fill the channels state with all channels current User is a member of OR owns
@@ -12,20 +12,21 @@ const Channels = () => {
 
     useEffect(() => {
         //dispatch thunk to fetch all channels That a user is a member of OR owns by user ID
-    })
+        console.log("CHANNELS: ", channels)
+    }, [])
 
     return (
-        <div id="channels-DM-container">
+        <>
             <div id="channels-container">
-                {channels.map(channel => {
-                    <div className="channel-tag"
-                        onClick={}
-                    >
-                        {channel.name}
-                    </div>
-                })}
+                <h3>Channel:</h3>
+                {channels.map(channel => (
+                    <a className="channel-tag">
+                        {channel.channelName}
+                    </a>
+                ))}
             </div>
-        </div>
+
+        </>
     )
 }
 export default Channels
