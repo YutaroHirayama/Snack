@@ -6,6 +6,7 @@ def seed_channels():
     channel1 = Channel(
         owner_id=1,
         channel_name="The Snack Team",
+        description='The original team',
         is_dm=False
     )
     channel2 = Channel(
@@ -17,6 +18,7 @@ def seed_channels():
     channel4 = Channel(
         owner_id=2,
         channel_name="The Other Group Doing Slack Project",
+        description='The fake team',
         is_dm=False
     )
 

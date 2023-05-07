@@ -10,6 +10,7 @@ class Channel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     channel_name = db.Column(db.String(50))
+    description = db.Column(db.String(1000))
     is_dm = db.Column(db.Boolean, nullable=False)
 
     owner = db.relationship("User", back_populates="channels_owned")
@@ -27,6 +28,7 @@ class Channel(db.Model):
             'id': self.id,
             'ownerId': self.owner_id,
             'channelName': self.channel_name,
+            'description': self.description,
             'isDm': self.is_dm,
             'owner': self.owner.to_dict_no_ref(),
             'messages': [message.to_dict_no_ref() for message in self.messages],
@@ -38,5 +40,6 @@ class Channel(db.Model):
             'id': self.id,
             'ownerId': self.owner_id,
             'channelName': self.channel_name,
+            'description': self.description,
             'isDm': self.is_dm
         }
