@@ -8,6 +8,8 @@ const Channels = () => {
     // fill the channels state with all channels current User is a member of OR owns
     // convert channels into an array
 
+
+
     useEffect(() => {
         //dispatch thunk to fetch all channels That a user is a member of OR owns by user ID
     })
@@ -17,9 +19,10 @@ const Channels = () => {
             <div id="channels-container">
                 {channels.map(channel => {
                     <div className="channel-tag"
+                        onClick={}
                     >
                         {channel.name}
-                        </div>
+                    </div>
                 })}
             </div>
         </div>
