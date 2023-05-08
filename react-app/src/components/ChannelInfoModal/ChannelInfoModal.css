@@ -1,0 +1,14 @@
+#allusers-channelusers-tab {
+    display: flex;
+    justify-content: space-around;
+}
+#allusers-channelusers-tab h3:hover {
+    cursor: pointer;
+    background-color: black;
+    color: white;
+}
+
+#edit-channel-all-users {
+    height: 500px;
+    overflow: scroll;
+}
