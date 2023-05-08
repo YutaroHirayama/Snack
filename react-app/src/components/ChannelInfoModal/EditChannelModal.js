@@ -5,7 +5,6 @@ import { editChannelThunk } from "../../store/session";
 import { useModal } from "../../context/Modal";
 
 const EditChannelModal = ({ channel }) => {
-  console.log(channel.members);
   const [channelName, setChannelName] = useState(channel.channelName);
   const [description, setDescription] = useState(channel.description);
   const [tab, setTab] = useState(true);
@@ -13,6 +12,14 @@ const EditChannelModal = ({ channel }) => {
   const [channelUsers, setChannelUsers] = useState(channel.members);
   const dispatch = useDispatch();
   const { closeModal } = useModal();
+
+  const members = channel.members.filter(
+    (member) => member.id !== channel.ownerId
+  );
+  const memberIds = members.map((member) => member.id);
+  const noneMembers = users?.users?.filter(
+    (user) => !memberIds.includes(user.id) && user.id !== channel.ownerId
+  );
 
   useEffect(() => {
     fetchUsers();
@@ -24,13 +31,14 @@ const EditChannelModal = ({ channel }) => {
     setUsers(allUsers);
   };
 
-  const addMember = (user) => {
+  const addMember = (e) => {
+    e.preventDefault();
     
   };
-  const removeMember = user => {
+  const removeMember = (e) => {
+    e.preventDefault();
 
   };
-
 
   if (!users?.users?.length) return null;
 
@@ -75,32 +83,34 @@ const EditChannelModal = ({ channel }) => {
           </div>
         </div>
         <div id="edit-channel-all-users">
-          {tab === true && users["users"].map((user) => (
-            <div>
+          {tab === true &&
+            noneMembers.map((user) => (
               <div>
-                {user.firstName}, {user.lastName}
+                <div>
+                  {user.firstName}, {user.lastName}
+                </div>
+                <button
+                  disabled={channelUsers.includes(user.id)}
+                  onClick={() => addMember(user.id)}
+                >
+                  Add
+                </button>
               </div>
-              <button
-                disabled={channelUsers.includes(user.id)}
-                onClick={() => addMember(user.id)}
-              >
-                Add
-              </button>
-            </div>
-          ))}
-          {tab === false && channel.members.map((user) => (
-            <div>
+            ))}
+          {tab === false &&
+            members.map((user) => (
               <div>
-                {user.firstName}, {user.lastName}
+                <div>
+                  {user.firstName}, {user.lastName}
+                </div>
+                <button
+                  disabled={channelUsers.includes(user.id)}
+                  onClick={() => removeMember(user.id)}
+                >
+                  Remove
+                </button>
               </div>
-              <button
-                disabled={channelUsers.includes(user.id)}
-                onClick={() => removeMember(user.id)}
-              >
-                Remove
-              </button>
-            </div>
-          ))}
+            ))}
         </div>
         <button>Submit</button>
       </form>
