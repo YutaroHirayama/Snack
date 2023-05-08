@@ -1,8 +1,9 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, db, Channel, Message
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
+from datetime import datetime
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -70,6 +71,39 @@ def sign_up():
             last_name=form.data['lastName'],
             profile_pic=form.data['profilePic']
         )
+
+        tm1 = Message(
+            user_id=1,
+            message="Welcome to Snack! We're excited to have you!",
+            created_at=datetime.now()
+        )
+
+        tm2 = Message(
+            user_id=1,
+            message="To start a Snack chat, begin by clicking 'create' icon next to 'Direct Messages' on your left",
+            created_at=datetime.now()
+        )
+
+        tm3 = Message(
+            user_id=1,
+            message="To start a Snack channel, begin by clicking 'create' icon next to 'Channels' on your left",
+            created_at=datetime.now()
+        )
+
+        tutorial_messages = [tm1, tm2, tm3]
+
+        general_channel = Channel.query.get(1)
+        tutorial_channel = Channel(
+            owner=user,
+            channel_name='Tutorial',
+            description='Welcome to Snack Tutorial',
+            is_dm=False,
+            messages=tutorial_messages
+        )
+
+        tutorial_channel.members.append(user)
+        general_channel.members.append(user)
+
         db.session.add(user)
         db.session.commit()
         login_user(user)
