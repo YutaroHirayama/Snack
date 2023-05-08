@@ -17,6 +17,16 @@ def get_all_channels():
     return {'channels': [channel.to_dict() for channel in channels]}
 
 
+@channel_routes.route('/<int:id>')
+@login_required
+def get_one_channel(id):
+    """
+    This route get one channel by channel_id
+    """
+    channel = Channel.query.get(id)
+    return {'channel': channel.to_dict()}
+
+
 @channel_routes.route('', methods=['POST'])
 @login_required
 def create_channel():
@@ -65,7 +75,6 @@ def update_channel(id):
     if form.validate_on_submit():
 
         channel_to_update.channel_name = form.data['channelName']
-
         channel_to_update.description = form.data['description']
 
         db.session.commit()
@@ -75,64 +84,65 @@ def update_channel(id):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
-# # PATCH too?
-# @channel_routes.route('/<int:channelId>/add-member/<int:userId>', methods=['PUT'])
-# @login_required
-# def add_member_to_channel(channelId, userId):
-#     """
-#     This route adds a member to the channel specified by id
-#     for the logged-in user if that user is the owner
-#     """
+@channel_routes.route('/<int:channelId>/add-members', methods=['PUT'])
+@login_required
+def add_members_to_channel(channelId):
+    """
+    This route adds members to the channel specified by id
+    for the logged-in user if that user is the owner
+    """
 
-#     channel_to_update = Channel.query.get(channelId)
+    channel = Channel.query.get(channelId)
 
-#     if current_user.id != channel_to_update.owner_id:
-#         return {'errors': ['Forbidden']}, 403
+    if current_user.id != channel.owner_id:
+        return {'errors': ['Forbidden']}, 403
 
-#     user_to_add = User.query.get(userId)
+    users_to_add = User.query.filter(User.id in request.form['addUsers']).all()
 
-#     if user_to_add not in channel_to_update.members:
-#         channel_to_update.members.append(user_to_add)
+    [channel.members.append(user) for user in users_to_add if user not in channel.members]
 
-#         db.session.commit()
-#         return {'channel': channel_to_update.to_dict()}
-
-#     # or 422
-#     return {'errors': 'The user is already a member'}, 400
+    db.session.commit()
+    return {'channel': channel.to_dict()}
 
 
-# @channel_routes.route('/<int:id>', methods=['DELETE'])
-# @login_required
-# def delete_channel(id):
-#     """
-#     This route deletes the channel specified by id
-#     if the logged-in user is the owner
-#     """
+@channel_routes.route('/<int:channelId>/delete-members', methods=['PUT'])
+@login_required
+def delete_members_of_channel(channelId):
+    """
+    This route deletes members of the channel specified by id
+    for the logged-in user if that user is the owner
+    """
 
-#     channel_to_delete = Channel.query.get(id)
+    channel = Channel.query.get(channelId)
 
-#     if current_user.id != channel_to_delete.owner_id:
-#         return {'errors': ['Forbidden']}, 403
+    if current_user.id != channel.owner_id:
+        return {'errors': ['Forbidden']}, 403
 
-#     db.session.commit()
-    # return {'channel': delete_channel.to_dict()}
+    users_to_delete = User.query.filter(User.id in request.form['addUsers']).all()
 
-    # or 422
-    # return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+    [channel.members.remove(user) for user in users_to_delete if user in channel.members]
 
-
-
+    db.session.commit()
+    return {'channel': channel.to_dict()}
 
 
+@channel_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_channel(id):
+    """
+    This route deletes the channel specified by id
+    if the logged-in user is the owner
+    """
 
+    channel_to_delete = Channel.query.get(id)
 
-# I'm tripping, Do we need this route??
+    channel_to_delete_name = channel_to_delete.channel_name
 
-# @channel_routes.route('/')
-# @login_required
-# def get_channels_of_logged_in_user():
-#     """
-#     This route gets all channels that the logged in user is a member of
-#     """
-#     channels = Channel.query.filter().all()
-#     return {'channels': [channel.to_dict() for channel in channels]}
+    if current_user.id != channel_to_delete.owner_id:
+        return {'errors': ['Forbidden']}, 403
+
+    db.session.delete(channel_to_delete)
+
+    db.session.commit()
+
+    return {'message': f"Successfully deleted channel {channel_to_delete_name}"}
