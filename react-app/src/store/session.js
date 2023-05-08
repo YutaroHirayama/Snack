@@ -6,6 +6,8 @@ const CREATE_CHANNEL = "channel/CREATE_CHANNEL";
 const DELETE_CHANNEL = "channel/DELETE_CHANNEL";
 const EDIT_CHANNEL = "channel/EDIT_CHANNEL";
 
+
+
 const setUser = (user) => ({
   type: SET_USER,
   payload: user,

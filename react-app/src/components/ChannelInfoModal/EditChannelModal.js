@@ -24,9 +24,13 @@ const EditChannelModal = ({ channel }) => {
     setUsers(allUsers);
   };
 
-  const addUser = (user) => {
-    setChannelUsers([...channelUsers, user]);
+  const addMember = (user) => {
+    
   };
+  const removeMember = user => {
+
+  };
+
 
   if (!users?.users?.length) return null;
 
@@ -78,7 +82,7 @@ const EditChannelModal = ({ channel }) => {
               </div>
               <button
                 disabled={channelUsers.includes(user.id)}
-                onClick={() => addUser(user.id)}
+                onClick={() => addMember(user.id)}
               >
                 Add
               </button>
@@ -91,9 +95,9 @@ const EditChannelModal = ({ channel }) => {
               </div>
               <button
                 disabled={channelUsers.includes(user.id)}
-                onClick={() => addUser(user.id)}
+                onClick={() => removeMember(user.id)}
               >
-                Add
+                Remove
               </button>
             </div>
           ))}
