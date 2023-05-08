@@ -23,6 +23,8 @@ const Channels = ({ channels }) => {
     <>
       <div>
         <h3>Channels</h3>
+        <button
+        >Create Channel</button>
         <div id="channels-container">
           {userChannels.map((channel) => (
             <a className="channel-tag">{channel.channelName}</a>
