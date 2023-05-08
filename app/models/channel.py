@@ -43,3 +43,13 @@ class Channel(db.Model):
             'description': self.description,
             'isDm': self.is_dm
         }
+
+    def to_dict_with_members(self):
+        return {
+            'id': self.id,
+            'ownerId': self.owner_id,
+            'channelName': self.channel_name,
+            'description': self.description,
+            'isDm': self.is_dm,
+            'members': [member.to_dict_no_ref() for member in self.members]
+        }

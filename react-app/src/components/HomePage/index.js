@@ -5,7 +5,7 @@ import Navigation from "../Navigation";
 
 const HomePage = ({ user, isLoaded }) => {
   const channels = user.channels;
-  
+
 
 
   if (!user) return null;
@@ -19,7 +19,7 @@ const HomePage = ({ user, isLoaded }) => {
           <div id="channel-thread-container">
             <h2>Channels: </h2>
             <div>
-              <Channels channels={channels} />
+              <Channels channels={channels}  user={user} />
             </div>
           </div>
         </div>

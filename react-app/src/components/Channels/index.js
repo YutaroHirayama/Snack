@@ -5,7 +5,7 @@ import OpenModalButton from "../OpenModalButton";
 import CreateChannelModal from "../CreateChannelModal";
 import ChannelInfoModal from "../ChannelInfoModal"
 
-const Channels = ({ channels }) => {
+const Channels = ({ channels, user }) => {
   // const userChannels = [];
   const userChannels = []
   const directMessages = [];
@@ -48,7 +48,11 @@ const Channels = ({ channels }) => {
         <h3>Direct Messages</h3>
         <div id="dms-container">
           {directMessages.map((channel) => (
-            <a className="channel-tag">{channel.channelName}</a>
+            <a className="channel-tag">
+              {channel.members
+                .filter(member => member.id !== user.id)
+                .map(member => `${member.firstName} ${member.lastName}`)
+                .join(', ')}</a>
           ))}
         </div></div>
     </>
