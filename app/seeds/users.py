@@ -3,7 +3,8 @@ from sqlalchemy.sql import text
 
 
 # Adds a demo user, you can add other users here if you want
-
+snack = User(
+    username='Snack', email='snack@aa.io', first_name="Snack", last_name="Bot", profile_pic="https://media.cnn.com/api/v1/images/stellar/prod/220321052036-david-beckham-11212021.jpg?c=9x16", password='password')
 demo = User(
     username='Demo', email='demo@aa.io', first_name="David", last_name="Beckham", profile_pic="https://media.cnn.com/api/v1/images/stellar/prod/220321052036-david-beckham-11212021.jpg?c=9x16", password='password')
 marnie = User(
@@ -57,6 +58,7 @@ def seed_users():
     # db.session.add(corbin)
     # db.session.add(yutaro)
     # db.session.add(emir)
+    db.session.add(snack)
     db.session.add(han)
     db.session.add(efren)
     db.session.add(francis)
