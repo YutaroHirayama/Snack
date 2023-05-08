@@ -20,7 +20,7 @@ def get_messages_by_channelId(channelId):
     if current_user not in channel.members:
         return {'errors': ['Forbidden']}, 403
 
-    messages = Message.query.filter(Message.channel_id == channelId)
+    messages = Message.query.filter(Message.channel_id == channelId).order_by(Message.created_at)
 
     return {'messages': [message.to_dict() for message in messages]}
 
