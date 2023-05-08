@@ -45,8 +45,10 @@ def create_channel():
         )
         channel.members.append(current_user)
 
-        #! CHECK HOW IT COMES IN , maybe request.data
-        users_to_add = User.query.filter(User.id in request.form['addUsers']).all()
+        addUsers = request.get_json()['addUsers']
+
+        users_to_add = User.query.filter(User.id.in_(addUsers)).all()
+
         [channel.members.append(user) for user in users_to_add]
 
         db.session.add(channel)
@@ -97,7 +99,9 @@ def add_members_to_channel(channelId):
     if current_user.id != channel.owner_id:
         return {'errors': ['Forbidden']}, 403
 
-    users_to_add = User.query.filter(User.id in request.form['addUsers']).all()
+    addUsers = request.get_json()['addUsers']
+
+    users_to_add = User.query.filter(User.id.in_(addUsers)).all()
 
     [channel.members.append(user) for user in users_to_add if user not in channel.members]
 
@@ -118,9 +122,11 @@ def delete_members_of_channel(channelId):
     if current_user.id != channel.owner_id:
         return {'errors': ['Forbidden']}, 403
 
-    users_to_delete = User.query.filter(User.id in request.form['addUsers']).all()
+    removeUsers = request.get_json()['removeUsers']
 
-    [channel.members.remove(user) for user in users_to_delete if user in channel.members]
+    users_to_remove = User.query.filter(User.id.in_(removeUsers)).all()
+
+    [channel.members.remove(user) for user in users_to_remove if user in channel.members]
 
     db.session.commit()
     return {'channel': channel.to_dict()}
