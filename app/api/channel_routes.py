@@ -44,9 +44,11 @@ def create_channel():
             owner=current_user
         )
         channel.members.append(current_user)
-
+        print("DATA-------------->", request.get_json())
+        print("FORM-->", request.get_json()["addUsers"])
         #! CHECK HOW IT COMES IN , maybe request.data
-        users_to_add = User.query.filter(User.id in request.form['addUsers']).all()
+        users_to_add = User.query.filter(User.id in request.get_json()['addUsers']).all()
+        print("USERRSTOADD___", users_to_add)
         [channel.members.append(user) for user in users_to_add]
 
         db.session.add(channel)

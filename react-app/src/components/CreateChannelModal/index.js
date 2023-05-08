@@ -1,13 +1,16 @@
-import "./CreateChannelModal.css"
+import "./CreateChannelModal.css";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { createChannelThunk } from "../../store/channels";
+import { useModal } from "../../context/Modal";
 
 const CreateChannelModal = () => {
   const [channelName, setChannelName] = useState("");
   const [description, setDescription] = useState("");
   const [users, setUsers] = useState([]);
   const [channelUsers, setChannelUsers] = useState([]);
+  const dispatch = useDispatch();
+  const {closeModal} = useModal()
 
   useEffect(() => {
     fetchUsers();
@@ -26,14 +29,15 @@ const CreateChannelModal = () => {
   if (!users?.users?.length) return null;
 
   const formSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const newChannel = {
-        channelName,
-        isDm: false,
-        description,
-        addUsers: channelUsers
-    }
-  }
+      channelName,
+      isDm: false,
+      description,
+      addUsers: channelUsers,
+    };
+    dispatch(createChannelThunk(newChannel)).then(closeModal);
+  };
   return (
     <>
       <form onSubmit={formSubmit}>
@@ -72,7 +76,7 @@ const CreateChannelModal = () => {
             </div>
           ))}
         </div>
-          <button>Submit</button>
+        <button>Submit</button>
       </form>
     </>
   );
