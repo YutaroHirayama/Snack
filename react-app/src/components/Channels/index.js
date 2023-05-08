@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./Channels.css";
+import OpenModalButton from "../OpenModalButton";
+import CreateChannelModal from "../CreateChannelModal";
 
 const Channels = ({ channels }) => {
   const userChannels = [];
@@ -16,15 +18,16 @@ const Channels = ({ channels }) => {
 
   useEffect(() => {
     //dispatch thunk to fetch all channels That a user is a member of OR owns by user ID
-    console.log("CHANNELS: ", channels);
+    //console.log("CHANNELS: ", channels);
   }, []);
 
   return (
     <>
       <div>
         <h3>Channels</h3>
-        <button
-        >Create Channel</button>
+        <OpenModalButton
+        buttonText="Create Channel"
+        modalComponent={<CreateChannelModal />}/>
         <div id="channels-container">
           {userChannels.map((channel) => (
             <a className="channel-tag">{channel.channelName}</a>
