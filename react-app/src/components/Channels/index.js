@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import "./Channels.css";
 import OpenModalButton from "../OpenModalButton";
 import CreateChannelModal from "../CreateChannelModal";
+import ChannelInfoModal from "../ChannelInfoModal"
 
 const Channels = ({ channels }) => {
   const userChannels = [];
@@ -26,16 +27,23 @@ const Channels = ({ channels }) => {
       <div>
         <h3>Channels</h3>
         <OpenModalButton
-        buttonText="Create Channel"
-        modalComponent={<CreateChannelModal />}/>
+          buttonText="Create Channel"
+          modalComponent={<CreateChannelModal />} />
         <div id="channels-container">
           {userChannels.map((channel) => (
-            <a className="channel-tag">{channel.channelName}</a>
+            <>
+              <a className="channel-tag">{channel.channelName}</a>
+              <OpenModalButton
+                buttonText="Info"
+                // onItemClick={closeMenu}
+                modalComponent={<ChannelInfoModal channel={channel} />}
+              />
+            </>
           ))}
         </div>
       </div>
       <div>
-      <h3>Direct Messages</h3>
+        <h3>Direct Messages</h3>
         <div id="dms-container">
           {directMessages.map((channel) => (
             <a className="channel-tag">{channel.channelName}</a>

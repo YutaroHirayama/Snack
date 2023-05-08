@@ -11,14 +11,16 @@ const HomePage = ({ user, isLoaded }) => {
   if (!user) return null;
   return (
     <>
-    <Navigation isLoaded={isLoaded}/>
+      <Navigation isLoaded={isLoaded} />
       <div id="home-page-container">
         <h1>HOME PAGE</h1>
         <div id="left-side-container">
           <div id="actions-container"></div>
           <div id="channel-thread-container">
             <h2>Channels: </h2>
-            <Channels channels={channels} />
+            <div>
+              <Channels channels={channels} />
+            </div>
           </div>
         </div>
         <div id="messages-container">{/*  <Messages /> */}</div>
