@@ -21,7 +21,6 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/">
-
             {sessionUser ? <HomePage user={sessionUser} isLoaded={isLoaded}/> :  <LandingPage isLoaded={isLoaded} />}
           </Route>
           <Route path="/signup">

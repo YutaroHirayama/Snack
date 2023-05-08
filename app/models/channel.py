@@ -19,18 +19,18 @@ class Channel(db.Model):
     members = db.relationship(
         "User",
         secondary=memberships,
-        back_populates="channels",
-        cascade="all, delete"
+        back_populates="channels"
     )
 
     def to_dict(self):
+        realOwner = self.owner.to_dict_no_ref() if self.owner is not None else None
         return {
             'id': self.id,
             'ownerId': self.owner_id,
             'channelName': self.channel_name,
             'description': self.description,
             'isDm': self.is_dm,
-            'owner': self.owner.to_dict_no_ref(),
+            'owner': realOwner,
             'messages': [message.to_dict_no_ref() for message in self.messages],
             'members': [member.to_dict_no_ref() for member in self.members]
         }
