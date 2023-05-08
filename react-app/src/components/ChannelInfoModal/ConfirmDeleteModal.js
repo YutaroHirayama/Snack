@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal"
-import { deleteChannelThunk } from "../../store/channels";
+import { deleteChannelThunk } from "../../store/session";
 
-const ConfirmDeleteModal = ({channelId}) => {
+const ConfirmDeleteModal = ({ channelId }) => {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
 
@@ -14,7 +14,7 @@ const ConfirmDeleteModal = ({channelId}) => {
         <>
             <h2>Confirm Deletion? {channelId}</h2>
             <button
-            onClick={confirmDelete}>Yes</button>
+                onClick={confirmDelete}>Yes</button>
             <button
                 onClick={closeModal}>No</button>
         </>

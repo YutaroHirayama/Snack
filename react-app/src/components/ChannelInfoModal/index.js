@@ -1,7 +1,7 @@
 import "./ChannelInfoModal.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { createChannelThunk } from "../../store/channels";
+import { createChannelThunk } from "../../store/session";
 import { useModal } from "../../context/Modal";
 import OpenModalButton from "../OpenModalButton";
 import ConfirmDeleteModal from "./ConfirmDeleteModal";

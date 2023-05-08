@@ -2,6 +2,10 @@
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 
+
+const CREATE_CHANNEL = "channel/CREATE_CHANNEL";
+const DELETE_CHANNEL = "channel/DELETE_CHANNEL";
+
 const setUser = (user) => ({
 	type: SET_USER,
 	payload: user,
@@ -11,7 +15,55 @@ const removeUser = () => ({
 	type: REMOVE_USER,
 });
 
-const initialState = { user: null };
+// ========= channels
+
+export const createChannelAction = (channel) => ({
+	type: CREATE_CHANNEL,
+	channel
+})
+
+const deleteChannelAction = channelId => ({
+	type: DELETE_CHANNEL,
+	channelId
+})
+
+export const createChannelThunk = (channel) => async (dispatch) => {
+	const { channelName, isDm, description, addUsers } = channel
+	const res = await fetch("/api/channels", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			channelName,
+			isDm,
+			description,
+			addUsers
+		})
+	})
+	if (res.ok) {
+		const newChannel = await res.json()
+		dispatch(createChannelAction(newChannel))
+	} else {
+		const errors = await res.json();
+		return errors;
+	}
+}
+
+export const deleteChannelThunk = channelId => async dispatch => {
+	const res = await fetch(`/api/channels/${channelId}`, {
+		method: "DELETE"
+	})
+	if (res.ok) {
+		dispatch(deleteChannelAction(channelId))
+	} else {
+		const errors = await res.json();
+		return errors;
+	}
+}
+
+// =============== AUTH
+
 
 export const authenticate = () => async (dispatch) => {
 	const response = await fetch("/api/auth/", {
@@ -97,12 +149,34 @@ export const signUp = (username, email, password, firstName, lastName, profilePi
 	}
 };
 
+const initialState = { user: null };
+
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
-		case SET_USER:
-			return { user: action.payload };
+		case SET_USER: {
+			const newState = { user: action.payload };
+			console.log("NEWSTATE: ", newState)
+			const newChannels = {}
+			newState.user.channels.forEach(channel => {
+				newChannels[channel.id] = channel
+			});
+			newState.user.channels = newChannels
+			return newState;
+		}
 		case REMOVE_USER:
 			return { user: null };
+		case CREATE_CHANNEL:
+			{
+				const newState = { ...state, user: { ...state.user } };
+				newState.user.channels = { ...state.user.channels, [action.channel.channel.id]: action.channel.channel };
+				return newState;
+			}
+		case DELETE_CHANNEL:
+			{
+				const newState = { ...state, user: { ...state.user, channels: { ...state.user.channels } } };
+				delete newState.user.channels[action.channelId];
+				return newState;
+			}
 		default:
 			return state;
 	}

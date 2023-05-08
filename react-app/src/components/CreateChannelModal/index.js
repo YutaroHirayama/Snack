@@ -1,10 +1,11 @@
 import "./CreateChannelModal.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { createChannelThunk } from "../../store/channels";
+import { createChannelThunk } from "../../store/session";
 import { useModal } from "../../context/Modal";
 
 const CreateChannelModal = () => {
+  // const sessionUser = useSelector(state => state.user)
   const [channelName, setChannelName] = useState("");
   const [description, setDescription] = useState("");
   const [users, setUsers] = useState([]);

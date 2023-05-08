@@ -4,8 +4,8 @@ import Channels from "../Channels";
 import Navigation from "../Navigation";
 
 const HomePage = ({ user, isLoaded }) => {
-  const channelsOwned = user.channelsOwned;
-  const channels = channelsOwned;
+  const channels = user.channels;
+  
 
 
   if (!user) return null;

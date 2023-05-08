@@ -6,10 +6,12 @@ import CreateChannelModal from "../CreateChannelModal";
 import ChannelInfoModal from "../ChannelInfoModal"
 
 const Channels = ({ channels }) => {
-  const userChannels = [];
+  // const userChannels = [];
+  const userChannels = []
   const directMessages = [];
 
-  channels.forEach((element) => {
+
+  Object.values(channels).forEach((element) => {
     if (!element.isDm) userChannels.push(element);
     else directMessages.push(element);
   });
