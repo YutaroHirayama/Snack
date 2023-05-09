@@ -17,7 +17,6 @@ const CreateChannelModal = () => {
     fetchUsers();
   }, []);
 
-
   const fetchUsers = async () => {
     const res = await fetch("/api/users/");
     const allUsers = await res.json();

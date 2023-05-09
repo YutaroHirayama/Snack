@@ -49,7 +49,7 @@ class User(db.Model, UserMixin):
             'firstName': self.first_name,
             'lastName': self.last_name,
             'profilePic': self.profile_pic,
-            'channels': [channel.to_dict_no_ref() for channel in self.channels],
+            'channels': [channel.to_dict_with_members() for channel in self.channels],
             'channelsOwned': [channel.to_dict_no_ref() for channel in self.channels_owned],
             'messages': [message.to_dict_no_ref() for message in self.messages]
         }

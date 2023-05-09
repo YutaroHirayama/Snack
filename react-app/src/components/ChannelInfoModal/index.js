@@ -1,20 +1,15 @@
 import "./ChannelInfoModal.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { createChannelThunk } from "../../store/session";
-import { useModal } from "../../context/Modal";
 import OpenModalButton from "../OpenModalButton";
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
+import EditChannelModal from "./EditChannelModal";
 
 
 const ChannelInfoModal = ({channel}) => {
     const sessionUser = useSelector(state => state.session.user)
-    const [channelName, setChannelName] = useState("");
-    const [description, setDescription] = useState("");
     const [owner, setOwner] = useState([]);
     const [channelUsers, setChannelUsers] = useState([]);
-    const dispatch = useDispatch();
-    const { closeModal } = useModal()
 
     useEffect(() => {
         fetchOwner();
@@ -44,11 +39,15 @@ const ChannelInfoModal = ({channel}) => {
                 {owner.firstName} {owner.lastName}
             </div>
             {sessionUser.id === channel.ownerId &&
+            <>
             <OpenModalButton
             buttonText={"Delete"}
             modalComponent={<ConfirmDeleteModal channelId={channel.id} />}
             />
-
+            <OpenModalButton
+            buttonText={"Edit"}
+            modalComponent={<EditChannelModal channel={channel}/>}/>
+            </>
             }
         </>
     );
