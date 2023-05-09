@@ -16,7 +16,8 @@ const EditChannelModal = ({ channel }) => {
   const [, forceRerender] = useState();
   const dispatch = useDispatch();
   const { closeModal } = useModal();
-  const members = Object.values(useSelector(state => state.session.user?.channels[channel.id].members))
+  const _members = Object.values(useSelector(state => state.session.user?.channels[channel.id].members))
+  const members = _members?.filter(member => member.id !== channel.ownerId)
   // const members = Object.values(channel.members).filter(
   //   (member) => member.id !== channel.ownerId
   // );
@@ -34,7 +35,7 @@ const EditChannelModal = ({ channel }) => {
 
   useEffect(() => {
 
-  },[users])
+  }, [users])
 
   const fetchUsers = async () => {
     const res = await fetch("/api/users/");
@@ -45,12 +46,12 @@ const EditChannelModal = ({ channel }) => {
   const addMember = (user, e) => {
     e.preventDefault();
     dispatch(addMemberThunk({ userId: user.id, channelId: channel.id }));
-    setUsers({...users, [user.id]: user})
+    setUsers({ ...users, [user.id]: user })
   };
   const removeMember = (id, e) => {
     e.preventDefault();
     dispatch(removeMemberThunk({ userId: id, channelId: channel.id }));
-    const newUsers = {...users}
+    const newUsers = { ...users }
     delete newUsers[id]
     setUsers(newUsers)
   };
