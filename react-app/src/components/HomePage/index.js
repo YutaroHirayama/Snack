@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Channels from "../Channels";
 import Navigation from "../Navigation";
+import MessagePage from '../MessagePage';
 
 const HomePage = ({ user, isLoaded }) => {
   const channels = user.channels;
@@ -23,7 +24,7 @@ const HomePage = ({ user, isLoaded }) => {
             </div>
           </div>
         </div>
-        <div id="messages-container">{/*  <Messages /> */}</div>
+        <MessagePage/>
       </div>
     </>
   );

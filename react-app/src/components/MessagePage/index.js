@@ -1,30 +1,24 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchMessagesThunk } from "../../store/messages";
+import Message from "../Message";
 import "./MessagePage.css";
 
 
-const MessagePage = ({channelId, channelName}) => {
+const MessagePage = () => {
 
-    const messages = useSelector(state => state.Messages);
-    dispatch = useDispatch();
+    const channel = useSelector(state => state.channels.currentChannel).channel;
+    const messages = channel?.messages
+    console.log('channel------->',channel)
+    console.log('messages------->',messages)
 
-
-    useEffect(()=> {
-
-        dispatch(fetchMessagesThunk(channelId))
-
-    }, []);
-
-
-
+    if(!messages) return null;
 
     return (
         <div className='message-page'>
-            <h2>{channelName}</h2>
+            <h2>{channel.channelName}</h2>
             <div className='messages-container'>
-            {messages.map(m => <Message message={m} />)}
-
+            {messages.map(m => <Message key={m.id} message={m} />)}
             </div>
 
             <div>TEXTAREA</div>
@@ -32,3 +26,5 @@ const MessagePage = ({channelId, channelName}) => {
 
     )
 }
+
+export default MessagePage

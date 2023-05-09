@@ -24,7 +24,9 @@ def get_one_channel(id):
     This route get one channel by channel_id
     """
     channel = Channel.query.get(id)
-    return {'channel': channel.to_dict()}
+    if channel:
+        return {'channel': channel.to_dict()}
+    return {'errors': ["Not Found"]}, 404
 
 
 @channel_routes.route('', methods=['POST'])
