@@ -48,7 +48,7 @@ def create_message(channelId):
 
         db.session.add(new_message)
         db.session.commit()
-        return {'message': new_message.to_dict()}
+        return new_message.to_dict_with_refs()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 

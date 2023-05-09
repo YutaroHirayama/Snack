@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchMessagesThunk } from "../../store/messages";
 import Message from "../Message";
+import MessageInput from "./MessageInput";
 import "./MessagePage.css";
 
 
 const MessagePage = () => {
 
-    const channel = useSelector(state => state.channels.currentChannel).channel;
+    const channel = useSelector(state => state.channels.currentChannel)?.channel;
     const messages = channel?.messages
     console.log('channel------->',channel)
     console.log('messages------->',messages)
@@ -21,7 +22,9 @@ const MessagePage = () => {
             {messages.map(m => <Message key={m.id} message={m} />)}
             </div>
 
-            <div>TEXTAREA</div>
+            <div>
+                <MessageInput channelId={channel.id}/>
+            </div>
         </div>
 
     )
