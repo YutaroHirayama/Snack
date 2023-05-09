@@ -255,11 +255,16 @@ export default function reducer(state = initialState, action) {
     case REMOVE_USER:
       return { user: null };
     case CREATE_CHANNEL: {
+			const newMembers = {};
+			action.channel.channel.members.forEach((member) => {
+				newMembers[member.id] = member
+			})
       const newState = { ...state, user: { ...state.user } };
       newState.user.channels = {
         ...state.user.channels,
-        [action.channel.channel.id]: action.channel.channel,
-      };
+        [action.channel.channel.id]: {...action.channel.channel,
+					members: newMembers
+      }};
       return newState;
     }
     case DELETE_CHANNEL: {
