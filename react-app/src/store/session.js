@@ -6,7 +6,8 @@ const CREATE_CHANNEL = "channel/CREATE_CHANNEL";
 const DELETE_CHANNEL = "channel/DELETE_CHANNEL";
 const EDIT_CHANNEL = "channel/EDIT_CHANNEL";
 
-
+const ADD_MEMBER = "member/ADD_MEMBER";
+const REMOVE_MEMBER = "member/REMOVE_MEMBER";
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -28,6 +29,42 @@ const deleteChannelAction = (channelId) => ({
   type: DELETE_CHANNEL,
   channelId,
 });
+
+// =============== Channel Members
+
+const addMemberAction = (userId) => ({
+  type: ADD_MEMBER,
+  userId
+})
+
+const removeMemberAction = (userId) => ({
+  type: REMOVE_MEMBER,
+  userId
+})
+
+export const addMemberThunk = channel => async dispatch => {
+  const { channelId, userId } = channel
+  userId = [userId]
+  const res = await fetch(`/api/channels/${channelId}/add-members`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      userId
+    })
+  });
+  if (res.ok) {
+    const member = await res.json()
+    dispatch(addMemberAction(member))
+  } else {
+    const errors = await res.json();
+    return errors;
+  }
+}
+
+
+
 
 export const createChannelThunk = (channel) => async (dispatch) => {
   const { channelName, isDm, description, addUsers } = channel;
@@ -84,6 +121,8 @@ export const deleteChannelThunk = (channelId) => async (dispatch) => {
     return errors;
   }
 };
+
+
 
 // =============== AUTH
 
@@ -143,35 +182,35 @@ export const logout = () => async (dispatch) => {
 
 export const signUp =
   (username, email, password, firstName, lastName, profilePic) =>
-  async (dispatch) => {
-    const response = await fetch("/api/auth/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        email,
-        password,
-        firstName,
-        lastName,
-        profilePic,
-      }),
-    });
+    async (dispatch) => {
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          email,
+          password,
+          firstName,
+          lastName,
+          profilePic,
+        }),
+      });
 
-    if (response.ok) {
-      const data = await response.json();
-      dispatch(setUser(data));
-      return null;
-    } else if (response.status < 500) {
-      const data = await response.json();
-      if (data.errors) {
-        return data.errors;
+      if (response.ok) {
+        const data = await response.json();
+        dispatch(setUser(data));
+        return null;
+      } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+          return data.errors;
+        }
+      } else {
+        return ["An error occurred. Please try again."];
       }
-    } else {
-      return ["An error occurred. Please try again."];
-    }
-  };
+    };
 
 const initialState = { user: null };
 
@@ -179,10 +218,16 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER: {
       const newState = { user: action.payload };
-      console.log("NEWSTATE: ", newState);
+      // console.log("NEWSTATE: ", newState);
       const newChannels = {};
       newState.user.channels.forEach((channel) => {
         newChannels[channel.id] = channel;
+        // making members into an object
+        const newChannelMembers = {}
+        newChannels[channel.id].members.forEach((member) => {
+          newChannelMembers[member.id] = member
+        })
+        newChannels[channel.id].members = newChannelMembers
       });
       newState.user.channels = newChannels;
       return newState;
@@ -204,6 +249,10 @@ export default function reducer(state = initialState, action) {
       };
       delete newState.user.channels[action.channelId];
       return newState;
+    }
+    case ADD_MEMBER: {
+      // const newState = { ...state, user: {...state.user}}
+      // newState.usermembers =
     }
     default:
       return state;

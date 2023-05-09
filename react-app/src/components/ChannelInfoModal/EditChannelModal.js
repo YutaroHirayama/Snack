@@ -13,7 +13,7 @@ const EditChannelModal = ({ channel }) => {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
-  const members = channel.members.filter(
+  const members = Object.values(channel.members).filter(
     (member) => member.id !== channel.ownerId
   );
   const memberIds = members.map((member) => member.id);
@@ -31,12 +31,12 @@ const EditChannelModal = ({ channel }) => {
     setUsers(allUsers);
   };
 
-  const addMember = (e) => {
-    e.preventDefault();
-    
+  const addMember = (id) => {
+    console.log(id)
+
   };
-  const removeMember = (e) => {
-    e.preventDefault();
+  const removeMember = (id) => {
+    console.log(id)
 
   };
 
@@ -90,7 +90,6 @@ const EditChannelModal = ({ channel }) => {
                   {user.firstName}, {user.lastName}
                 </div>
                 <button
-                  disabled={channelUsers.includes(user.id)}
                   onClick={() => addMember(user.id)}
                 >
                   Add
@@ -104,7 +103,6 @@ const EditChannelModal = ({ channel }) => {
                   {user.firstName}, {user.lastName}
                 </div>
                 <button
-                  disabled={channelUsers.includes(user.id)}
                   onClick={() => removeMember(user.id)}
                 >
                   Remove
@@ -112,7 +110,8 @@ const EditChannelModal = ({ channel }) => {
               </div>
             ))}
         </div>
-        <button>Submit</button>
+        <button type="submit"
+        >Submit</button>
       </form>
     </>
   );
