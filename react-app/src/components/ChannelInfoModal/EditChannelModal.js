@@ -13,21 +13,28 @@ const EditChannelModal = ({ channel }) => {
   const [description, setDescription] = useState(channel.description);
   const [tab, setTab] = useState(true);
   const [users, setUsers] = useState([]);
-  const [channelUsers, setChannelUsers] = useState(channel.members);
+  const [, forceRerender] = useState();
   const dispatch = useDispatch();
   const { closeModal } = useModal();
-
-  const members = Object.values(channel.members).filter(
-    (member) => member.id !== channel.ownerId
-  );
-  const memberIds = members.map((member) => member.id);
+  const members = Object.values(useSelector(state => state.session.user?.channels[channel.id].members))
+  // const members = Object.values(channel.members).filter(
+  //   (member) => member.id !== channel.ownerId
+  // );
+  const memberIds = members?.map((member) => member.id);
+  // const members = users?.users?.filter(
+  //   (user) => memberIds.includes(user.id) && user.id !== channel.ownerId
+  // );
   const noneMembers = users?.users?.filter(
-    (user) => !memberIds.includes(user.id) && user.id !== channel.ownerId
+    (user) => !memberIds?.includes(user.id) && user.id !== channel.ownerId
   );
 
   useEffect(() => {
     fetchUsers();
   }, []);
+
+  useEffect(() => {
+
+  },[users])
 
   const fetchUsers = async () => {
     const res = await fetch("/api/users/");
@@ -35,14 +42,21 @@ const EditChannelModal = ({ channel }) => {
     setUsers(allUsers);
   };
 
-  const addMember = (id) => {
-    dispatch(addMemberThunk({ userId: id, channelId: channel.id }));
+  const addMember = (user, e) => {
+    e.preventDefault();
+    dispatch(addMemberThunk({ userId: user.id, channelId: channel.id }));
+    setUsers({...users, [user.id]: user})
   };
-  const removeMember = (id) => {
+  const removeMember = (id, e) => {
+    e.preventDefault();
     dispatch(removeMemberThunk({ userId: id, channelId: channel.id }));
+    const newUsers = {...users}
+    delete newUsers[id]
+    setUsers(newUsers)
   };
 
   if (!users?.users?.length) return null;
+  if (!members) return null
 
   const formSubmit = (e) => {
     e.preventDefault();
@@ -91,7 +105,7 @@ const EditChannelModal = ({ channel }) => {
                 <div>
                   {user.firstName}, {user.lastName}
                 </div>
-                <button onClick={() => addMember(user.id)}>Add</button>
+                <button onClick={(e) => addMember(user, e)}>Add</button>
               </div>
             ))}
           {tab === false &&
@@ -100,7 +114,7 @@ const EditChannelModal = ({ channel }) => {
                 <div>
                   {user.firstName}, {user.lastName}
                 </div>
-                <button onClick={() => removeMember(user.id)}>Remove</button>
+                <button onClick={(e) => removeMember(user.id, e)}>Remove</button>
               </div>
             ))}
         </div>

@@ -106,7 +106,7 @@ def add_members_to_channel(channelId):
     [channel.members.append(user) for user in users_to_add if user not in channel.members]
 
     db.session.commit()
-    return {'channel': channel.to_dict()}
+    return {'channel': channel.to_dict(), 'members': [user.to_dict_no_ref() for user in users_to_add]}
 
 
 @channel_routes.route('/<int:channelId>/delete-members', methods=['PUT'])
@@ -129,7 +129,7 @@ def delete_members_of_channel(channelId):
     [channel.members.remove(user) for user in users_to_remove if user in channel.members]
 
     db.session.commit()
-    return {'channel': channel.to_dict()}
+    return {'channel': channel.to_dict(), 'removed_users': [user.to_dict_no_ref() for user in users_to_remove]}
 
 
 @channel_routes.route('/<int:id>', methods=['DELETE'])

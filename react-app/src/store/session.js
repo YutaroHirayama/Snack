@@ -53,12 +53,13 @@ export const addMemberThunk = (channel) => async (dispatch) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-     addUsers: userId,
+      addUsers: userId,
     }),
   });
   if (res.ok) {
     const member = await res.json();
-    dispatch(addMemberAction({ member, channelId }));
+    const newMember = member.members[0]
+    dispatch(addMemberAction({ member: newMember, channelId }));
   } else {
     const errors = await res.json();
     return errors;
@@ -74,11 +75,12 @@ export const removeMemberThunk = (channel) => async (dispatch) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-     removeUsers: userId,
+      removeUsers: userId,
     }),
   });
   if (res.ok) {
-    const member = await res.json();
+    const _member = await res.json();
+    const member = _member.removed_users[0]
     dispatch(removeMemberAction({ member, channelId }));
   } else {
     const errors = await res.json();
@@ -200,35 +202,35 @@ export const logout = () => async (dispatch) => {
 
 export const signUp =
   (username, email, password, firstName, lastName, profilePic) =>
-  async (dispatch) => {
-    const response = await fetch("/api/auth/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        email,
-        password,
-        firstName,
-        lastName,
-        profilePic,
-      }),
-    });
+    async (dispatch) => {
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          email,
+          password,
+          firstName,
+          lastName,
+          profilePic,
+        }),
+      });
 
-    if (response.ok) {
-      const data = await response.json();
-      dispatch(setUser(data));
-      return null;
-    } else if (response.status < 500) {
-      const data = await response.json();
-      if (data.errors) {
-        return data.errors;
+      if (response.ok) {
+        const data = await response.json();
+        dispatch(setUser(data));
+        return null;
+      } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+          return data.errors;
+        }
+      } else {
+        return ["An error occurred. Please try again."];
       }
-    } else {
-      return ["An error occurred. Please try again."];
-    }
-  };
+    };
 
 const initialState = { user: null };
 
@@ -269,14 +271,45 @@ export default function reducer(state = initialState, action) {
       return newState;
     }
     case ADD_MEMBER: {
-      const newState = { ...state, user: { ...state.user } };
-      newState.user.channels[action.channelId][action.member.id] =
+      const newState = {
+        ...state,
+        user: {
+          ...state.user,
+          channels: {
+            ...state.user.channels,
+            [action.channelId]: {
+              ...state.user.channels[action.channelId],
+              members: {
+                ...state.user.channels[action.channelId].members,
+              }
+            }
+          }
+        }
+      };
+      console.log("ACTION MEMBER : ", action.member)
+      newState.user.channels[action.channelId].members[action.member.id] =
         action.member;
       return newState;
     }
     case REMOVE_MEMBER: {
-      const newState = { ...state, user: { ...state.user } };
-      delete newState.user.channels[action.channelId][action.member.id]
+
+      const newState = {
+        ...state,
+        user: {
+          ...state.user,
+          channels: {
+            ...state.user.channels,
+            [action.channelId]: {
+              ...state.user.channels[action.channelId],
+              members: {
+                ...state.user.channels[action.channelId].members,
+              }
+            }
+          }
+        }
+      };
+      console.log(newState.user.channels[action.channelId])
+      delete newState.user.channels[action.channelId].members[action.member.id]
       return newState
     }
     default:
