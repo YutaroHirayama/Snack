@@ -32,39 +32,59 @@ const deleteChannelAction = (channelId) => ({
 
 // =============== Channel Members
 
-const addMemberAction = (userId) => ({
+const addMemberAction = ({ channelId, member }) => ({
   type: ADD_MEMBER,
-  userId
-})
+  channelId,
+  member,
+});
 
-const removeMemberAction = (userId) => ({
+const removeMemberAction = ({ channelId, member }) => ({
   type: REMOVE_MEMBER,
-  userId
-})
+  channelId,
+  member,
+});
 
-export const addMemberThunk = channel => async dispatch => {
-  const { channelId, userId } = channel
-  userId = [userId]
+export const addMemberThunk = (channel) => async (dispatch) => {
+  let { channelId, userId } = channel;
+  userId = [userId];
   const res = await fetch(`/api/channels/${channelId}/add-members`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      userId
-    })
+     addUsers: userId,
+    }),
   });
   if (res.ok) {
-    const member = await res.json()
-    dispatch(addMemberAction(member))
+    const member = await res.json();
+    dispatch(addMemberAction({ member, channelId }));
   } else {
     const errors = await res.json();
     return errors;
   }
-}
+};
 
-
-
+export const removeMemberThunk = (channel) => async (dispatch) => {
+  let { channelId, userId } = channel;
+  userId = [userId];
+  const res = await fetch(`/api/channels/${channelId}/delete-members`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+     removeUsers: userId,
+    }),
+  });
+  if (res.ok) {
+    const member = await res.json();
+    dispatch(removeMemberAction({ member, channelId }));
+  } else {
+    const errors = await res.json();
+    return errors;
+  }
+};
 
 export const createChannelThunk = (channel) => async (dispatch) => {
   const { channelName, isDm, description, addUsers } = channel;
@@ -121,8 +141,6 @@ export const deleteChannelThunk = (channelId) => async (dispatch) => {
     return errors;
   }
 };
-
-
 
 // =============== AUTH
 
@@ -182,35 +200,35 @@ export const logout = () => async (dispatch) => {
 
 export const signUp =
   (username, email, password, firstName, lastName, profilePic) =>
-    async (dispatch) => {
-      const response = await fetch("/api/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          email,
-          password,
-          firstName,
-          lastName,
-          profilePic,
-        }),
-      });
+  async (dispatch) => {
+    const response = await fetch("/api/auth/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        email,
+        password,
+        firstName,
+        lastName,
+        profilePic,
+      }),
+    });
 
-      if (response.ok) {
-        const data = await response.json();
-        dispatch(setUser(data));
-        return null;
-      } else if (response.status < 500) {
-        const data = await response.json();
-        if (data.errors) {
-          return data.errors;
-        }
-      } else {
-        return ["An error occurred. Please try again."];
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(setUser(data));
+      return null;
+    } else if (response.status < 500) {
+      const data = await response.json();
+      if (data.errors) {
+        return data.errors;
       }
-    };
+    } else {
+      return ["An error occurred. Please try again."];
+    }
+  };
 
 const initialState = { user: null };
 
@@ -223,11 +241,11 @@ export default function reducer(state = initialState, action) {
       newState.user.channels.forEach((channel) => {
         newChannels[channel.id] = channel;
         // making members into an object
-        const newChannelMembers = {}
+        const newChannelMembers = {};
         newChannels[channel.id].members.forEach((member) => {
-          newChannelMembers[member.id] = member
-        })
-        newChannels[channel.id].members = newChannelMembers
+          newChannelMembers[member.id] = member;
+        });
+        newChannels[channel.id].members = newChannelMembers;
       });
       newState.user.channels = newChannels;
       return newState;
@@ -251,8 +269,15 @@ export default function reducer(state = initialState, action) {
       return newState;
     }
     case ADD_MEMBER: {
-      // const newState = { ...state, user: {...state.user}}
-      // newState.usermembers =
+      const newState = { ...state, user: { ...state.user } };
+      newState.user.channels[action.channelId][action.member.id] =
+        action.member;
+      return newState;
+    }
+    case REMOVE_MEMBER: {
+      const newState = { ...state, user: { ...state.user } };
+      delete newState.user.channels[action.channelId][action.member.id]
+      return newState
     }
     default:
       return state;

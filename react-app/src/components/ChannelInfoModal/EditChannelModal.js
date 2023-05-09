@@ -1,7 +1,11 @@
 import "./ChannelInfoModal.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { editChannelThunk } from "../../store/session";
+import {
+  addMemberThunk,
+  editChannelThunk,
+  removeMemberThunk,
+} from "../../store/session";
 import { useModal } from "../../context/Modal";
 
 const EditChannelModal = ({ channel }) => {
@@ -32,12 +36,10 @@ const EditChannelModal = ({ channel }) => {
   };
 
   const addMember = (id) => {
-    console.log(id)
-
+    dispatch(addMemberThunk({ userId: id, channelId: channel.id }));
   };
   const removeMember = (id) => {
-    console.log(id)
-
+    dispatch(removeMemberThunk({ userId: id, channelId: channel.id }));
   };
 
   if (!users?.users?.length) return null;
@@ -89,11 +91,7 @@ const EditChannelModal = ({ channel }) => {
                 <div>
                   {user.firstName}, {user.lastName}
                 </div>
-                <button
-                  onClick={() => addMember(user.id)}
-                >
-                  Add
-                </button>
+                <button onClick={() => addMember(user.id)}>Add</button>
               </div>
             ))}
           {tab === false &&
@@ -102,16 +100,11 @@ const EditChannelModal = ({ channel }) => {
                 <div>
                   {user.firstName}, {user.lastName}
                 </div>
-                <button
-                  onClick={() => removeMember(user.id)}
-                >
-                  Remove
-                </button>
+                <button onClick={() => removeMember(user.id)}>Remove</button>
               </div>
             ))}
         </div>
-        <button type="submit"
-        >Submit</button>
+        <button type="submit">Submit</button>
       </form>
     </>
   );
