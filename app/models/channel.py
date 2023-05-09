@@ -14,7 +14,7 @@ class Channel(db.Model):
     is_dm = db.Column(db.Boolean, nullable=False)
 
     owner = db.relationship("User", back_populates="channels_owned")
-    messages = db.relationship('Message', back_populates='channel', cascade="all, delete")
+    messages = db.relationship('Message', back_populates='channel', order_by='Message.created_at', cascade="all, delete")
 
     members = db.relationship(
         "User",
@@ -31,7 +31,7 @@ class Channel(db.Model):
             'description': self.description,
             'isDm': self.is_dm,
             'owner': realOwner,
-            'messages': [message.to_dict_no_ref() for message in self.messages],
+            'messages': [message.to_dict_with_refs() for message in self.messages],
             'members': [member.to_dict_no_ref() for member in self.members]
         }
 

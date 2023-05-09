@@ -26,8 +26,8 @@ class Message(db.Model):
               'createdAt': self.created_at,
               'channel': self.channel.to_dict_no_ref(),
               'user': self.user.to_dict_no_ref(),
-              'reactions': [self.reactions.to_dict_no_ref() for reaction in self.reactions],
-              'threads': [self.threads.to_dict_no_ref() for thread in self.threads]
+              'reactions': [reaction.to_dict_no_ref() for reaction in self.reactions],
+              'threads': [thread.to_dict_no_ref() for thread in self.threads]
           }
 
       def to_dict_no_ref(self):
@@ -38,3 +38,15 @@ class Message(db.Model):
               'message': self.message,
               'createdAt': self.created_at
            }
+
+      def to_dict_with_refs(self):
+           return {
+              'id': self.id,
+              'userId': self.user_id,
+              'channelId': self.channel_id,
+              'message': self.message,
+              'createdAt': self.created_at,
+              'user': self.user.to_dict_no_ref(),
+              'reactions': [reaction.to_dict_no_ref() for reaction in self.reactions],
+              'threads': [thread.to_dict_no_ref() for thread in self.threads]
+          }

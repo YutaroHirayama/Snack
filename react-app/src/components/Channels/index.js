@@ -4,12 +4,13 @@ import "./Channels.css";
 import OpenModalButton from "../OpenModalButton";
 import CreateChannelModal from "../CreateChannelModal";
 import ChannelInfoModal from "../ChannelInfoModal"
+import { fetchChannelThunk } from "../../store/channels";
 
 const Channels = ({ channels, user }) => {
   // const userChannels = [];
   const userChannels = []
   const directMessages = [];
-
+  const dispatch = useDispatch();
 
   Object.values(channels).forEach((element) => {
     if (!element.isDm) userChannels.push(element);
@@ -24,6 +25,16 @@ const Channels = ({ channels, user }) => {
     //console.log("CHANNELS: ", channels);
   }, []);
 
+  const onChannelClick = e => {
+
+    const channelId = e.target.value
+    console.log('TARGET VALUE ----->',e.target.value);
+    const request = dispatch(fetchChannelThunk(channelId))
+        if (request.errors) {
+            alert("Channel Not Found")
+        }
+  }
+
   return (
     <>
       <div>
@@ -34,7 +45,9 @@ const Channels = ({ channels, user }) => {
         <div id="channels-container">
           {userChannels.map((channel) => (
             <>
-              <a className="channel-tag">{channel.channelName}</a>
+              <button className="channel-tag"
+              value={channel.id}
+              onClick={onChannelClick}>{channel.channelName}</button>
               <OpenModalButton
                 buttonText="Info"
                 // onItemClick={closeMenu}
