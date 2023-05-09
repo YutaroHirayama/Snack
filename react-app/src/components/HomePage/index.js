@@ -24,7 +24,7 @@ const HomePage = ({ user, isLoaded }) => {
             </div>
           </div>
         </div>
-        <MessagePage/>
+        <MessagePage user={user}/>
       </div>
     </>
   );

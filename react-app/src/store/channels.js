@@ -59,6 +59,7 @@ export const createMessageThunk = (message, channelId) => async (dispatch) => {
   if(res.ok) {
     const newMessage = await res.json()
     dispatch(createMessageAction(newMessage))
+    return newMessage
   } else {
     const errors = await res.json();
     return errors;
