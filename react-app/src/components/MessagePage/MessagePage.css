@@ -1,0 +1,18 @@
+.message-page {
+    margin-left: 30px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.message-page h2 {
+    color: whitesmoke;
+    width: 50%;
+    text-align: start;
+}
+
+.messages-container {
+    height: 600px;
+    overflow: scroll;
+}

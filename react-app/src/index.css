@@ -1,1 +1,6 @@
 /* TODO Add site wide styles */
+body {
+    background: rgb(155,160,226);
+background: linear-gradient(100deg, rgba(155,160,226,1) 0%, rgba(68,74,177,1) 36%, rgba(52,56,148,1) 74%, rgba(3,5,20,1) 100%, rgba(6,8,33,1) 100%);
+    font-family: 'Montserrat', sans-serif;
+}

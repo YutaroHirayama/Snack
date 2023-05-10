@@ -3,11 +3,10 @@ import { useSelector } from "react-redux";
 import Channels from "../Channels";
 import Navigation from "../Navigation";
 import MessagePage from '../MessagePage';
+import { Route, Switch } from "react-router-dom";
 
 const HomePage = ({ user, isLoaded }) => {
   const channels = user.channels;
-
-
 
   if (!user) return null;
   return (
@@ -15,16 +14,11 @@ const HomePage = ({ user, isLoaded }) => {
       <Navigation isLoaded={isLoaded} />
       <div id="home-page-container">
         <h1>HOME PAGE</h1>
-        <div id="left-side-container">
-          <div id="actions-container"></div>
-          <div id="channel-thread-container">
-            <h2>Channels: </h2>
-            <div>
-              <Channels channels={channels}  user={user} />
-            </div>
+        <div className="channel-message-container">
+          <div>
+            <Channels channels={channels} user={user} />
           </div>
         </div>
-        <MessagePage/>
       </div>
     </>
   );
