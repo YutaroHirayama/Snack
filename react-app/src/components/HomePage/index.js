@@ -2,8 +2,13 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Channels from "../Channels";
 import Navigation from "../Navigation";
+<<<<<<< HEAD
 import MessagePage from "../MessagePage";
 import "./HomePage.css";
+=======
+import MessagePage from '../MessagePage';
+import { Route, Switch } from "react-router-dom";
+>>>>>>> websocket
 
 const HomePage = ({ user, isLoaded }) => {
   const channels = user.channels;

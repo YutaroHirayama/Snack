@@ -6,7 +6,7 @@ import "./Message.css";
 const Message = ({message}) => {
 
     const timestamp = new Date(message.createdAt)
-    console.log('timestamp -->', timestamp, typeof timestamp)
+    // console.log('timestamp -->', timestamp, typeof timestamp)
 
     return (
         <div>

@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
+import MessagePage from "./components/MessagePage"
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import LandingPage from "./components/LandingPage";
 import HomePage from "./components/HomePage";
+import { Redirect } from "react-router-dom";
 
 function App() {
   const sessionUser = useSelector((state) => state.session.user);
@@ -19,17 +21,29 @@ function App() {
   return (
     <>
       {isLoaded && (
-        <Switch>
-          <Route exact path="/">
-            {sessionUser ? <HomePage user={sessionUser} isLoaded={isLoaded}/> :  <LandingPage isLoaded={isLoaded} />}
+        <>
+          <Route path="/">
+            {sessionUser && <HomePage user={sessionUser} isLoaded={isLoaded}/>}
           </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-          <Route path="/login">
-            <LoginFormPage />
-          </Route>
-        </Switch>
+          <Switch>
+            <Route exact path="/">
+              {!sessionUser && <LandingPage isLoaded={isLoaded} />}
+            </Route>
+            <Route exact path="/signup">
+              <SignupFormPage />
+            </Route>
+            <Route exact path="/login">
+              <LoginFormPage />
+            </Route>
+            <Route exact path="/channel/:channelId">
+              {!sessionUser && <Redirect to="/" />}
+              <MessagePage />
+            </Route>
+            <Route exact path="/test">
+              <h1>TEST</h1>
+            </Route>
+          </Switch>
+        </>
       )}
     </>
   );

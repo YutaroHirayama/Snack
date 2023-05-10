@@ -8,6 +8,7 @@ from .models import db, User
 from .api import user_routes, auth_routes, channel_routes, message_routes
 from .seeds import seed_commands
 from .config import Config
+from .socket_io import socketio
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
@@ -32,6 +33,9 @@ app.register_blueprint(message_routes, url_prefix='/api/messages')
 
 db.init_app(app)
 Migrate(app, db)
+
+#initialize app with socket
+socketio.init_app(app)
 
 # Application Security
 CORS(app)
@@ -91,3 +95,7 @@ def react_root(path):
 @app.errorhandler(404)
 def not_found(e):
     return app.send_static_file('index.html')
+
+# run socket
+if __name__ == '__main__':
+    socketio.run(app)
