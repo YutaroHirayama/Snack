@@ -54,7 +54,7 @@ const MessagePage = ({user}) => {
         <div className='message-page'>
             <h2>{channel?.channelName}</h2>
             <div className='messages-container'>
-            {messages.map(m => <Message key={m.id} message={m} />)}
+            {messages.map(m => <Message key={m.id} message={m} user={user} socket={socket} />)}
             </div>
 
             <div>

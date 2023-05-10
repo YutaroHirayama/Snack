@@ -1,5 +1,6 @@
 const GET_ALL_CHANNELS = "channels/GET_ALL_CHANNELS";
-const GET_ONE_CHANNEL = "channels/GET_ONE_CHANNEL"
+const GET_ONE_CHANNEL = "channels/GET_ONE_CHANNEL";
+const EDIT_MESSAGE = "channels/EDIT_MESSAGE";
 const CREATE_CHANNEL = "channel/CREATE_CHANNEL";
 const DELETE_CHANNEL = "channel/DELETE_CHANNEL";
 
@@ -20,6 +21,14 @@ export const createMessageAction = (message) => ({
   message
 });
 
+export const editMessageAction = (message) => {
+  console.log("EDIT MESSAGE ACTION -----------> ", message)
+  return {
+    type: EDIT_MESSAGE,
+    message
+  };
+}
+
 
 //THUNK------------------------------
 
@@ -33,14 +42,14 @@ export const getAllChannelsThunk = () => async (dispatch) => {
 export const fetchChannelThunk = (channelId) => async (dispatch) => {
   const res = await fetch(`/api/channels/${channelId}`);
 
-  if(res.ok) {
+  if (res.ok) {
     const channel = await res.json();
     console.log('Current Channel----->', channel)
     dispatch(fetchChannelAction(channel));
     return channel
   } else {
     const errors = await res.json();
-		return errors;
+    return errors;
   }
 }
 
@@ -56,7 +65,7 @@ export const createMessageThunk = (message, channelId) => async (dispatch) => {
       })
     })
 
-  if(res.ok) {
+  if (res.ok) {
     const newMessage = await res.json()
     dispatch(createMessageAction(newMessage))
     return newMessage
@@ -65,6 +74,28 @@ export const createMessageThunk = (message, channelId) => async (dispatch) => {
     return errors;
   }
 
+}
+
+export const editMessageThunk = (message, text) => async (dispatch) => {
+  const res = await fetch(`/api/messages/${message.id}`,
+    {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message: text
+      })
+    })
+
+  if (res.ok) {
+    const newMessage = await res.json()
+    dispatch(editMessageAction(newMessage))
+    return newMessage
+  } else {
+    const errors = await res.json();
+    return errors;
+  }
 }
 
 
@@ -80,17 +111,51 @@ export default function reducer(state = initialState, action) {
       action.channels.forEach((channel) => { (newState.allChannels.channel[channel.id] = channel) });
       return newState;
     case GET_ONE_CHANNEL:
-      newState = {currentChannel: action.channel};
+      newState = { currentChannel: action.channel };
       return newState;
     case CREATE_MESSAGE:
-    {
-      newState = {...state,
-          currentChannel: {...state.currentChannel,
-            channel: {...state.currentChannel.channel,
-              messages: [...state.currentChannel.channel.messages, action.message]}}};
+      {
+        newState = {
+          ...state,
+          currentChannel: {
+            ...state.currentChannel,
+            channel: {
+              ...state.currentChannel.channel,
+              messages: [...state.currentChannel.channel.messages, action.message]
+            }
+          }
+        };
 
-      return newState;
-    }
+        return newState;
+      }
+    case EDIT_MESSAGE:
+      {
+        newState = {
+          ...state,
+          currentChannel: {
+            ...state.currentChannel,
+            channel: {
+              ...state.currentChannel.channel,
+              messages: [...state.currentChannel.channel.messages]
+            }
+          }
+        };
+        newState.currentChannel.channel.messages.map(message => {
+          console.log("action : ", action)
+          console.log("curr message id: ", message.id)
+
+          console.log("BOOL : ", action.message.message.id === message.id)
+          if (action.message.id === message.id) {
+            console.log("TRUE HERE!@!!!")
+            return action.message
+          } else {
+            return message
+          }
+        })
+
+        return newState;
+
+      }
     default:
       return state;
   }

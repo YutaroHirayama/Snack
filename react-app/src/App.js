@@ -37,7 +37,7 @@ function App() {
             </Route>
             <Route exact path="/channel/:channelId">
               {!sessionUser && <Redirect to="/" />}
-              <MessagePage />
+              <MessagePage user={sessionUser} />
             </Route>
             <Route exact path="/test">
               <h1>TEST</h1>
