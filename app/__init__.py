@@ -5,7 +5,7 @@ from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 from .models import db, User
-from .api import user_routes, auth_routes, channel_routes, message_routes
+from .api import user_routes, auth_routes, channel_routes, message_routes, reaction_routes
 from .seeds import seed_commands
 from .config import Config
 from .socket_io import socketio
@@ -30,6 +30,7 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(channel_routes, url_prefix='/api/channels')
 app.register_blueprint(message_routes, url_prefix='/api/messages')
+app.register_blueprint(reaction_routes, url_prefix='/api/reactions')
 
 db.init_app(app)
 Migrate(app, db)

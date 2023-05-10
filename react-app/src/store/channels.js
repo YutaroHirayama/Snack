@@ -4,6 +4,7 @@ const CREATE_CHANNEL = "channel/CREATE_CHANNEL";
 const DELETE_CHANNEL = "channel/DELETE_CHANNEL";
 
 const CREATE_MESSAGE = "channel/CREATE_MESSAGE";
+const ADD_REACTION = "channel/message/ADD_REACTION"
 
 export const allChannelsAction = (channels) => ({
   type: GET_ALL_CHANNELS,
@@ -20,8 +21,13 @@ export const createMessageAction = (message) => ({
   message
 });
 
+export const addReactionAction = (reaction) => ({
+  type: ADD_REACTION,
+  reaction
+})
 
-//THUNK------------------------------
+
+// CHANNEL THUNKS------------------------------
 
 export const getAllChannelsThunk = () => async (dispatch) => {
   const res = await fetch("/api/channels");
@@ -43,6 +49,8 @@ export const fetchChannelThunk = (channelId) => async (dispatch) => {
 		return errors;
   }
 }
+
+// MESSAGE THUNKS------------------------------
 
 export const createMessageThunk = (message, channelId) => async (dispatch) => {
   const res = await fetch(`/api/messages/channels/${channelId}`,
@@ -68,6 +76,30 @@ export const createMessageThunk = (message, channelId) => async (dispatch) => {
 }
 
 
+// REACTION THUNKS------------------------------
+
+export const addReactionThunk = (reaction, messageId) => async (dispatch) => {
+  const res = await fetch(`/api/reactions/${messageId}`,
+    {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        reaction
+      })
+    })
+
+  if(res.ok) {
+    const newReaction = await res.json()
+    dispatch(addReactionAction(newReaction))
+    return newReaction
+  } else {
+    const errors = await res.json();
+    return errors;
+  }
+}
+
 
 //REDUCER------------------------------
 
@@ -89,6 +121,24 @@ export default function reducer(state = initialState, action) {
             channel: {...state.currentChannel.channel,
               messages: [...state.currentChannel.channel.messages, action.message]}}};
 
+      return newState;
+    }
+    case ADD_REACTION:
+    {
+      const newMessages = {};
+      state.currentChannel.channel.messages.forEach((message) => {
+        newMessages[message.id] = message
+      });
+
+      newState = {...state,
+        currentChannel: {...state.currentChannel,
+          channel: {...state.currentChannel.channel,
+            messages: newMessages}}};
+
+      newState.currentChannel.channel.messages[action.reaction.messageId] = {
+        ...newState.currentChannel.channel.messages[action.reaction.messageId],
+        reactions: [...newState.currentChannel.channel.messages[action.reaction.messageId].reactions, [action.reaction.id] = action.reaction]
+      }
       return newState;
     }
     default:
