@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import "./Channels.css";
 import OpenModalButton from "../OpenModalButton";
 import CreateChannelModal from "../CreateChannelModal";
-import ChannelInfoModal from "../ChannelInfoModal";
 import { fetchChannelThunk } from "../../store/channels";
 import { NavLink, useHistory } from "react-router-dom";
 
@@ -58,11 +57,11 @@ const Channels = ({ channels, user }) => {
                 value={channel.id}
                 onClick={onChannelClick}>{channel.channelName}
               </NavLink>
-              <OpenModalButton
+              {/* <OpenModalButton
                 buttonText="Info"
                 // onItemClick={closeMenu}
                 modalComponent={<ChannelInfoModal channel={channel} />}
-              />
+              /> */}
             </>
           ))}
         </div>

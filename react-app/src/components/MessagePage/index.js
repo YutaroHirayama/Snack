@@ -7,10 +7,12 @@ import "./MessagePage.css";
 import { io } from 'socket.io-client';
 import { fetchChannelThunk } from "../../store/channels";
 import { useParams } from 'react-router-dom';
+import OpenModalButton from "../OpenModalButton";
+import ChannelInfoModal from "../ChannelInfoModal";
 
 let socket
 
-const MessagePage = ({user}) => {
+const MessagePage = ({ user }) => {
 
     const channel = useSelector(state => state.channels?.currentChannel?.channel);
     const messages = channel?.messages;
@@ -18,7 +20,7 @@ const MessagePage = ({user}) => {
 
     const dispatch = useDispatch();
 
-    console.log('messages------->',messages)
+    console.log('messages------->', messages)
     // const params = useParams()
     // const channelId = params.channelId
 
@@ -40,25 +42,29 @@ const MessagePage = ({user}) => {
             // let msgArr = Object.values(msg.messages)
             // setMessages(messages => [...messages, chat])
         })
-        return(() => {
+        return (() => {
             console.log("UNMOUNTED")
             socket.disconnect()
         })
 
-    },[channelId])
+    }, [channelId])
 
 
-    if(!messages) return null;
+    if (!channel || !messages) return null;
 
     return (
         <div className='message-page'>
-            <h2>{channel?.channelName}</h2>
+            <OpenModalButton
+                buttonText={channel.channelName}
+                // onItemClick={closeMenu}
+                modalComponent={<ChannelInfoModal channel={channel} />}
+            />
             <div className='messages-container'>
-            {messages.map(m => <Message key={m.id} message={m} user={user} socket={socket} />)}
+                {messages.map(m => <Message key={m.id} message={m} user={user} socket={socket} />)}
             </div>
 
             <div>
-                <MessageInput user={user} channelId={channel.id} socket={socket}/>
+                <MessageInput user={user} channelId={channel.id} socket={socket} />
             </div>
         </div>
 
