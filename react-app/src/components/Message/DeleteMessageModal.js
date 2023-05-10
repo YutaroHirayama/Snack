@@ -1,12 +1,15 @@
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal"
+import { deleteMessageThunk } from "../../store/channels";
 
 const DeleteMessageModal = ({ message, socket }) => {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
 
-    const confirmDelete = () => {
-
+    const confirmDelete = async (e) => {
+        await dispatch(deleteMessageThunk(message.id));
+        socket.emit('chat', 'DELETED');
+        closeModal()
     }
 
     return (

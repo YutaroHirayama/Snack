@@ -1,6 +1,7 @@
 const GET_ALL_CHANNELS = "channels/GET_ALL_CHANNELS";
 const GET_ONE_CHANNEL = "channels/GET_ONE_CHANNEL";
 const EDIT_MESSAGE = "channels/EDIT_MESSAGE";
+const DELETE_MESSAGE = "channels/DELETE_MESSAGE";
 const CREATE_CHANNEL = "channel/CREATE_CHANNEL";
 const DELETE_CHANNEL = "channel/DELETE_CHANNEL";
 
@@ -22,10 +23,16 @@ export const createMessageAction = (message) => ({
 });
 
 export const editMessageAction = (message) => {
-  console.log("EDIT MESSAGE ACTION -----------> ", message)
   return {
     type: EDIT_MESSAGE,
     message
+  };
+}
+
+export const deleteMessageAction = (messageId) => {
+  return {
+    type: DELETE_MESSAGE,
+    messageId
   };
 }
 
@@ -98,6 +105,19 @@ export const editMessageThunk = (message, text) => async (dispatch) => {
   }
 }
 
+export const deleteMessageThunk = (messageId) => async (dispatch) => {
+  const res = await fetch(`/api/messages/${messageId}`,
+    {
+      method: 'DELETE'
+    })
+
+  if (res.ok) {
+    dispatch(deleteMessageAction(messageId))
+  } else {
+    return { 'errors': "Could not delete" };
+  }
+}
+
 
 
 //REDUCER------------------------------
@@ -141,12 +161,7 @@ export default function reducer(state = initialState, action) {
           }
         };
         newState.currentChannel.channel.messages.map(message => {
-          console.log("action : ", action)
-          console.log("curr message id: ", message.id)
-
-          console.log("BOOL : ", action.message.message.id === message.id)
           if (action.message.id === message.id) {
-            console.log("TRUE HERE!@!!!")
             return action.message
           } else {
             return message
@@ -156,6 +171,27 @@ export default function reducer(state = initialState, action) {
         return newState;
 
       }
+
+    case DELETE_MESSAGE:
+      {
+        newState = {
+          ...state,
+          currentChannel: {
+            ...state.currentChannel,
+            channel: {
+              ...state.currentChannel.channel,
+              messages: [...state.currentChannel.channel.messages]
+            }
+          }
+        };
+
+        newState.currentChannel.channel.messages.filter(message => {
+          return action.messageId !== message.id;
+        });
+
+        return newState;
+      }
+
     default:
       return state;
   }
