@@ -19,8 +19,10 @@ const MessageInput = ({channelId}) => {
     return (
         <form onSubmit={messageSubmit}>
             <textarea
+            className="message-textarea"
             value={message}
             onChange={e=>setMessage(e.target.value)}
+            placeholder="Enter message"
             ></textarea>
             {messageTooLong && <p>{`Message is ${message.length - 10000} characters too long.`}</p>}
             <button

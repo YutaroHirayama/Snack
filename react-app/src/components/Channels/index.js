@@ -3,12 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import "./Channels.css";
 import OpenModalButton from "../OpenModalButton";
 import CreateChannelModal from "../CreateChannelModal";
-import ChannelInfoModal from "../ChannelInfoModal"
+import ChannelInfoModal from "../ChannelInfoModal";
 import { fetchChannelThunk } from "../../store/channels";
 
 const Channels = ({ channels, user }) => {
   // const userChannels = [];
-  const userChannels = []
+  const userChannels = [];
   const directMessages = [];
   const dispatch = useDispatch();
 
@@ -25,29 +25,35 @@ const Channels = ({ channels, user }) => {
     //console.log("CHANNELS: ", channels);
   }, []);
 
-  const onChannelClick = e => {
-
-    const channelId = e.target.value
-    console.log('TARGET VALUE ----->', e.target.value);
-    const request = dispatch(fetchChannelThunk(channelId))
+  const onChannelClick = (e) => {
+    const channelId = e.target.value;
+    console.log("TARGET VALUE ----->", e.target.value);
+    const request = dispatch(fetchChannelThunk(channelId));
     if (request.errors) {
-      alert("Channel Not Found")
+      alert("Channel Not Found");
     }
-  }
+  };
 
   return (
     <>
       <div>
-        <h3>Channels</h3>
-        <OpenModalButton
-          buttonText="Create Channel"
-          modalComponent={<CreateChannelModal />} />
+        <div className="create-channel-container">
+          <h3>Channels</h3>
+            <OpenModalButton
+              buttonText="Create Channel"
+              modalComponent={<CreateChannelModal />}
+            />
+        </div>
         <div id="channels-container">
           {userChannels.map((channel) => (
             <>
-              <button className="channel-tag"
+              <button
+                className="channel-tag"
                 value={channel.id}
-                onClick={onChannelClick}>{channel.channelName}</button>
+                onClick={onChannelClick}
+              >
+                {channel.channelName}
+              </button>
               <OpenModalButton
                 buttonText="Info"
                 // onItemClick={closeMenu}
@@ -63,11 +69,13 @@ const Channels = ({ channels, user }) => {
           {directMessages.map((channel) => (
             <a className="channel-tag">
               {Object.values(channel.members)
-                .filter(member => member.id !== user.id)
-                .map(member => `${member.firstName} ${member.lastName}`)
-                .join(', ')}</a>
+                .filter((member) => member.id !== user.id)
+                .map((member) => `${member.firstName} ${member.lastName}`)
+                .join(", ")}
+            </a>
           ))}
-        </div></div>
+        </div>
+      </div>
     </>
   );
 };

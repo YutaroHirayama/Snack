@@ -15,9 +15,9 @@ const Message = ({message}) => {
             </div>
             <div className='message-header'>
                 <span>{message.user.firstName} {message.user.lastName}</span>
-                <span>{message.createdAt}</span>
+                <span> {message.createdAt}</span>
             </div>
-            <div>
+            <div className="users-message">
                 <p>{message.message}</p>
             </div>
         </div>
