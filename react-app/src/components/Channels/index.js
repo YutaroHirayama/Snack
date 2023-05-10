@@ -5,12 +5,14 @@ import OpenModalButton from "../OpenModalButton";
 import CreateChannelModal from "../CreateChannelModal";
 import ChannelInfoModal from "../ChannelInfoModal"
 import { fetchChannelThunk } from "../../store/channels";
+import { NavLink, useHistory } from "react-router-dom";
 
 const Channels = ({ channels, user }) => {
   // const userChannels = [];
   const userChannels = []
   const directMessages = [];
   const dispatch = useDispatch();
+  const history = useHistory();
 
   Object.values(channels).forEach((element) => {
     if (!element.isDm) userChannels.push(element);
@@ -29,10 +31,12 @@ const Channels = ({ channels, user }) => {
 
     const channelId = e.target.value
     console.log('TARGET VALUE ----->', e.target.value);
-    const request = dispatch(fetchChannelThunk(channelId))
-    if (request.errors) {
-      alert("Channel Not Found")
-    }
+    // history.push(`/channel/${channelId}`);
+
+    // const request = dispatch(fetchChannelThunk(channelId))
+    // if (request.errors) {
+    //   alert("Channel Not Found")
+    // }
   }
 
   return (
@@ -45,9 +49,12 @@ const Channels = ({ channels, user }) => {
         <div id="channels-container">
           {userChannels.map((channel) => (
             <>
-              <button className="channel-tag"
+              <NavLink
+                to={`/channel/${channel.id}`}
+                className="channel-tag"
                 value={channel.id}
-                onClick={onChannelClick}>{channel.channelName}</button>
+                onClick={onChannelClick}>{channel.channelName}
+              </NavLink>
               <OpenModalButton
                 buttonText="Info"
                 // onItemClick={closeMenu}

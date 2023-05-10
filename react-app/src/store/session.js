@@ -105,6 +105,8 @@ export const createChannelThunk = (channel) => async (dispatch) => {
   if (res.ok) {
     const newChannel = await res.json();
     dispatch(createChannelAction(newChannel));
+    console.log('NEW CHANNEL RES --------->', newChannel)
+    return newChannel.channel.id
   } else {
     const errors = await res.json();
     return errors;

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import Channels from "../Channels";
 import Navigation from "../Navigation";
 import MessagePage from '../MessagePage';
+import { Route, Switch } from "react-router-dom";
 
 const HomePage = ({ user, isLoaded }) => {
   const channels = user.channels;
@@ -24,7 +25,6 @@ const HomePage = ({ user, isLoaded }) => {
             </div>
           </div>
         </div>
-        <MessagePage user={user}/>
       </div>
     </>
   );

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createChannelThunk } from "../../store/session";
 import { useModal } from "../../context/Modal";
+import { useHistory } from 'react-router-dom';
 
 const CreateChannelModal = () => {
   // const sessionUser = useSelector(state => state.user)
@@ -11,7 +12,8 @@ const CreateChannelModal = () => {
   const [users, setUsers] = useState([]);
   const [channelUsers, setChannelUsers] = useState([]);
   const dispatch = useDispatch();
-  const {closeModal} = useModal()
+  const {closeModal} = useModal();
+  const history = useHistory();
 
   useEffect(() => {
     fetchUsers();
@@ -29,7 +31,7 @@ const CreateChannelModal = () => {
 
   if (!users?.users?.length) return null;
 
-  const formSubmit = (e) => {
+  const formSubmit = async (e) => {
     e.preventDefault();
     const newChannel = {
       channelName,
@@ -37,7 +39,12 @@ const CreateChannelModal = () => {
       description,
       addUsers: channelUsers,
     };
-    dispatch(createChannelThunk(newChannel)).then(closeModal);
+
+    const res = await dispatch(createChannelThunk(newChannel))
+
+    closeModal()
+
+    history.push(`/channel/${res}`)
   };
   return (
     <>
