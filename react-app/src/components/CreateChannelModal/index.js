@@ -5,7 +5,7 @@ import { createChannelThunk } from "../../store/session";
 import { useModal } from "../../context/Modal";
 import { useHistory } from 'react-router-dom';
 
-const CreateChannelModal = ({ sessionUser }) => {
+const CreateChannelModal = ({ sessionUser, socket }) => {
   // const sessionUser = useSelector(state => state.user)
   const [channelName, setChannelName] = useState("");
   const [description, setDescription] = useState("");
@@ -42,7 +42,7 @@ const CreateChannelModal = ({ sessionUser }) => {
     };
 
     const res = await dispatch(createChannelThunk(newChannel))
-
+    socket.emit('chat', "created channel")
     closeModal()
 
     history.push(`/channel/${res}`)

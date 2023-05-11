@@ -9,7 +9,7 @@ import {
 import { useModal } from "../../context/Modal";
 import { fetchChannelThunk } from "../../store/channels";
 
-const EditChannelModal = ({ channel }) => {
+const EditChannelModal = ({ channel, socket }) => {
   const [channelName, setChannelName] = useState(channel.channelName);
   const [description, setDescription] = useState(channel.description);
   const [tab, setTab] = useState(true);
@@ -69,6 +69,7 @@ const EditChannelModal = ({ channel }) => {
     };
     await dispatch(editChannelThunk(updatedChannel))
     await dispatch(fetchChannelThunk(channel.id))
+    socket.emit('chat', "updated channel")
     closeModal();
 
   };

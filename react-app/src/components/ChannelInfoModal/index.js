@@ -6,7 +6,7 @@ import ConfirmDeleteModal from "./ConfirmDeleteModal";
 import EditChannelModal from "./EditChannelModal";
 
 
-const ChannelInfoModal = ({ channel }) => {
+const ChannelInfoModal = ({ channel, socket }) => {
     const sessionUser = useSelector(state => state.session.user)
     const [owner, setOwner] = useState([]);
     const [channelUsers, setChannelUsers] = useState([]);
@@ -42,11 +42,11 @@ const ChannelInfoModal = ({ channel }) => {
 
                     <OpenModalButton
                         buttonText={"Delete"}
-                        modalComponent={<ConfirmDeleteModal channelId={channel.id} />}
+                        modalComponent={<ConfirmDeleteModal channelId={channel.id} socket={socket} />}
                     />
                     <OpenModalButton
                         buttonText={"Edit"}
-                        modalComponent={<EditChannelModal channel={channel} />} />
+                        modalComponent={<EditChannelModal channel={channel} socket={socket} />} />
                 </>
             }
             <h3>Channel Members</h3>

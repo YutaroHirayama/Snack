@@ -4,8 +4,12 @@ import "./Channels.css";
 import OpenModalButton from "../OpenModalButton";
 import CreateChannelModal from "../CreateChannelModal";
 import { fetchChannelThunk } from "../../store/channels";
+import { io } from "socket.io-client";
+import { authenticate } from "../../store/session";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import CreateDirectMessageModal from "../CreateDirectMessageModal";
+
+let socket;
 
 const Channels = ({ channels, user }) => {
   // const userChannels = [];
@@ -24,8 +28,20 @@ const Channels = ({ channels, user }) => {
   // convert channels into an array
 
   useEffect(() => {
+    socket = io();
+    console.log("IS THIS RUNNING?")
     //dispatch thunk to fetch all channels That a user is a member of OR owns by user ID
     //console.log("CHANNELS: ", channels);
+    socket.on("chat", (chat) => {
+
+      dispatch(authenticate())
+
+    })
+
+    return (() => {
+      socket.disconnect()
+    })
+
   }, []);
 
   const onChannelClick = e => {
@@ -62,7 +78,7 @@ const Channels = ({ channels, user }) => {
           <h3>Channels</h3>
           <OpenModalButton
             buttonText="Create Channel"
-            modalComponent={<CreateChannelModal sessionUser={user} />}
+            modalComponent={<CreateChannelModal sessionUser={user} socket={socket} />}
           />
         </div>
         <div id="channels-container">
@@ -83,7 +99,7 @@ const Channels = ({ channels, user }) => {
         <h3>Direct Messages</h3>
         <OpenModalButton
           buttonText="Create Direct Message"
-          modalComponent={<CreateDirectMessageModal channels={directMessages} sessionUser={user} />}
+          modalComponent={<CreateDirectMessageModal channels={directMessages} sessionUser={user} socket={socket} />}
         />
         <div id="dms-container">
           {directMessages.map((channel) => (

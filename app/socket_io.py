@@ -18,6 +18,6 @@ socketio = SocketIO(cors_allowed_origins=origins)
 def handle_chat(data):
   emit('chat', data, broadcast=True)
 
-@socketio.on('thread')
-def handle_thread(data):
-  emit('thread', data, broadcast=True)
+# @socketio.on('chat')
+# def handle_createChannel(data):
+#   emit('chat', data, broadcast=True)
