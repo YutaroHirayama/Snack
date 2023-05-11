@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addReactionThunk } from "../../store/channels";
 
-const Reaction = ({reaction, messageId}) => {
+const Reaction = ({reaction, count, messageId}) => {
   // const messageState = useSelector(state => state.channels?.currentChannel?.channel?.messages?.messageId)
   // const reactionState = messageState?.reactions?.
 
@@ -26,7 +26,7 @@ const Reaction = ({reaction, messageId}) => {
         <>
           <button
             onClick={onClick}
-          >{reaction.reaction}</button>
+          >{reaction} {count}</button>
         </>
     )
 }

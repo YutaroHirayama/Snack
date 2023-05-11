@@ -49,7 +49,7 @@ def seed_reactions():
     db.session.commit()
     print('all reactions added')
 
-def undo_messages():
+def undo_reactions():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.reactions RESTART IDENTITY CASCADE;")
     else:

@@ -8,9 +8,23 @@ import ReactionFormModal from "../Reaction/ReactionFormModal";
 
 
 const Message = ({message}) => {
-    const reactions = Object.values(message.reactions)
+    const allReactions = Object.values(message.reactions)
     const timestamp = new Date(message.createdAt)
     // console.log('timestamp -->', timestamp, typeof timestamp)
+
+    let reactions = []
+    if (allReactions.length) {
+        const resObj = {}
+        for (let i = 0; i < allReactions.length; i++) {
+            let reaction = allReactions[i].reaction;
+            if(resObj[reaction]) {
+                resObj[reaction] += 1
+            } else {
+                resObj[reaction] = 1
+            }
+        }
+        reactions = Object.entries(resObj)
+    }
 
     const handleClick = (e) => {
         e.preventDefault()
@@ -35,8 +49,8 @@ const Message = ({message}) => {
             <div className="users-message">
                 <p>{message.message}</p>
                 <div className='reaction-container'>
-                    {reactions && reactions.map(r =>
-                        <Reaction reaction={r} messageId={message.id}/>
+                    {reactions.length && reactions.map(r =>
+                        <Reaction reaction={r[0]} count={r[1]} messageId={message.id}/>
                     )}
                 </div>
                 <div>
