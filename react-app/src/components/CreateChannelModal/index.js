@@ -5,14 +5,14 @@ import { createChannelThunk } from "../../store/session";
 import { useModal } from "../../context/Modal";
 import { useHistory } from 'react-router-dom';
 
-const CreateChannelModal = () => {
+const CreateChannelModal = ({ sessionUser }) => {
   // const sessionUser = useSelector(state => state.user)
   const [channelName, setChannelName] = useState("");
   const [description, setDescription] = useState("");
   const [users, setUsers] = useState([]);
   const [channelUsers, setChannelUsers] = useState([]);
   const dispatch = useDispatch();
-  const {closeModal} = useModal();
+  const { closeModal } = useModal();
   const history = useHistory();
 
   useEffect(() => {
@@ -21,7 +21,8 @@ const CreateChannelModal = () => {
 
   const fetchUsers = async () => {
     const res = await fetch("/api/users/");
-    const allUsers = await res.json();
+    const _allUsers = await res.json();
+    const allUsers = _allUsers.users.filter(user => user.id !== sessionUser.id)
     setUsers(allUsers);
   };
 
@@ -29,7 +30,7 @@ const CreateChannelModal = () => {
     setChannelUsers([...channelUsers, user]);
   };
 
-  if (!users?.users?.length) return null;
+  if (!users?.length) return null;
 
   const formSubmit = async (e) => {
     e.preventDefault();
@@ -70,7 +71,7 @@ const CreateChannelModal = () => {
         </label>
 
         <div id="create-channel-all-users">
-          {users["users"].map((user) => (
+          {users.map((user) => (
             <div>
               <div>
                 {user.firstName}, {user.lastName}

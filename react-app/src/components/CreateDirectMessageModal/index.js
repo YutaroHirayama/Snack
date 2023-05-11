@@ -20,7 +20,8 @@ const CreateDirectMessageModal = ({ channels, sessionUser }) => {
 
     const fetchUsers = async () => {
         const res = await fetch("/api/users/");
-        const allUsers = await res.json();
+        const _allUsers = await res.json();
+        const allUsers = _allUsers.users.filter(user => user.id !== sessionUser.id)
         setUsers(allUsers);
     };
 
@@ -29,7 +30,7 @@ const CreateDirectMessageModal = ({ channels, sessionUser }) => {
         setChannelUsers([...channelUsers, user]);
     };
 
-    if (!users?.users?.length) return null;
+    if (!users?.length) return null;
 
     const formSubmit = async (e) => {
         e.preventDefault();
@@ -79,7 +80,7 @@ const CreateDirectMessageModal = ({ channels, sessionUser }) => {
             <form onSubmit={formSubmit}>
                 <h3>Create Direct Message</h3>
                 <div id="create-channel-all-users">
-                    {users["users"].map((user) => (
+                    {users.map((user) => (
                         <div>
                             <div>
                                 {user.firstName}, {user.lastName}

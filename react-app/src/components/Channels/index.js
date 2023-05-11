@@ -62,7 +62,7 @@ const Channels = ({ channels, user }) => {
           <h3>Channels</h3>
           <OpenModalButton
             buttonText="Create Channel"
-            modalComponent={<CreateChannelModal />}
+            modalComponent={<CreateChannelModal sessionUser={user} />}
           />
         </div>
         <div id="channels-container">
@@ -83,7 +83,7 @@ const Channels = ({ channels, user }) => {
         <h3>Direct Messages</h3>
         <OpenModalButton
           buttonText="Create Direct Message"
-          modalComponent={<CreateDirectMessageModal channels={directMessages} sessionUser={user}/>}
+          modalComponent={<CreateDirectMessageModal channels={directMessages} sessionUser={user} />}
         />
         <div id="dms-container">
           {directMessages.map((channel) => (

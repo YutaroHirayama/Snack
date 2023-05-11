@@ -27,7 +27,7 @@ const ChannelInfoModal = ({ channel }) => {
     };
 
 
-    return (
+    return !channel.isDm ? (
         <>
             <h2>{channel.channelName}</h2>
             <div>
@@ -37,7 +37,7 @@ const ChannelInfoModal = ({ channel }) => {
                 Created By:
                 {owner.firstName} {owner.lastName}
             </div>
-            {sessionUser.id === channel.ownerId && !channel.isDm &&
+            {sessionUser.id === channel.ownerId &&
                 <>
 
                     <OpenModalButton
@@ -49,7 +49,26 @@ const ChannelInfoModal = ({ channel }) => {
                         modalComponent={<EditChannelModal channel={channel} />} />
                 </>
             }
+            <h3>Channel Members</h3>
+            {channel.members.map((user) => (
+                <div>
+                    <div>
+                        {user.firstName}, {user.lastName}
+                    </div>
+                </div>
+            ))}
         </>
-    );
+    ) :
+        (<>
+            <h3>Channel Members</h3>
+            {channel.members.map((user) => (
+                <div>
+                    <div>
+                        {user.firstName}, {user.lastName}
+                    </div>
+                </div>
+            ))}
+        </>
+        )
 };
 export default ChannelInfoModal;
