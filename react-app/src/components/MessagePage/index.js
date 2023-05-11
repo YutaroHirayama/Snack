@@ -13,7 +13,8 @@ let socket
 const MessagePage = ({user}) => {
 
     const channel = useSelector(state => state.channels?.currentChannel?.channel);
-    const messages = channel?.messages;
+    const messages = channel?.messages ? Object.values(channel.messages) : false
+
     // const [messages, setMessages] = useState();
 
     const dispatch = useDispatch();
@@ -54,7 +55,7 @@ const MessagePage = ({user}) => {
         <div className='message-page'>
             <h2>{channel?.channelName}</h2>
             <div className='messages-container'>
-            {messages.map(m => <Message key={m.id} message={m} />)}
+            {messages && messages.map(m => <Message key={m.id} message={m} />)}
 
             </div>
 

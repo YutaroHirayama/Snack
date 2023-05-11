@@ -58,7 +58,7 @@ def seed_users():
     # db.session.add(corbin)
     # db.session.add(yutaro)
     # db.session.add(emir)
-    db.session.add(snack)
+    # db.session.add(snack)
     db.session.add(han)
     db.session.add(efren)
     db.session.add(francis)

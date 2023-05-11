@@ -50,7 +50,7 @@ const Message = ({message}) => {
                 <p>{message.message}</p>
                 <div className='reaction-container'>
                     {reactions.length && reactions.map(r =>
-                        <Reaction reaction={r[0]} count={r[1]} messageId={message.id}/>
+                        <Reaction reaction={r[0]} count={r[1]} message={message}/>
                     )}
                 </div>
                 <div>

@@ -1,6 +1,6 @@
 from app.models import db, Channel, User, environment, SCHEMA
 from sqlalchemy.sql import text
-from .users import all_users, demo, marnie, bobbie, serghei, corbin, yutaro, emir
+from .users import all_users, demo, marnie, bobbie, serghei, corbin, yutaro, emir, snack
 
 def seed_channels():
     general = Channel(
@@ -38,6 +38,7 @@ def seed_channels():
     channel1.members.append(corbin)
     channel1.members.append(yutaro)
     channel1.members.append(emir)
+    general.members.append(snack)
 
     channel2.members.append(serghei)
     channel2.members.append(yutaro)

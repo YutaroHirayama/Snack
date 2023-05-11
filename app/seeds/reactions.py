@@ -43,6 +43,11 @@ def seed_reactions():
         message_id=3,
         reaction='👎🏻',
     )
+    reaction8 = Reaction(
+        user_id=1,
+        message_id=1,
+        reaction='👎🏻',
+    )
 
     all_reactions = [reaction1, reaction2, reaction3, reaction4, reaction5, reaction6, reaction7, reaction8]
     add_reactions = [db.session.add(reaction) for reaction in all_reactions]
