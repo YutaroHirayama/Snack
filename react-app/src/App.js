@@ -30,12 +30,12 @@ function App() {
             <Route exact path="/">
               {!sessionUser && <LandingPage isLoaded={isLoaded} />}
             </Route>
-            <Route exact path="/signup">
+            {/* <Route exact path="/signup">
               <SignupFormPage />
             </Route>
             <Route exact path="/login">
               <LoginFormPage />
-            </Route>
+            </Route> */}
           </Switch>
           <Route path="/channel/:channelId">
             {!sessionUser && <Redirect to="/" />}
