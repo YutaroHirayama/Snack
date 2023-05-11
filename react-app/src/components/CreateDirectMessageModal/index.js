@@ -43,9 +43,7 @@ const CreateDirectMessageModal = ({ channels, sessionUser }) => {
 
         let ableToCreate = true;
 
-
         for (let channel of channels) {
-
             if (!canCreate(currentDmUsers, channel.members)) {
                 ableToCreate = false;
                 break

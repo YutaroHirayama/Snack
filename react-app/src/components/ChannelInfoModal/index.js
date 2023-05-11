@@ -37,15 +37,16 @@ const ChannelInfoModal = ({ channel }) => {
                 Created By:
                 {owner.firstName} {owner.lastName}
             </div>
-            {sessionUser.id === channel.ownerId &&
+            {sessionUser.id === channel.ownerId && !channel.isDm &&
                 <>
+
                     <OpenModalButton
                         buttonText={"Delete"}
                         modalComponent={<ConfirmDeleteModal channelId={channel.id} />}
                     />
-                    {!channel.isDm && <OpenModalButton
+                    <OpenModalButton
                         buttonText={"Edit"}
-                        modalComponent={<EditChannelModal channel={channel} />} />}
+                        modalComponent={<EditChannelModal channel={channel} />} />
                 </>
             }
         </>
