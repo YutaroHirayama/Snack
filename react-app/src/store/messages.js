@@ -1,29 +1,36 @@
-const LOAD_MESSAGES = 'messages/LOAD_MESSAGES'
+const LOAD_MESSAGE = 'message/LOAD_MESSAGES'
 
 
-const loadMessagesAction = (messages) => {
+const loadMessageAction = (message) => {
     return {
-        type: LOAD_MESSAGES,
-        messages
+        type: LOAD_MESSAGE,
+        message
     }
 }
-export const fetchMessagesThunk = (channelId) => async dispatch => {
-    const response = await fetch()
+export const fetchMessageThunk = (messageId) => async dispatch => {
+    const res = await fetch(`/api/messages/${messageId}`)
 
-
+    if (res.ok) {
+        const message = await res.json()
+        console.log("MESSAGE FROM FETCH: -----> ", message);
+        const newMessage = await dispatch(loadMessageAction(message))
+        return newMessage
+    } else {
+        const errors = await res.json();
+        return errors;
+    }
 }
 
 
-const initialState = { messages: {} }
+const initialState = { currentMessage: {} }
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
-        case LOAD_MESSAGES:
-            const newState = {}
-            action.messages.forEach((message, index) => {
-                newState[index] = message
-            })
-            return { user: action.payload };
+        case LOAD_MESSAGE: {
+            const newState = { ...state }
+            newState.currentMessage = action.message
+            return newState
+        }
         default:
             return state;
     }

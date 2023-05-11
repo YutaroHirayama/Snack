@@ -51,7 +51,7 @@ export const fetchChannelThunk = (channelId) => async (dispatch) => {
 
   if (res.ok) {
     const channel = await res.json();
-    console.log('Current Channel----->', channel)
+    // console.log('Current Channel----->', channel)
     dispatch(fetchChannelAction(channel));
     return channel
   } else {
@@ -131,7 +131,7 @@ export default function reducer(state = initialState, action) {
       action.channels.forEach((channel) => { (newState.allChannels.channel[channel.id] = channel) });
       return newState;
     case GET_ONE_CHANNEL:
-      newState = { currentChannel: action.channel };
+      newState = { allChannels: { ...state.allChannels }, currentChannel: action.channel };
       return newState;
     case CREATE_MESSAGE:
       {
