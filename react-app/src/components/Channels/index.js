@@ -5,6 +5,7 @@ import OpenModalButton from "../OpenModalButton";
 import CreateChannelModal from "../CreateChannelModal";
 import { fetchChannelThunk } from "../../store/channels";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
+import CreateDirectMessageModal from "../CreateDirectMessageModal";
 
 const Channels = ({ channels, user }) => {
   // const userChannels = [];
@@ -73,24 +74,29 @@ const Channels = ({ channels, user }) => {
                 value={channel.id}
                 onClick={onChannelClick}>{channel.channelName}
               </NavLink>
-              {/* <OpenModalButton
-                buttonText="Info"
-                // onItemClick={closeMenu}
-                modalComponent={<ChannelInfoModal channel={channel} />}
-              /> */}
+
             </>
           ))}
         </div>
       </div>
       <div>
         <h3>Direct Messages</h3>
+        <OpenModalButton
+          buttonText="Create Direct Message"
+          modalComponent={<CreateDirectMessageModal channels={directMessages} sessionUser={user}/>}
+        />
         <div id="dms-container">
           {directMessages.map((channel) => (
             <a className="channel-tag">
-              {Object.values(channel.members)
-                .filter((member) => member.id !== user.id)
-                .map((member) => `${member.firstName} ${member.lastName}`)
-                .join(", ")}
+              <NavLink
+                to={`${generateLink(channel.id, location.pathname)}`}
+                className="channel-tag"
+                value={channel.id}
+                onClick={onChannelClick}>{Object.values(channel.members)
+                  .filter((member) => member.id !== user.id)
+                  .map((member) => `${member.firstName} ${member.lastName}`)
+                  .join(", ")}
+              </NavLink>
             </a>
           ))}
         </div>

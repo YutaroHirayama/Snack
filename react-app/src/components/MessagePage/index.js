@@ -67,7 +67,12 @@ const MessagePage = ({ user }) => {
     return (
         <div className='message-page'>
             <OpenModalButton
-                buttonText={channel.channelName}
+                buttonText={!channel.isDm ? channel.channelName :
+                    Object.values(channel.members)
+                        .filter((member) => member.id !== user.id)
+                        .map((member) => `${member.firstName} ${member.lastName}`)
+                        .join(", ")
+                }
                 // onItemClick={closeMenu}
                 modalComponent={<ChannelInfoModal channel={channel} />}
             />
