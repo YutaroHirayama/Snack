@@ -42,7 +42,7 @@ export const deleteMessageAction = (messageId) => {
 export const getAllChannelsThunk = () => async (dispatch) => {
   const res = await fetch("/api/channels");
   const channels = await res.json();
-  console.log("ALL CHANNELS", channels)
+
   await dispatch(allChannelsAction(channels));
 };
 

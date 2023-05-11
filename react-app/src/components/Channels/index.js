@@ -4,7 +4,7 @@ import "./Channels.css";
 import OpenModalButton from "../OpenModalButton";
 import CreateChannelModal from "../CreateChannelModal";
 import { fetchChannelThunk } from "../../store/channels";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 
 const Channels = ({ channels, user }) => {
   // const userChannels = [];
@@ -12,6 +12,7 @@ const Channels = ({ channels, user }) => {
   const directMessages = [];
   const dispatch = useDispatch();
   const history = useHistory();
+  let location = useLocation();
 
   Object.values(channels).forEach((element) => {
     if (!element.isDm) userChannels.push(element);
@@ -29,7 +30,7 @@ const Channels = ({ channels, user }) => {
   const onChannelClick = e => {
 
     const channelId = e.target.value
-    console.log('TARGET VALUE ----->', e.target.value);
+
     // history.push(`/channel/${channelId}`);
 
     // const request = dispatch(fetchChannelThunk(channelId))
@@ -38,21 +39,36 @@ const Channels = ({ channels, user }) => {
     // }
   }
 
+  const generateLink = (channelId, path) => {
+    if (path.includes('message')) {
+      let messageId;
+      for (let i = path.length - 1; i > 0; i--) {
+        if (path[i] === '/') {
+          messageId = path.slice(i + 1);
+          break;
+        }
+      }
+      return `/channel/${channelId}/message/${messageId}`
+    } else {
+      return `/channel/${channelId}`
+    }
+  }
+
   return (
     <>
       <div>
         <div className="create-channel-container">
           <h3>Channels</h3>
-            <OpenModalButton
-              buttonText="Create Channel"
-              modalComponent={<CreateChannelModal />}
-            />
+          <OpenModalButton
+            buttonText="Create Channel"
+            modalComponent={<CreateChannelModal />}
+          />
         </div>
         <div id="channels-container">
           {userChannels.map((channel) => (
             <>
               <NavLink
-                to={`/channel/${channel.id}`}
+                to={`${generateLink(channel.id, location.pathname)}`}
                 className="channel-tag"
                 value={channel.id}
                 onClick={onChannelClick}>{channel.channelName}

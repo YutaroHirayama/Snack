@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import Message, Channel, db
+from app.models import Message, Channel, db, Thread
 from ..forms import MessageForm
 from .auth_routes import validation_errors_to_error_messages
 from datetime import datetime
@@ -39,16 +39,16 @@ def create_message(channelId):
     form = MessageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        new_message = Message(
+        new_thread = Message(
             user = current_user,
             channel = channel_to_post_in,
             message = form.data['message'],
             created_at = datetime.now()
         )
 
-        db.session.add(new_message)
+        db.session.add(new_thread)
         db.session.commit()
-        return new_message.to_dict_with_refs()
+        return new_thread.to_dict_with_refs()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
@@ -104,3 +104,32 @@ def fetch_threads(messageId):
     message = Message.query.get(messageId)
 
     return message.to_dict()
+
+
+
+@message_routes.route('/<int:messageId>/threads', methods=['POST'])
+@login_required
+def create_thread(messageId):
+    """
+    This route creates threads for the specified message
+    """
+    message_to_add_to = Message.query.get(messageId)
+
+    if current_user not in message_to_add_to.channel.members:
+        return {'errors': ['Forbidden']}, 403
+
+    form = MessageForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        new_thread = Thread(
+            user = current_user,
+            message_id = messageId,
+            thread_message = form.data['message'],
+            created_at = datetime.now()
+        )
+
+        db.session.add(new_thread)
+        db.session.commit()
+        return new_thread.to_dict_no_ref()
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400

@@ -24,7 +24,7 @@ class Message(db.Model):
               'channelId': self.channel_id,
               'message': self.message,
               'createdAt': self.created_at,
-              'channel': self.channel.to_dict_no_ref(),
+              'channel': self.channel.to_dict_with_members(),
               'user': self.user.to_dict_no_ref(),
               'reactions': [reaction.to_dict_no_ref() for reaction in self.reactions],
               'threads': [thread.to_dict_no_ref() for thread in self.threads]
