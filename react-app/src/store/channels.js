@@ -1,5 +1,7 @@
 const GET_ALL_CHANNELS = "channels/GET_ALL_CHANNELS";
-const GET_ONE_CHANNEL = "channels/GET_ONE_CHANNEL"
+const GET_ONE_CHANNEL = "channels/GET_ONE_CHANNEL";
+const EDIT_MESSAGE = "channels/EDIT_MESSAGE";
+const DELETE_MESSAGE = "channels/DELETE_MESSAGE";
 const CREATE_CHANNEL = "channel/CREATE_CHANNEL";
 const DELETE_CHANNEL = "channel/DELETE_CHANNEL";
 
@@ -22,6 +24,20 @@ export const createMessageAction = (message) => ({
   message
 });
 
+export const editMessageAction = (message) => {
+  return {
+    type: EDIT_MESSAGE,
+    message
+  };
+}
+
+export const deleteMessageAction = (messageId) => {
+  return {
+    type: DELETE_MESSAGE,
+    messageId
+  };
+}
+
 export const addReactionAction = (reaction) => ({
   type: ADD_REACTION,
   reaction
@@ -37,21 +53,21 @@ export const removeReactionAction = (reactionId) => ({
 export const getAllChannelsThunk = () => async (dispatch) => {
   const res = await fetch("/api/channels");
   const channels = await res.json();
-  console.log("ALL CHANNELS", channels)
+
   await dispatch(allChannelsAction(channels));
 };
 
 export const fetchChannelThunk = (channelId) => async (dispatch) => {
   const res = await fetch(`/api/channels/${channelId}`);
 
-  if(res.ok) {
+  if (res.ok) {
     const channel = await res.json();
-    console.log('Current Channel----->', channel)
+    // console.log('Current Channel----->', channel)
     dispatch(fetchChannelAction(channel));
     return channel
   } else {
     const errors = await res.json();
-		return errors;
+    return errors;
   }
 }
 
@@ -69,7 +85,7 @@ export const createMessageThunk = (message, channelId) => async (dispatch) => {
       })
     })
 
-  if(res.ok) {
+  if (res.ok) {
     const newMessage = await res.json()
     dispatch(createMessageAction(newMessage))
     return newMessage
@@ -78,6 +94,41 @@ export const createMessageThunk = (message, channelId) => async (dispatch) => {
     return errors;
   }
 
+}
+
+export const editMessageThunk = (message, text) => async (dispatch) => {
+  const res = await fetch(`/api/messages/${message.id}`,
+    {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message: text
+      })
+    })
+
+  if (res.ok) {
+    const newMessage = await res.json()
+    dispatch(editMessageAction(newMessage))
+    return newMessage
+  } else {
+    const errors = await res.json();
+    return errors;
+  }
+}
+
+export const deleteMessageThunk = (messageId) => async (dispatch) => {
+  const res = await fetch(`/api/messages/${messageId}`,
+    {
+      method: 'DELETE'
+    })
+
+  if (res.ok) {
+    dispatch(deleteMessageAction(messageId))
+  } else {
+    return { 'errors': "Could not delete" };
+  }
 }
 
 
@@ -132,17 +183,67 @@ export default function reducer(state = initialState, action) {
       action.channels.forEach((channel) => { (newState.allChannels.channel[channel.id] = channel) });
       return newState;
     case GET_ONE_CHANNEL:
-      newState = {currentChannel: action.channel};
+      newState = { allChannels: { ...state.allChannels }, currentChannel: action.channel };
       return newState;
     case CREATE_MESSAGE:
-      {
-        newState = {...state,
-            currentChannel: {...state.currentChannel,
-              channel: {...state.currentChannel.channel,
-                messages: [...state.currentChannel.channel.messages, action.message]}}};
+        {
+          newState = {
+          ...state,
+            currentChannel: {
+            ...state.currentChannel,
+              channel: {
+              ...state.currentChannel.channel,
+                messages: [...state.currentChannel.channel.messages, action.message]
+            }
+          }
+        };
 
         return newState;
       }
+    case EDIT_MESSAGE:
+      {
+        newState = {
+          ...state,
+          currentChannel: {
+            ...state.currentChannel,
+            channel: {
+              ...state.currentChannel.channel,
+              messages: [...state.currentChannel.channel.messages]
+            }
+          }
+        };
+        newState.currentChannel.channel.messages.map(message => {
+          if (action.message.id === message.id) {
+            return action.message
+          } else {
+            return message
+          }
+        })
+
+        return newState;
+
+      }
+
+    case DELETE_MESSAGE:
+      {
+        newState = {
+          ...state,
+          currentChannel: {
+            ...state.currentChannel,
+            channel: {
+              ...state.currentChannel.channel,
+              messages: [...state.currentChannel.channel.messages]
+            }
+          }
+        };
+
+        newState.currentChannel.channel.messages.filter(message => {
+          return action.messageId !== message.id;
+        });
+
+        return newState;
+      }
+
     case ADD_REACTION:
       {
         const newMessages = {};
@@ -177,7 +278,7 @@ export default function reducer(state = initialState, action) {
           ...newState.currentChannel.channel.messages[action.reaction.messageId],
           reactions: [...newState.currentChannel.channel.messages[action.reaction.messageId].reactions, action.reaction]
       }
-
+    }
     // case DELETE_CHANNEL: {
     //     const newState = {
     //       ...state,

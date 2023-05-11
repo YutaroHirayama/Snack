@@ -26,8 +26,7 @@ const ChannelInfoModal = ({channel}) => {
         setChannelUsers([...channelUsers, user]);
     };
 
-    console.log("CHANNEL : ", channel)
-    console.log("USER : ", owner)
+
     return (
         <>
             <h2>{channel.channelName}</h2>

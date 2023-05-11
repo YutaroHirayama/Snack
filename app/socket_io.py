@@ -5,8 +5,8 @@ from app.models import Message, db
 
 if os.environ.get("FLASK_ENV") == "production":
     origins = [
-        "http://snack-slack.onrender.com/",
-        "https://snack-slack.onrender.com/"
+        "http://snack-slack.onrender.com",
+        "https://snack-slack.onrender.com"
     ]
 else:
     origins = "*"
@@ -17,3 +17,7 @@ socketio = SocketIO(cors_allowed_origins=origins)
 @socketio.on('chat')
 def handle_chat(data):
   emit('chat', data, broadcast=True)
+
+@socketio.on('thread')
+def handle_thread(data):
+  emit('thread', data, broadcast=True)

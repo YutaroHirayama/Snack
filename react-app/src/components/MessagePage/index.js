@@ -7,28 +7,35 @@ import "./MessagePage.css";
 import { io } from 'socket.io-client';
 import { fetchChannelThunk } from "../../store/channels";
 import { useParams } from 'react-router-dom';
+import OpenModalButton from "../OpenModalButton";
+import ChannelInfoModal from "../ChannelInfoModal";
+import ThreadsPage from "../ThreadsPage";
+import { Redirect } from "react-router-dom";
 
 let socket
 
-const MessagePage = ({user}) => {
+const MessagePage = ({ user }) => {
 
     const channel = useSelector(state => state.channels?.currentChannel?.channel);
     const messages = channel?.messages ? Object.values(channel.messages) : false
 
     // const [messages, setMessages] = useState();
 
+
+
     const dispatch = useDispatch();
 
-    console.log('messages------->',messages)
+
+
     // const params = useParams()
     // const channelId = params.channelId
 
     const { channelId } = useParams();
-    console.log('CHANNEL ID --------->', channelId)
+
     let newChannel;
     useEffect(() => {
         socket = io();
-        console.log('INSIDE USE EFFECT')
+
         dispatch(fetchChannelThunk(parseInt(channelId)))
         socket.on("chat", (chat) => {
 
@@ -41,26 +48,37 @@ const MessagePage = ({user}) => {
             // let msgArr = Object.values(msg.messages)
             // setMessages(messages => [...messages, chat])
         })
-        return(() => {
-            console.log("UNMOUNTED")
+        return (() => {
+
             socket.disconnect()
         })
 
-    },[channelId])
+    }, [channelId])
 
 
-    if(!messages) return null;
+    if (!channel || !messages) return null;
+
+    let isMember = false;
+    for (let member of channel.members) {
+        if (member.id === user.id) isMember = true;
+    }
+
+    if (!isMember) return <Redirect to='/' />
 
     return (
         <div className='message-page'>
-            <h2>{channel?.channelName}</h2>
+            <OpenModalButton
+                buttonText={channel.channelName}
+                // onItemClick={closeMenu}
+                modalComponent={<ChannelInfoModal channel={channel} />}
+            />
             <div className='messages-container'>
-            {messages && messages.map(m => <Message key={m.id} message={m} />)}
+                {messages && messages.map(m => <Message key={m.id} message={m} user={user} socket={socket} />)}
 
             </div>
 
             <div>
-                <MessageInput user={user} channelId={channel.id} socket={socket}/>
+                <MessageInput user={user} channelId={channel.id} socket={socket} type='message' />
             </div>
         </div>
 

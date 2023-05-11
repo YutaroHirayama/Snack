@@ -105,7 +105,7 @@ export const createChannelThunk = (channel) => async (dispatch) => {
   if (res.ok) {
     const newChannel = await res.json();
     dispatch(createChannelAction(newChannel));
-    console.log('NEW CHANNEL RES --------->', newChannel)
+
     return newChannel.channel.id
   } else {
     const errors = await res.json();
@@ -257,16 +257,18 @@ export default function reducer(state = initialState, action) {
     case REMOVE_USER:
       return { user: null };
     case CREATE_CHANNEL: {
-			const newMembers = {};
-			action.channel.channel.members.forEach((member) => {
-				newMembers[member.id] = member
-			})
+      const newMembers = {};
+      action.channel.channel.members.forEach((member) => {
+        newMembers[member.id] = member
+      })
       const newState = { ...state, user: { ...state.user } };
       newState.user.channels = {
         ...state.user.channels,
-        [action.channel.channel.id]: {...action.channel.channel,
-					members: newMembers
-      }};
+        [action.channel.channel.id]: {
+          ...action.channel.channel,
+          members: newMembers
+        }
+      };
       return newState;
     }
     case DELETE_CHANNEL: {
@@ -293,7 +295,7 @@ export default function reducer(state = initialState, action) {
           }
         }
       };
-      console.log("ACTION MEMBER : ", action.member)
+
       newState.user.channels[action.channelId].members[action.member.id] =
         action.member;
       return newState;
@@ -315,7 +317,7 @@ export default function reducer(state = initialState, action) {
           }
         }
       };
-      console.log(newState.user.channels[action.channelId])
+
       delete newState.user.channels[action.channelId].members[action.member.id]
       return newState
     }

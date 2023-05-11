@@ -4,6 +4,7 @@ import Channels from "../Channels";
 import Navigation from "../Navigation";
 import MessagePage from '../MessagePage';
 import { Route, Switch } from "react-router-dom";
+import ThreadsPage from "../ThreadsPage";
 
 const HomePage = ({ user, isLoaded }) => {
   const channels = user.channels;
@@ -20,6 +21,7 @@ const HomePage = ({ user, isLoaded }) => {
           </div>
         </div>
       </div>
+    
     </>
   );
 };
