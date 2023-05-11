@@ -45,6 +45,16 @@ def create_channel():
             is_dm=form.data['isDm'],
             owner=current_user
         )
+        # Check for Uniquness if channel is a DM
+        if channel.is_dm:
+            all_channels = Channel.query.filter(Channel.is_dm).all()
+            print(f"GETTING ALL CHANNELS ---------------> : {all_channels}")
+
+
+        def can_create(current_members_ids, all_channel_members):
+            pass
+
+
         channel.members.append(current_user)
 
         addUsers = request.get_json()['addUsers']
