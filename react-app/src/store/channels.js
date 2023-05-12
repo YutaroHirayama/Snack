@@ -43,9 +43,10 @@ export const addReactionAction = (reaction) => ({
   reaction
 })
 
-export const removeReactionAction = (reactionId) => ({
+export const removeReactionAction = (reactionId, messageId) => ({
   type:DELETE_REACTION,
-  reactionId
+  reactionId,
+  messageId
 })
 
 // CHANNEL THUNKS------------------------------
@@ -148,7 +149,6 @@ export const addReactionThunk = (reaction, messageId, userId) => async (dispatch
 
   if(res.ok) {
     const newReaction = await res.json()
-    console.log('newReaction ------->', newReaction)
     dispatch(addReactionAction(newReaction))
     return newReaction
   } else {
@@ -157,14 +157,14 @@ export const addReactionThunk = (reaction, messageId, userId) => async (dispatch
   }
 }
 
-export const removeReactionThunk = (reactionId) => async (dispatch) => {
+export const removeReactionThunk = (reactionId, messageId) => async (dispatch) => {
   const res = await fetch(`/api/reactions/${reactionId}`,
     {
       method: "DELETE"
     });
 
   if (res.ok) {
-    dispatch(removeReactionAction(reactionId));
+    dispatch(removeReactionAction(reactionId, messageId));
   } else {
     const errors = await res.json();
     return errors;
@@ -246,47 +246,41 @@ export default function reducer(state = initialState, action) {
 
     case ADD_REACTION:
       {
-        const newMessages = {};
-        state.currentChannel.channel.messages.forEach((message) => {
-          newMessages[message.id] = message
-        });
-
         newState = {...state,
-          currentChannel: {...state.currentChannel,
+          currentChannel: {
+            ...state.currentChannel,
             channel: {...state.currentChannel.channel,
-              messages: newMessages}}};
+              messages: [...state.currentChannel.channel.messages]}}};
 
-        newState.currentChannel.channel.messages[action.reaction.messageId] = {
-          ...newState.currentChannel.channel.messages[action.reaction.messageId],
-          reactions: [...newState.currentChannel.channel.messages[action.reaction.messageId].reactions, action.reaction]
-        }
+        newState.currentChannel.channel.messages = newState.currentChannel.channel.messages.map(message => {
+          if(message.id === action.reaction.messageId) {
+            return {...message, reactions: [...message.reactions, action.reaction]}
+          } else {
+            return message
+          }
+        })
         return newState;
       }
+
     case DELETE_REACTION:
       {
-        const newMessages = {};
-        state.currentChannel.channel.messages.forEach((message) => {
-          newMessages[message.id] = message
-        });
-
         newState = {...state,
-          currentChannel: {...state.currentChannel,
+          currentChannel: {
+            ...state.currentChannel,
             channel: {...state.currentChannel.channel,
-              messages: newMessages}}};
+              messages: [...state.currentChannel.channel.messages]}}};
 
-        newState.currentChannel.channel.messages[action.reaction.messageId] = {
-          ...newState.currentChannel.channel.messages[action.reaction.messageId],
-          reactions: [...newState.currentChannel.channel.messages[action.reaction.messageId].reactions, action.reaction]
+        newState.currentChannel.channel.messages = newState.currentChannel.channel.messages.map(message => {
+          if(message.id === action.messageId) {
+            const newReactions = message.reactions.filter(reaction => reaction.id !== action.reactionId)
+            return {...message, reactions: newReactions}
+          } else {
+            return message
+          }
+        })
+        return newState;
       }
-    }
-    // case DELETE_CHANNEL: {
-    //     const newState = {
-    //       ...state,
-    //       user: { ...state.user, channels: { ...state.user.channels } },
-    //     };
-    //     delete newState.user.channels[action.channelId];
-    //     return newState;
-    //   }
+
     default:
       return state;
   }

@@ -21,3 +21,7 @@ def handle_chat(data):
 @socketio.on('thread')
 def handle_thread(data):
   emit('thread', data, broadcast=True)
+
+@socketio.on('reaction')
+def handle_reaction(data):
+  emit('reaction', data, broadcast=True)

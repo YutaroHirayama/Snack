@@ -1,42 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addReactionThunk, removeReactionThunk } from "../../store/channels";
+import { useModal } from "../../context/Modal";
 
-const Reaction = ({reaction, count, message}) => {
-  // const messageState = useSelector(state => state.channels?.currentChannel?.channel?.messages?.messageId)
-  // const reactionState = messageState?.reactions?.
+const Reaction = ({reaction, count, message, socket}) => {
+
   const sessionUser = useSelector((state) => state.session.user)
   const [used, setUsed] = useState(false)
   const dispatch = useDispatch()
-  console.log("123", message)
+  const { closeModal } = useModal()
 
   const messageId = message.id
   const userId = sessionUser.id
+  let existingReaction = message?.reactions?.find(r => r.userId === userId && r.reaction === reaction)
+  let reactionId = existingReaction?.id
 
-  // console.log(check)
-
-
-  //const {userId = message
-
-  const onClick = (e) => {
+  const onClick = async (e) => {
     e.preventDefault()
-      let check = message.reactions.find(reaction => reaction.userId === userId && reaction.messageId === message.id && reaction.reaction === reaction)
-      if (check) {
-        setUsed(true)
+      if(!reactionId) {
+        const newReaction = await dispatch(addReactionThunk(reaction, messageId, userId))
+        socket.emit('chat', newReaction)
+        closeModal()
       } else {
-        setUsed(false)
+      if(reactionId){
+        await dispatch(removeReactionThunk(reactionId, messageId))
+        socket.emit('chat', 'DELETED')
+        closeModal()
       }
-      if(used === false) {
-        dispatch(addReactionThunk(reaction, messageId, userId))
-        setUsed(true)
-      } else {
-        dispatch(removeReactionThunk(reaction))
-        setUsed(false)
-      }
-    }
-
-
-
+     }
+  }
     return (
         <>
           <button
@@ -45,5 +37,4 @@ const Reaction = ({reaction, count, message}) => {
         </>
     )
 }
-
 export default Reaction

@@ -16,6 +16,7 @@ const Message = ({ message, user, socket }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     let location = useLocation()
+
     const allReactions = Object.values(message.reactions)
     const timestamp = new Date(message.createdAt);
     // console.log('timestamp -->', timestamp, typeof timestamp)
@@ -51,11 +52,6 @@ const Message = ({ message, user, socket }) => {
         reactions = Object.entries(resObj)
     }
 
-    const handleClick = (e) => {
-        e.preventDefault()
-
-    }
-
 
     return (
         <div>
@@ -79,21 +75,16 @@ const Message = ({ message, user, socket }) => {
                 <span>
                     <OpenModalButton
                         buttonText="Add reaction"
-                        modalComponent={<ReactionFormModal />}
+                        modalComponent={<ReactionFormModal message={message} socket={socket}/>}
                     />
                 </span>
             </div>
             <div className="users-message">
                 <p>{message.message}</p>
                 <div className='reaction-container'>
-                    {reactions.length && reactions.map(r =>
-                        <Reaction reaction={r[0]} count={r[1]} message={message}/>
+                    {reactions.length > 0 && reactions.map(r =>
+                        <Reaction reaction={r[0]} count={r[1]} message={message} socket={socket}/>
                     )}
-                </div>
-                <div>
-                    <button
-                    onClick={handleClick}
-                    >+</button>
                 </div>
             </div>
         </div>
