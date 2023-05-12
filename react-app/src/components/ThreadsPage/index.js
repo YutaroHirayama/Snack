@@ -45,7 +45,7 @@ const ThreadsPage = ({ user }) => {
             isMember = true;
         }
     }
-
+    console.log("MESSAGE ----> ", message)
     if (!isMember) return <Redirect to='/' />
 
     return (
@@ -53,7 +53,11 @@ const ThreadsPage = ({ user }) => {
             <h3>{message.user.firstName} {message.user.lastName}</h3>
             <p>{message.message}</p>
             <div className='threads-container'>
-                {message.threads.map(thread => <p key={thread.id}>{thread.threadMessage}</p>)}
+                {message.threads.map(thread => <div key={thread.id}>
+                    <h4>{thread.user.firstName} {thread.user.lastName} {thread.createdAt}</h4>
+                    <p>{thread.threadMessage}</p>
+
+                </div>)}
             </div>
             <MessageInput user={user} messageId={message.id} socket={threadSocket} type='thread' />
         </div>
