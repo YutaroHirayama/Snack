@@ -21,6 +21,7 @@ function SignupFormModal() {
 		if (password === confirmPassword) {
 			const data = await dispatch(signUp(username, email, password, firstName, lastName, profilePic));
 			if (data) {
+				console.log('ERROR OBJECT FROM DB ----->',data)
 				setErrors(data);
 			} else {
 				closeModal();
@@ -38,7 +39,7 @@ function SignupFormModal() {
 			<form onSubmit={handleSubmit}>
 				<ul>
 					{errors.map((error, idx) => (
-						<li key={idx}>{error}</li>
+						<li className='form-error' key={idx}>{error}</li>
 					))}
 				</ul>
 				<label>

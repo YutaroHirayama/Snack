@@ -102,6 +102,7 @@ export const createChannelThunk = (channel) => async (dispatch) => {
       addUsers,
     }),
   });
+
   if (res.ok) {
     const newChannel = await res.json();
     dispatch(createChannelAction(newChannel));
@@ -230,7 +231,9 @@ export const signUp =
           return data.errors;
         }
       } else {
-        return ["An error occurred. Please try again."];
+        const data = await response.json();
+        console.log('500 ERROR ----->', data)
+        return data
       }
     };
 
