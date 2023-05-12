@@ -17,11 +17,3 @@ socketio = SocketIO(cors_allowed_origins=origins)
 @socketio.on('chat')
 def handle_chat(data):
   emit('chat', data, broadcast=True)
-
-@socketio.on('thread')
-def handle_thread(data):
-  emit('thread', data, broadcast=True)
-
-@socketio.on('reaction')
-def handle_reaction(data):
-  emit('reaction', data, broadcast=True)
