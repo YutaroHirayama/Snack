@@ -14,24 +14,28 @@ const Reaction = ({reaction, count, message, socket}) => {
   const userId = sessionUser.id
   let existingReaction = message?.reactions?.find(r => r.userId === userId && r.reaction === reaction)
   let reactionId = existingReaction?.id
+  let reactionClick = false
+
 
   const onClick = async (e) => {
     e.preventDefault()
+    reactionClick = true
       if(!reactionId) {
-        const newReaction = await dispatch(addReactionThunk(reaction, messageId, userId))
-        socket.emit('chat', newReaction)
-        closeModal()
+        const newReaction = dispatch(addReactionThunk(reaction, messageId, userId))
+          .then(() => socket.emit('chat', newReaction))
+          .then(() => closeModal())
       } else {
       if(reactionId){
-        await dispatch(removeReactionThunk(reactionId, messageId))
-        socket.emit('chat', 'DELETED')
-        closeModal()
+        dispatch(removeReactionThunk(reactionId, messageId))
+          .then(() => socket.emit('chat', 'DELETED'))
+          .then(() => closeModal())
       }
      }
+     reactionClick = false
   }
     return (
         <>
-          <button
+          <button disabled={reactionClick}
             onClick={onClick}
           >{reaction} {count}</button>
         </>

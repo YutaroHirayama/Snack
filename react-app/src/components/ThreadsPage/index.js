@@ -54,8 +54,8 @@ const ThreadsPage = ({ user }) => {
             <p>{message.message}</p>
             <div className='threads-container'>
                 {message.threads.map(thread => <div key={thread.id}>
-                    <h4>{thread.user.firstName} {thread.user.lastName} {thread.createdAt}</h4>
-                    <p>{thread.threadMessage}</p>
+                    <h4>{thread?.user.firstName} {thread?.user.lastName} {thread.createdAt}</h4>
+                    <p>{thread?.threadMessage}</p>
 
                 </div>)}
             </div>
