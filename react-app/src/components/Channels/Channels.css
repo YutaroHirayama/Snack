@@ -21,6 +21,11 @@
     cursor: pointer;
 }
 
+.channel-tag::selection {
+    background-color: red;
+    color: white
+}
+
 #dms-container {
     display: flex;
     flex-direction: column;

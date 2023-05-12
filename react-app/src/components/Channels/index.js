@@ -19,6 +19,7 @@ const Channels = ({ channels, user, socket }) => {
   const history = useHistory();
   let location = useLocation();
   const [, forceRerender] = useState()
+  const [isSelected, setIsSelected] = useState(false)
 
   Object.values(channels).forEach((element) => {
     if (!element.isDm) userChannels.push(element);
