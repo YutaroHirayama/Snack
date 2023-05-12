@@ -126,9 +126,11 @@ export const deleteMessageThunk = (messageId) => async (dispatch) => {
     })
 
   if (res.ok) {
-    dispatch(deleteMessageAction(messageId))
+    const message = await dispatch(deleteMessageAction(messageId))
+    return message;
   } else {
-    return { 'errors': "Could not delete" };
+    const errors = await res.json();
+    return errors;
   }
 }
 

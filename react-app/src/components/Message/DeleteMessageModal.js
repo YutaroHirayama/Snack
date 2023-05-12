@@ -1,18 +1,38 @@
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal"
 import { deleteMessageThunk } from "../../store/channels";
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { deleteThreadThunk } from "../../store/messages";
 
-const DeleteMessageModal = ({ message, socket }) => {
+const DeleteMessageModal = ({ message, socket, type }) => {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
     const history = useHistory();
+    const params = useParams()
 
     const confirmDelete = async (e) => {
-        await dispatch(deleteMessageThunk(message.id));
-        socket.emit('chat', 'DELETED');
-        closeModal()
-        history.push(`/channel/${message.channelId}`)
+        if (type === "thread") {
+            const deletedThread = await dispatch(deleteThreadThunk(message.id))
+            if (deletedThread.no_thread) {
+                alert("Message no longer exists");
+                closeModal();
+                history.push(`/channel/${params.channelId}`);
+                return
+            }
+            socket.emit('chat', 'DELETED');
+            closeModal()
+        } else {
+            const deletedMessage = await dispatch(deleteMessageThunk(message.id));
+            if (deletedMessage.no_message) {
+                alert("Channel no longer exists");
+                closeModal();
+                history.push(`/`);
+                return
+            }
+            socket.emit('chat', 'DELETED');
+            closeModal();
+            history.push(`/channel/${message.channelId}`);
+        }
     }
 
     return (

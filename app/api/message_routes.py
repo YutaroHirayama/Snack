@@ -33,6 +33,9 @@ def create_message(channelId):
     """
     channel_to_post_in = Channel.query.get(channelId)
 
+    if not channel_to_post_in:
+        return {'no_channel': 'Channel does not Exist'}, 404
+
     if current_user not in channel_to_post_in.members:
         return {'errors': ['Forbidden']}, 403
 
@@ -83,6 +86,8 @@ def delete_message(messageId):
     """
 
     message_to_delete = Message.query.get(messageId)
+    if not message_to_delete:
+        return {'no_message': 'Message does not Exist'}, 404
 
     if message_to_delete.user_id != current_user.id:
         return {'errors': ['Forbidden']}, 403
@@ -113,7 +118,10 @@ def create_thread(messageId):
     """
     This route creates threads for the specified message
     """
+
     message_to_add_to = Message.query.get(messageId)
+    if not message_to_add_to:
+        return {'no_message': 'Message does not Exist'}, 404
 
     if current_user not in message_to_add_to.channel.members:
         return {'errors': ['Forbidden']}, 403

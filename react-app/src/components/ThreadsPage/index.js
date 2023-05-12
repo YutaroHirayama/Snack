@@ -8,13 +8,14 @@ import ChannelInfoModal from "../ChannelInfoModal";
 import MessageInput from "../MessagePage/MessageInput";
 import Message from "../Message";
 import { Redirect } from "react-router-dom";
+import DeleteMessageModal from "../Message/DeleteMessageModal";
 
 let threadSocket
 
 const ThreadsPage = ({ user }) => {
 
     const message = useSelector(state => state.messages.currentMessage)
-
+    
     const dispatch = useDispatch();
     const history = useHistory();
     let location = useLocation();
@@ -50,13 +51,18 @@ const ThreadsPage = ({ user }) => {
 
     return (
         <div className='thread-page'>
+            <img className="profile-pic-msg" src={message.user.profilePic}></img>
             <h3>{message.user.firstName} {message.user.lastName}</h3>
             <p>{message.message}</p>
             <div className='threads-container'>
-                {message.threads.map(thread => <div key={thread.id}>
-                    <h4>{thread.user.firstName} {thread.user.lastName} {thread.createdAt}</h4>
-                    <p>{thread.threadMessage}</p>
-
+                {message?.threads.map(thread => <div key={thread.id}>
+                    <img className="profile-pic-msg" src={thread?.user.profilePic}></img>
+                    <span>{thread?.user.firstName} {thread?.user.lastName} {thread.createdAt}</span>
+                    {thread?.user.id === user.id && <OpenModalButton
+                        buttonText={"Delete"}
+                        modalComponent={<DeleteMessageModal message={thread} socket={threadSocket} type={"thread"} />}
+                    />}
+                    <p>{thread?.threadMessage}</p>
                 </div>)}
             </div>
             <MessageInput user={user} messageId={message.id} socket={threadSocket} type='thread' />
