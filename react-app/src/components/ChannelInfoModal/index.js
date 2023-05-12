@@ -6,7 +6,7 @@ import ConfirmDeleteModal from "./ConfirmDeleteModal";
 import EditChannelModal from "./EditChannelModal";
 
 
-const ChannelInfoModal = ({channel}) => {
+const ChannelInfoModal = ({ channel, socket }) => {
     const sessionUser = useSelector(state => state.session.user)
     const [owner, setOwner] = useState([]);
     const [channelUsers, setChannelUsers] = useState([]);
@@ -26,9 +26,8 @@ const ChannelInfoModal = ({channel}) => {
         setChannelUsers([...channelUsers, user]);
     };
 
-    console.log("CHANNEL : ", channel)
-    console.log("USER : ", owner)
-    return (
+
+    return !channel.isDm ? (
         <>
             <h2>{channel.channelName}</h2>
             <div>
@@ -39,17 +38,37 @@ const ChannelInfoModal = ({channel}) => {
                 {owner.firstName} {owner.lastName}
             </div>
             {sessionUser.id === channel.ownerId &&
-            <>
-            <OpenModalButton
-            buttonText={"Delete"}
-            modalComponent={<ConfirmDeleteModal channelId={channel.id} />}
-            />
-            <OpenModalButton
-            buttonText={"Edit"}
-            modalComponent={<EditChannelModal channel={channel}/>}/>
-            </>
+                <>
+
+                    <OpenModalButton
+                        buttonText={"Delete"}
+                        modalComponent={<ConfirmDeleteModal channelId={channel.id} socket={socket} />}
+                    />
+                    <OpenModalButton
+                        buttonText={"Edit"}
+                        modalComponent={<EditChannelModal channel={channel} socket={socket} />} />
+                </>
             }
+            <h3>Channel Members</h3>
+            {channel.members.map((user) => (
+                <div>
+                    <div>
+                        {user.firstName}, {user.lastName}
+                    </div>
+                </div>
+            ))}
         </>
-    );
+    ) :
+        (<>
+            <h3>Channel Members</h3>
+            {channel.members.map((user) => (
+                <div>
+                    <div>
+                        {user.firstName}, {user.lastName}
+                    </div>
+                </div>
+            ))}
+        </>
+        )
 };
 export default ChannelInfoModal;

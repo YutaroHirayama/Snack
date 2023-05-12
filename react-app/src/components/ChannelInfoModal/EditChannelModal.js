@@ -7,8 +7,9 @@ import {
   removeMemberThunk,
 } from "../../store/session";
 import { useModal } from "../../context/Modal";
+import { fetchChannelThunk } from "../../store/channels";
 
-const EditChannelModal = ({ channel }) => {
+const EditChannelModal = ({ channel, socket }) => {
   const [channelName, setChannelName] = useState(channel.channelName);
   const [description, setDescription] = useState(channel.description);
   const [tab, setTab] = useState(true);
@@ -59,14 +60,18 @@ const EditChannelModal = ({ channel }) => {
   if (!users?.users?.length) return null;
   if (!members) return null
 
-  const formSubmit = (e) => {
+  const formSubmit = async (e) => {
     e.preventDefault();
     const updatedChannel = {
       id: channel.id,
       channelName,
       description,
     };
-    dispatch(editChannelThunk(updatedChannel)).then(closeModal);
+    await dispatch(editChannelThunk(updatedChannel))
+    await dispatch(fetchChannelThunk(channel.id))
+    socket.emit('chat', "updated channel")
+    closeModal();
+
   };
   return (
     <>

@@ -3,9 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import "./Channels.css";
 import OpenModalButton from "../OpenModalButton";
 import CreateChannelModal from "../CreateChannelModal";
-import ChannelInfoModal from "../ChannelInfoModal";
 import { fetchChannelThunk } from "../../store/channels";
-import { NavLink, useHistory } from "react-router-dom";
+import { io } from "socket.io-client";
+import { authenticate } from "../../store/session";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
+import CreateDirectMessageModal from "../CreateDirectMessageModal";
+
+let socket;
 
 const Channels = ({ channels, user }) => {
   // const userChannels = [];
@@ -13,6 +17,7 @@ const Channels = ({ channels, user }) => {
   const directMessages = [];
   const dispatch = useDispatch();
   const history = useHistory();
+  let location = useLocation();
 
   Object.values(channels).forEach((element) => {
     if (!element.isDm) userChannels.push(element);
@@ -23,14 +28,26 @@ const Channels = ({ channels, user }) => {
   // convert channels into an array
 
   useEffect(() => {
+    socket = io();
+    console.log("IS THIS RUNNING?")
     //dispatch thunk to fetch all channels That a user is a member of OR owns by user ID
     //console.log("CHANNELS: ", channels);
+    socket.on("chat", (chat) => {
+
+      dispatch(authenticate())
+
+    })
+
+    return (() => {
+      socket.disconnect()
+    })
+
   }, []);
 
   const onChannelClick = e => {
 
     const channelId = e.target.value
-    console.log('TARGET VALUE ----->', e.target.value);
+
     // history.push(`/channel/${channelId}`);
 
     // const request = dispatch(fetchChannelThunk(channelId))
@@ -39,43 +56,63 @@ const Channels = ({ channels, user }) => {
     // }
   }
 
+  const generateLink = (channelId, path) => {
+    if (path.includes('message')) {
+      let messageId;
+      for (let i = path.length - 1; i > 0; i--) {
+        if (path[i] === '/') {
+          messageId = path.slice(i + 1);
+          break;
+        }
+      }
+      return `/channel/${channelId}/message/${messageId}`
+    } else {
+      return `/channel/${channelId}`
+    }
+  }
+
   return (
     <>
       <div>
         <div className="create-channel-container">
           <h3>Channels</h3>
-            <OpenModalButton
-              buttonText="Create Channel"
-              modalComponent={<CreateChannelModal />}
-            />
+          <OpenModalButton
+            buttonText="Create Channel"
+            modalComponent={<CreateChannelModal sessionUser={user} socket={socket} />}
+          />
         </div>
         <div id="channels-container">
           {userChannels.map((channel) => (
             <>
               <NavLink
-                to={`/channel/${channel.id}`}
+                to={`${generateLink(channel.id, location.pathname)}`}
                 className="channel-tag"
                 value={channel.id}
                 onClick={onChannelClick}>{channel.channelName}
               </NavLink>
-              <OpenModalButton
-                buttonText="Info"
-                // onItemClick={closeMenu}
-                modalComponent={<ChannelInfoModal channel={channel} />}
-              />
+
             </>
           ))}
         </div>
       </div>
       <div>
         <h3>Direct Messages</h3>
+        <OpenModalButton
+          buttonText="Create Direct Message"
+          modalComponent={<CreateDirectMessageModal channels={directMessages} sessionUser={user} socket={socket} />}
+        />
         <div id="dms-container">
           {directMessages.map((channel) => (
             <a className="channel-tag">
-              {Object.values(channel.members)
-                .filter((member) => member.id !== user.id)
-                .map((member) => `${member.firstName} ${member.lastName}`)
-                .join(", ")}
+              <NavLink
+                to={`${generateLink(channel.id, location.pathname)}`}
+                className="channel-tag"
+                value={channel.id}
+                onClick={onChannelClick}>{Object.values(channel.members)
+                  .filter((member) => member.id !== user.id)
+                  .map((member) => `${member.firstName} ${member.lastName}`)
+                  .join(", ")}
+              </NavLink>
             </a>
           ))}
         </div>

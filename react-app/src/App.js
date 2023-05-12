@@ -9,6 +9,7 @@ import Navigation from "./components/Navigation";
 import LandingPage from "./components/LandingPage";
 import HomePage from "./components/HomePage";
 import { Redirect } from "react-router-dom";
+import ThreadsPage from "./components/ThreadsPage";
 
 function App() {
   const sessionUser = useSelector((state) => state.session.user);
@@ -23,26 +24,31 @@ function App() {
       {isLoaded && (
         <>
           <Route path="/">
-            {sessionUser && <HomePage user={sessionUser} isLoaded={isLoaded}/>}
+            {sessionUser && <HomePage user={sessionUser} isLoaded={isLoaded} />}
           </Route>
           <Switch>
             <Route exact path="/">
               {!sessionUser && <LandingPage isLoaded={isLoaded} />}
             </Route>
-            <Route exact path="/signup">
+            {/* <Route exact path="/signup">
               <SignupFormPage />
             </Route>
             <Route exact path="/login">
               <LoginFormPage />
-            </Route>
-            <Route exact path="/channel/:channelId">
-              {!sessionUser && <Redirect to="/" />}
-              <MessagePage />
-            </Route>
-            <Route exact path="/test">
-              <h1>TEST</h1>
-            </Route>
+            </Route> */}
           </Switch>
+          <Route path="/channel/:channelId">
+            {!sessionUser && <Redirect to="/" />}
+            <MessagePage user={sessionUser} />
+          </Route>
+          <Route path="/channel/:channelId/message/:messageId">
+            {!sessionUser && <Redirect to="/" />}
+            <ThreadsPage user={sessionUser} />
+          </Route>
+          <Route exact path="/test">
+            <h1>TEST</h1>
+          </Route>
+
         </>
       )}
     </>
