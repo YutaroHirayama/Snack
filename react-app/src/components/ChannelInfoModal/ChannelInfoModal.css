@@ -12,3 +12,6 @@
     height: 500px;
     overflow: scroll;
 }
+.form-errors {
+    color: red;
+}

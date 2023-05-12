@@ -11,6 +11,7 @@ const CreateChannelModal = ({ sessionUser, socket }) => {
   const [description, setDescription] = useState("");
   const [users, setUsers] = useState([]);
   const [channelUsers, setChannelUsers] = useState([]);
+  const [errors, setErrors] = useState([])
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const history = useHistory();
@@ -40,17 +41,32 @@ const CreateChannelModal = ({ sessionUser, socket }) => {
       description,
       addUsers: channelUsers,
     };
-
-    const res = await dispatch(createChannelThunk(newChannel))
-    socket.emit('chat', "created channel")
-    closeModal()
-
-    history.push(`/channel/${res}`)
+    // if (channelName.length < 5 || channelName.length > 50) {
+    //   setErrors(["Channel Name must be between 5 and 50 characters"])
+    //   // console.log('ERRORS FRONTEND ----->', errors)
+    // }
+    // else if (description.length > 400) {
+    //   setErrors(["Description can't be more than 400 characters"])
+    // } else {
+      const res = await dispatch(createChannelThunk(newChannel))
+      if(res?.errors) {
+        setErrors(res.errors)
+      } else {
+      socket.emit('chat', "created channel")
+      closeModal()
+      history.push(`/channel/${res}`)
+      }
   };
+  console.log('ERRORS FRONTEND ----->', errors)
   return (
     <>
+      <h3>Create Channel</h3>
       <form onSubmit={formSubmit}>
-        <h3>Create Channel</h3>
+        <ul>
+        {errors.map((error, idx) => (
+          <li className='form-errors' key={idx}>{error}</li>
+        ))}
+        </ul>
         <label>
           Channel Name
           <input
@@ -66,7 +82,6 @@ const CreateChannelModal = ({ sessionUser, socket }) => {
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            required
           />
         </label>
 

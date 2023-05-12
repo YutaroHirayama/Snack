@@ -19,7 +19,7 @@ const EditMessageModal = ({ message, socket }) => {
         closeModal()
     }
 
-    const messageTooLong = message.length > 10000
+    const messageTooLong = _message.length > 10000
 
 
     return (
