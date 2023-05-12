@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchMessageThunk } from "../../store/messages";
 import { io } from 'socket.io-client';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory, useLocation } from 'react-router-dom';
 import OpenModalButton from "../OpenModalButton";
 import ChannelInfoModal from "../ChannelInfoModal";
 import MessageInput from "../MessagePage/MessageInput";
@@ -16,12 +16,12 @@ const ThreadsPage = ({ user }) => {
     const message = useSelector(state => state.messages.currentMessage)
 
     const dispatch = useDispatch();
-
+    const history = useHistory();
+    let location = useLocation();
     const { messageId } = useParams();
 
     useEffect(() => {
         threadSocket = io();
-
         dispatch(fetchMessageThunk(messageId));
 
         threadSocket.on("chat", (chat) => {
@@ -50,7 +50,8 @@ const ThreadsPage = ({ user }) => {
 
     return (
         <div className='thread-page'>
-            <Message message={message} user={user} />
+            <h3>{message.user.firstName} {message.user.lastName}</h3>
+            <p>{message.message}</p>
             <div className='threads-container'>
                 {message.threads.map(thread => <p key={thread.id}>{thread.threadMessage}</p>)}
             </div>

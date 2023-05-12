@@ -48,9 +48,10 @@ tomhanks = User(
 robert = User(
     username='Robert', email='robertdwnjr@aa.io', first_name="Robert", last_name="Downey Jr", profile_pic="https://media1.popsugar-assets.com/files/thumbor/bSrzBlO2Pc6EVkDa6wIYmuV48WY/fit-in/728xorig/filters:format_auto-!!-:strip_icc-!!-/2022/11/22/980/n/1922153/8580795c637d4dec5a4826.74829674_/i/robert-downey-jr-bald-head.jpg", password='password21')
 
-all_users=[demo, marnie, bobbie, serghei, corbin, yutaro, emir, han, efren, francis, michael, ash, david, andre, angelina, brad, tom, leonardo, will, tomhanks, robert]
+all_users=[snack, demo, marnie, bobbie, serghei, corbin, yutaro, emir, han, efren, francis, michael, ash, david, andre, angelina, brad, tom, leonardo, will, tomhanks, robert]
 
 def seed_users():
+    pass
     # db.session.add(demo)
     # db.session.add(marnie)
     # db.session.add(bobbie)
@@ -59,21 +60,21 @@ def seed_users():
     # db.session.add(yutaro)
     # db.session.add(emir)
     # db.session.add(snack)
-    db.session.add(han)
-    db.session.add(efren)
-    db.session.add(francis)
-    db.session.add(michael)
-    db.session.add(ash)
-    db.session.add(david)
-    db.session.add(andre)
-    db.session.add(angelina)
-    db.session.add(brad)
-    db.session.add(tom)
-    db.session.add(leonardo)
-    db.session.add(will)
-    db.session.add(tomhanks)
-    db.session.add(robert)
-    db.session.commit()
+    # db.session.add(han)
+    # db.session.add(efren)
+    # db.session.add(francis)
+    # db.session.add(michael)
+    # db.session.add(ash)
+    # db.session.add(david)
+    # db.session.add(andre)
+    # db.session.add(angelina)
+    # db.session.add(brad)
+    # db.session.add(tom)
+    # db.session.add(leonardo)
+    # db.session.add(will)
+    # db.session.add(tomhanks)
+    # db.session.add(robert)
+    # db.session.commit()
 
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't

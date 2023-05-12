@@ -38,7 +38,7 @@ def seed_channels():
     channel1.members.append(corbin)
     channel1.members.append(yutaro)
     channel1.members.append(emir)
-    general.members.append(snack)
+
 
     channel2.members.append(serghei)
     channel2.members.append(yutaro)
