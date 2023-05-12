@@ -43,7 +43,7 @@ const Message = ({ message, user, socket }) => {
         const resObj = {}
         for (let i = 0; i < allReactions.length; i++) {
             let reaction = allReactions[i].reaction;
-            if(resObj[reaction]) {
+            if (resObj[reaction]) {
                 resObj[reaction] += 1
             } else {
                 resObj[reaction] = 1
@@ -59,6 +59,7 @@ const Message = ({ message, user, socket }) => {
 
             </div>
             <div className='message-header'>
+                <img className="profile-pic-msg" src={message.user.profilePic}></img>
                 <span>{message.user.firstName} {message.user.lastName}</span>
                 <span> {message.createdAt} {message.user.id === user.id && <OpenModalButton
                     buttonText={"Edit"}
@@ -75,7 +76,7 @@ const Message = ({ message, user, socket }) => {
                 <span>
                     <OpenModalButton
                         buttonText="Add reaction"
-                        modalComponent={<ReactionFormModal message={message} socket={socket}/>}
+                        modalComponent={<ReactionFormModal message={message} socket={socket} />}
                     />
                 </span>
             </div>
@@ -83,7 +84,7 @@ const Message = ({ message, user, socket }) => {
                 <p>{message.message}</p>
                 <div className='reaction-container'>
                     {reactions.length > 0 && reactions.map(r =>
-                        <Reaction reaction={r[0]} count={r[1]} message={message} socket={socket}/>
+                        <Reaction reaction={r[0]} count={r[1]} message={message} socket={socket} />
                     )}
                 </div>
             </div>
