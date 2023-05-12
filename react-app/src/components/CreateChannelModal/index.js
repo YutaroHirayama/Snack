@@ -47,6 +47,7 @@ const CreateChannelModal = ({ sessionUser, socket }) => {
 
     history.push(`/channel/${res}`)
   };
+  
   return (
     <>
       <form onSubmit={formSubmit}>

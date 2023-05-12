@@ -17,9 +17,14 @@ function LoginFormModal() {
     if (data) {
       setErrors(data);
     } else {
-        closeModal()
+      closeModal()
     }
   };
+
+  const loginDemoUser = (user) => {
+    dispatch(login(user, "password"));
+    closeModal()
+  }
 
   return (
     <>
@@ -50,6 +55,14 @@ function LoginFormModal() {
         </label>
         <button type="submit">Log In</button>
       </form>
+      <button
+        className="demo-user-button"
+        onClick={() => loginDemoUser("demo@aa.io")}
+      >Demo User #1</button>
+      <button
+        className="demo-user-button"
+        onClick={() => loginDemoUser("demo1@aa.io")}
+      >Demo User #2</button>
     </>
   );
 }

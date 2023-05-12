@@ -9,15 +9,16 @@ import { authenticate } from "../../store/session";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import CreateDirectMessageModal from "../CreateDirectMessageModal";
 
-let socket;
 
-const Channels = ({ channels, user }) => {
+
+const Channels = ({ channels, user, socket }) => {
   // const userChannels = [];
   const userChannels = [];
   const directMessages = [];
   const dispatch = useDispatch();
   const history = useHistory();
   let location = useLocation();
+  const [, forceRerender] = useState()
 
   Object.values(channels).forEach((element) => {
     if (!element.isDm) userChannels.push(element);
@@ -28,7 +29,7 @@ const Channels = ({ channels, user }) => {
   // convert channels into an array
 
   useEffect(() => {
-    socket = io();
+
     console.log("IS THIS RUNNING?")
     //dispatch thunk to fetch all channels That a user is a member of OR owns by user ID
     //console.log("CHANNELS: ", channels);
@@ -42,7 +43,7 @@ const Channels = ({ channels, user }) => {
       socket.disconnect()
     })
 
-  }, []);
+  }, [dispatch]);
 
   const onChannelClick = e => {
 
@@ -70,6 +71,8 @@ const Channels = ({ channels, user }) => {
       return `/channel/${channelId}`
     }
   }
+
+  if (!socket) return null
 
   return (
     <>

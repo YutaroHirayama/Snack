@@ -10,12 +10,20 @@ import LandingPage from "./components/LandingPage";
 import HomePage from "./components/HomePage";
 import { Redirect } from "react-router-dom";
 import ThreadsPage from "./components/ThreadsPage";
+import Channels from "./components/Channels";
+import { io } from "socket.io-client";
+
+let socket
+
 
 function App() {
+
+
   const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
+    socket = io();
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
@@ -24,18 +32,17 @@ function App() {
       {isLoaded && (
         <>
           <Route path="/">
-            {sessionUser && <HomePage user={sessionUser} isLoaded={isLoaded} />}
+            {sessionUser &&
+              <>
+                <Navigation isLoaded={isLoaded} />
+                <Channels channels={sessionUser.channels} user={sessionUser} isLoaded={isLoaded} socket={socket} />
+              </>
+            }
           </Route>
           <Switch>
             <Route exact path="/">
               {!sessionUser && <LandingPage isLoaded={isLoaded} />}
             </Route>
-            {/* <Route exact path="/signup">
-              <SignupFormPage />
-            </Route>
-            <Route exact path="/login">
-              <LoginFormPage />
-            </Route> */}
           </Switch>
           <Route path="/channel/:channelId">
             {!sessionUser && <Redirect to="/" />}
