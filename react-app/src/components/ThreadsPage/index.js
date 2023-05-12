@@ -15,7 +15,7 @@ let threadSocket
 const ThreadsPage = ({ user }) => {
 
     const message = useSelector(state => state.messages.currentMessage)
-    
+
     const dispatch = useDispatch();
     const history = useHistory();
     let location = useLocation();
@@ -23,7 +23,7 @@ const ThreadsPage = ({ user }) => {
 
     useEffect(() => {
         threadSocket = io();
-        dispatch(fetchMessageThunk(messageId));
+        fetchMessage();
 
         threadSocket.on("chat", (chat) => {
 
@@ -36,6 +36,16 @@ const ThreadsPage = ({ user }) => {
         })
 
     }, [messageId])
+
+    async function fetchMessage() {
+        const currentMessage = await dispatch(fetchMessageThunk(messageId));
+
+        if (currentMessage.no_message) {
+            alert("Channel no longer exists");
+            history.push(`/`);
+            return
+        }
+    }
 
 
     if (!message || !message.threads) return null;
@@ -60,7 +70,7 @@ const ThreadsPage = ({ user }) => {
                     <span>{thread?.user.firstName} {thread?.user.lastName} {thread.createdAt}</span>
                     {thread?.user.id === user.id && <OpenModalButton
                         buttonText={"Delete"}
-                        modalComponent={<DeleteMessageModal message={thread} socket={threadSocket} type={"thread"} />}
+                        modalComponent={<DeleteMessageModal message={thread} socket={threadSocket} type={"thread"} channelId={message.channelId} />}
                     />}
                     <p>{thread?.threadMessage}</p>
                 </div>)}

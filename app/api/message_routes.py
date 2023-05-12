@@ -64,6 +64,9 @@ def update_message(messageId):
 
     message_to_update = Message.query.get(messageId)
 
+    if not message_to_update:
+        return {'no_message': 'Message does not exist'}
+
     if message_to_update.user_id != current_user.id:
         return {'errors': ['Forbidden']}, 403
 
@@ -107,6 +110,9 @@ def fetch_threads(messageId):
     """This route grabs all threads from a message Id
     """
     message = Message.query.get(messageId)
+
+    if not message:
+        return {'no_message': 'Message does not exist'}, 404
 
     return message.to_dict()
 

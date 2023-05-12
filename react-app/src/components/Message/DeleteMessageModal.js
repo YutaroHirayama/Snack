@@ -4,11 +4,10 @@ import { deleteMessageThunk } from "../../store/channels";
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { deleteThreadThunk } from "../../store/messages";
 
-const DeleteMessageModal = ({ message, socket, type }) => {
+const DeleteMessageModal = ({ message, socket, type, channelId }) => {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
     const history = useHistory();
-    const params = useParams()
 
     const confirmDelete = async (e) => {
         if (type === "thread") {
@@ -16,7 +15,7 @@ const DeleteMessageModal = ({ message, socket, type }) => {
             if (deletedThread.no_thread) {
                 alert("Message no longer exists");
                 closeModal();
-                history.push(`/channel/${params.channelId}`);
+                history.push(`/channel/${channelId}`);
                 return
             }
             socket.emit('chat', 'DELETED');
