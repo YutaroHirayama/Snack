@@ -9,11 +9,20 @@ const MessageInput = ({ user, channelId, socket, type, messageId }) => {
     const history = useHistory()
     const [message, setMessage] = useState("");
     const [isSelected, setSelected] = useState(false)
+    const [disabled, setDisabled] = useState(false)
+    const [pressed, setPressed] = useState(false)
     const dispatch = useDispatch();
     const params = useParams()
 
     const messageSubmit = async e => {
         e.preventDefault();
+
+        if (message.length === 0) {
+            setPressed(false);
+            return;
+        }
+
+
         const newMessage = await dispatch(createMessageThunk(message, channelId))
         if (newMessage.no_channel) {
             history.push(`/`)
@@ -22,10 +31,17 @@ const MessageInput = ({ user, channelId, socket, type, messageId }) => {
         }
         socket.emit('chat', newMessage)
         setMessage('');
+        setPressed(false);
     }
 
     const threadSubmit = async e => {
         e.preventDefault();
+
+        if (message.length === 0) {
+            setPressed(false);
+            return;
+        }
+
         const newMessage = await dispatch(createThreadThunk(message, messageId))
 
         if (newMessage.no_message) {
@@ -35,11 +51,18 @@ const MessageInput = ({ user, channelId, socket, type, messageId }) => {
         }
         socket.emit('chat', newMessage)
         setMessage('');
+        setPressed(false);
     }
 
     const handleKeyDown = e => {
+        if (pressed) e.preventDefault();
+
         if (e.keyCode === 13 || e.key === 'Enter') {
-            e.target.form.requestSubmit();
+            e.preventDefault()
+            if (!pressed) {
+                setPressed(true)
+                e.target.form.requestSubmit();
+            }
         }
     }
 
