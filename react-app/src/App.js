@@ -47,7 +47,7 @@ function App() {
             </div>
 
 
-            <div>
+            <div className='message-page-container'>
             <Route path="/channel/:channelId">
               {!sessionUser && <Redirect to="/" />}
               <MessagePage user={sessionUser} />

@@ -14,3 +14,7 @@ body {
 .threads-container {
 
 }
+
+body::-webkit-scrollbar-track {
+    color: transparent
+}

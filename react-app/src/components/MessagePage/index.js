@@ -66,10 +66,11 @@ const MessagePage = ({ user }) => {
     if (!isMember) return <Redirect to='/' />
 
     return (
-        <div className='message-page'>
+        <>
+            <div className='message-page-header'>
             <OpenModalButton
                 className='channel-info-modal'
-                buttonText={!channel.isDm ? channel.channelName :
+                buttonText={!channel.isDm ? `# ${channel.channelName}` :
                     Object.values(channel.members)
                         .filter((member) => member.id !== user.id)
                         .map((member) => `${member.firstName} ${member.lastName}`)
@@ -78,6 +79,7 @@ const MessagePage = ({ user }) => {
                 // onItemClick={closeMenu}
                 modalComponent={<ChannelInfoModal channel={channel} socket={socket} />}
             />
+            </div>
             <div className='messages-container'>
                 {messages && messages.map(m => <Message key={m.id} message={m} user={user} socket={socket} />)}
 
@@ -86,7 +88,7 @@ const MessagePage = ({ user }) => {
             <div className='message-input-container'>
                 <MessageInput user={user} channelId={channel.id} socket={socket} type='message' />
             </div>
-        </div>
+        </>
 
     )
 }
