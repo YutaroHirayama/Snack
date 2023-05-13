@@ -1,0 +1,77 @@
+.create-dm-modal {
+    background-color: rgb(237, 237, 218);
+    color:#1d1c1d;
+    font-weight: bold;
+    width: 400px;
+}
+
+.create-dm-modal h3 {
+    background-color: rgb(221, 37, 37);
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 0;
+    color: aliceblue;
+}
+
+.add-user-to-channel-button{
+    padding: 5px 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.add-user-to-channel-button:hover{
+    background-color:rgb(221, 37, 37);
+    color: aliceblue;
+    cursor: pointer;
+}
+
+.create-dm-add-user{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.create-dm-add-user:hover{
+    background-color: rgb(250, 215, 215);
+}
+.add-user-to-dm-button{
+    padding: 5px 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.add-user-to-dm-button:hover{
+    background-color:rgb(221, 37, 37);
+    color: aliceblue;
+    cursor: pointer;
+}
+.create-dm-submit{
+    padding: 10px 20px;
+    width: 80%;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.create-dm-submit:hover{
+    background-color:rgb(221, 37, 37);
+    color: aliceblue;
+}
+.create-dm-submit-div{
+    display: flex;
+    justify-content: center;
+}
+.create-dm-all-users {
+    height: 400px;
+    overflow: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createChannelThunk } from "../../store/session";
 import { useModal } from "../../context/Modal";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 const CreateChannelModal = ({ sessionUser, socket }) => {
   // const sessionUser = useSelector(state => state.user)
@@ -22,7 +22,9 @@ const CreateChannelModal = ({ sessionUser, socket }) => {
   const fetchUsers = async () => {
     const res = await fetch("/api/users/");
     const _allUsers = await res.json();
-    const allUsers = _allUsers.users.filter(user => user.id !== sessionUser.id)
+    const allUsers = _allUsers.users.filter(
+      (user) => user.id !== sessionUser.id
+    );
     setUsers(allUsers);
   };
 
@@ -41,53 +43,68 @@ const CreateChannelModal = ({ sessionUser, socket }) => {
       addUsers: channelUsers,
     };
 
-    const res = await dispatch(createChannelThunk(newChannel))
-    socket.emit('chat', "created channel")
-    closeModal()
+    const res = await dispatch(createChannelThunk(newChannel));
+    socket.emit("chat", "created channel");
+    closeModal();
 
-    history.push(`/channel/${res}`)
+    history.push(`/channel/${res}`);
   };
 
   return (
     <>
-      <form onSubmit={formSubmit}>
-        <h3>Create Channel</h3>
-        <label>
-          Channel Name
-          <input
-            type="text"
-            value={channelName}
-            onChange={(e) => setChannelName(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Channel Description
-          <textarea
-            type="text"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          />
-        </label>
-
-        <div id="create-channel-all-users">
-          {users.map((user) => (
-            <div>
-              <div>
-                {user.firstName}, {user.lastName}
-              </div>
-              <button
-                disabled={channelUsers.includes(user.id)}
-                onClick={() => addUser(user.id)}
-              >
-                Add
-              </button>
+      <div className="create-channel-modal">
+        <form onSubmit={formSubmit}>
+          <h3>Create Channel</h3>
+          <div className="channel-name-desc">
+            <div className="create-channel-name">
+              <label>
+                <input
+                  type="text"
+                  value={channelName}
+                  onChange={(e) => setChannelName(e.target.value)}
+                  required
+                  placeholder="Channel name"
+                />
+              </label>
             </div>
-          ))}
-        </div>
-        <button>Submit</button>
-      </form>
+            <div className="create-channel-textarea">
+              <label>
+                <textarea
+                  rows="5"
+                  cols="40"
+                  type="text"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  required
+                  placeholder="Channel description"
+                />
+              </label>
+            </div>
+          </div>
+
+          <div id="create-channel-all-users">
+            {users.map((user) => (
+              <div className="create-channel-add-user">
+                <div>
+                  {user.firstName}, {user.lastName}
+                </div>
+                <div>
+                  <button
+                    className="add-user-to-channel-button"
+                    disabled={channelUsers.includes(user.id)}
+                    onClick={() => addUser(user.id)}
+                  >
+                    Add
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="create-channel-submit-div">
+            <button className="create-channel-submit">Submit</button>
+          </div>
+        </form>
+      </div>
     </>
   );
 };
