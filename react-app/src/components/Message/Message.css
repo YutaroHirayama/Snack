@@ -14,7 +14,30 @@
     border-radius: 50%;
     object-fit: cover;
 }
+.edit-message-form-modal{
+    width: 400px;
+    height: 160px;
+}
+.edit-message-form-modal textarea {
+    width: 90%;
+    font-size: 20px;
+}
+.edit-message-form-modal button{
+    padding: 10px 30px;
+    width: 95%;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.edit-message-form-modal button:hover{
+    background-color: brown;
+    color: aliceblue;
+}
+.edit-messsage-send-button {
+    display: flex;
+    justify-content: center;
 
+}
 .message-textarea {
     resize: none;
     background-color: transparent;
