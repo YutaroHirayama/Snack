@@ -65,30 +65,39 @@ const ThreadsPage = ({ user }) => {
     if (!isMember) return <Redirect to='/' />
 
     return (
-        <div className='thread-page'>
-            <div className="close-threads-bttn-div">
-                <button
-                    className="close-threads-bttn"
-                    onClick={closeThreads}>X</button>
+        <div>
+            <div className="threads-header">
+                <h2>Thread</h2>
+                <div className="close-threads-bttn-div">
+                    <button
+                        className="close-threads-bttn"
+                        onClick={closeThreads}>X</button>
 
+                </div>
             </div>
-            <img className="profile-pic-msg" src={message.user.profilePic}></img>
-            <h3>{message.user.firstName} {message.user.lastName}</h3>
-            <p>{message.message}</p>
-            <div className='threads-container'>
-                {message?.threads.map(thread => <div key={thread.id}>
-                    <img className="profile-pic-msg" src={thread?.user.profilePic}></img>
-                    <span>{thread?.user.firstName} {thread?.user.lastName} {thread.createdAt}</span>
-                    {thread?.user.id === user.id && <OpenModalButton
-                        buttonText={"Delete"}
-                        modalComponent={<DeleteMessageModal message={thread} socket={threadSocket} type={"thread"} channelId={message.channelId} />}
-                    />}
-                    <p>{thread?.threadMessage}</p>
-                </div>)}
+            <div className='thread-page'>
+                <img className="profile-pic-msg" src={message.user.profilePic}></img>
+                <h3>{message.user.firstName} {message.user.lastName}</h3>
+                <p>{message.message}</p>
+                <div className='threads-container'>
+                    <div>
+                        {message?.threads.map(thread =>
+                            <div key={thread.id}>
+                                <img className="profile-pic-msg" src={thread?.user.profilePic}></img>
+                                <span>{thread?.user.firstName} {thread?.user.lastName} {thread.createdAt}</span>
+                                {thread?.user.id === user.id && <OpenModalButton
+                                    buttonText={"Delete"}
+                                    modalComponent={<DeleteMessageModal message={thread} socket={threadSocket} type={"thread"} channelId={message.channelId} />}
+                                />}
+                                <p>{thread?.threadMessage}</p>
+                            </div>)}
+                    </div>
+                </div>
+                <div>
+                    <MessageInput user={user} messageId={message.id} socket={threadSocket} type='thread' />
+                </div>
             </div>
-            <MessageInput user={user} messageId={message.id} socket={threadSocket} type='thread' />
         </div>
-
     )
 }
 

@@ -25,3 +25,25 @@
     background-color: rgba(211, 211, 211, 0.067);
     cursor: pointer;
 }
+
+.thread-page {
+    margin-left: 30px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.threads-container {
+    height: 650px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column-reverse;
+
+}
+
+.threads-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}

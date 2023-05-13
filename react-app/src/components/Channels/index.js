@@ -101,6 +101,7 @@ const Channels = ({ channels, user, socket }) => {
               to={`${generateLink(channel.id, location.pathname)}`}
               className={`${isSelected === channel.id ? 'selected-channel' : "channel-tag"}`}
               value={channel.id}
+              key={channel.id}
               onClick={() => onChannelClick(channel.id)}># {channel.channelName}
             </NavLink>
 
@@ -123,6 +124,7 @@ const Channels = ({ channels, user, socket }) => {
               to={`${generateLink(channel.id, location.pathname)}`}
               className={`${isSelected === channel.id ? 'selected-channel' : "channel-tag"}`}
               value={channel.id}
+              key={channel.id}
               onClick={() => onChannelClick(channel.id)}> - {Object.values(channel.members)
                 .filter((member) => member.id !== user.id)
                 .map((member) => `${member.firstName} ${member.lastName}`)
