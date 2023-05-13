@@ -149,6 +149,7 @@
     width: 80%;
     padding: 10px 0;
     font-size: 20px;
+    border-radius: 10px;
 }
 .submit-edit-channel:hover{
     background-color: rgb(42, 43, 44);
@@ -159,4 +160,41 @@
     display: flex;
     justify-content: center;
 
+}
+
+.delete-channel-modal{
+    width: 400px;
+    height: 200px;
+    background-color: rgb(49, 48, 48);
+    color: aliceblue;
+    text-align: center;
+}
+
+.delete-channel-modal h2{
+    margin: 0;
+    padding-top: 10px;
+}
+.delete-channel-modal-buttons {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    padding: 0px 20px;
+}
+
+.yes-button-delete{
+    margin-bottom: 15px;
+    padding: 10px 0;
+    font-size: 20px;
+    cursor: pointer;
+}
+.yes-button-delete:hover{
+    background-color: rgb(112, 128, 243);
+}
+.no-button-delete{
+    padding: 10px 0;
+    font-size: 20px;
+    cursor: pointer;
+}
+.no-button-delete:hover{
+    background-color: rgb(243, 116, 112);
 }
