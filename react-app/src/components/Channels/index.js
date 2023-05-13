@@ -6,8 +6,11 @@ import CreateChannelModal from "../CreateChannelModal";
 import { fetchChannelThunk } from "../../store/channels";
 import { io } from "socket.io-client";
 import { authenticate } from "../../store/session";
-import { NavLink, useHistory, useLocation } from "react-router-dom";
+import { NavLink, useHistory, useLocation, useParams } from "react-router-dom";
 import CreateDirectMessageModal from "../CreateDirectMessageModal";
+
+
+
 
 
 
@@ -19,7 +22,11 @@ const Channels = ({ channels, user, socket }) => {
   const history = useHistory();
   let location = useLocation();
   const [, forceRerender] = useState()
-  const [isSelected, setIsSelected] = useState(false)
+  const [isSelected, setIsSelected] = useState(location.pathname.split('/')[2])
+
+  const [hideChannels, setHideChannels] = useState(false);
+  const [hideDms, setHideDms] = useState(false);
+
 
   Object.values(channels).forEach((element) => {
     if (!element.isDm) userChannels.push(element);
@@ -29,9 +36,11 @@ const Channels = ({ channels, user, socket }) => {
   // fill the channels state with all channels current User is a member of OR owns
   // convert channels into an array
 
+  // console.log(isSelected)
   useEffect(() => {
+    setIsSelected(location.pathname.split('/')[2])
 
-    console.log("IS THIS RUNNING?")
+    console.log("IS THIS RUNNING?", isSelected)
     //dispatch thunk to fetch all channels That a user is a member of OR owns by user ID
     //console.log("CHANNELS: ", channels);
     socket.on("chat", (chat) => {
@@ -46,9 +55,10 @@ const Channels = ({ channels, user, socket }) => {
 
   }, [dispatch]);
 
-  const onChannelClick = e => {
+  const onChannelClick = channelId => {
+    console.log(channelId)
+    setIsSelected(channelId)
 
-    const channelId = e.target.value
 
     // history.push(`/channel/${channelId}`);
 
@@ -57,6 +67,7 @@ const Channels = ({ channels, user, socket }) => {
     //   alert("Channel Not Found")
     // }
   }
+
 
   const generateLink = (channelId, path) => {
     if (path.includes('message')) {
@@ -76,52 +87,59 @@ const Channels = ({ channels, user, socket }) => {
   if (!socket) return null
 
   return (
-    <>
-      <div>
-        <div className="create-channel-container">
-          <h3>Channels</h3>
-          <OpenModalButton
-            buttonText="Create Channel"
-            modalComponent={<CreateChannelModal sessionUser={user} socket={socket} />}
-          />
-        </div>
-        <div id="channels-container">
-          {userChannels.map((channel) => (
-            <>
-              <NavLink
-                to={`${generateLink(channel.id, location.pathname)}`}
-                className="channel-tag"
-                value={channel.id}
-                onClick={onChannelClick}>{channel.channelName}
-              </NavLink>
+    <div id="all-channels-container">
+      <div id="channel-channel-container">
+        <div>
+          <span className="channel-titles">
+            <h4>Channels</h4>
+          </span>
 
-            </>
-          ))}
+        </div>
+        <div className={`channels-container ${hideDms ? 'hidden' : ''}`}>
+          {userChannels.map((channel) => (
+            <NavLink
+              to={`${generateLink(channel.id, location.pathname)}`}
+              className={`${isSelected === channel.id ? 'selected-channel' : "channel-tag"}`}
+              value={channel.id}
+              onClick={() => onChannelClick(channel.id)}># {channel.channelName}
+            </NavLink>
+
+          ))}<span><i className="fa-plus"></i>
+            <OpenModalButton
+              buttonText="Create Channel"
+              className={"create-channel-button"}
+              modalComponent={<CreateChannelModal sessionUser={user} socket={socket} />}
+            />
+          </span>
         </div>
       </div>
-      <div>
-        <h3>Direct Messages</h3>
-        <OpenModalButton
-          buttonText="Create Direct Message"
-          modalComponent={<CreateDirectMessageModal channels={directMessages} sessionUser={user} socket={socket} />}
-        />
-        <div id="dms-container">
+      <div id="channels-directMessages-container">
+        <span className="channel-titles">
+          <h4>Direct Messages</h4>
+        </span>
+        <div className={`channels-container ${hideDms ? 'hidden' : ''}`}>
           {directMessages.map((channel) => (
-            <a className="channel-tag">
-              <NavLink
-                to={`${generateLink(channel.id, location.pathname)}`}
-                className="channel-tag"
-                value={channel.id}
-                onClick={onChannelClick}>{Object.values(channel.members)
-                  .filter((member) => member.id !== user.id)
-                  .map((member) => `${member.firstName} ${member.lastName}`)
-                  .join(", ")}
-              </NavLink>
-            </a>
+            <NavLink
+              to={`${generateLink(channel.id, location.pathname)}`}
+              className={`${isSelected === channel.id ? 'selected-channel' : "channel-tag"}`}
+              value={channel.id}
+              onClick={() => onChannelClick(channel.id)}> - {Object.values(channel.members)
+                .filter((member) => member.id !== user.id)
+                .map((member) => `${member.firstName} ${member.lastName}`)
+                .join(", ")}
+            </NavLink>
+
           ))}
+          <span><i className="fa-plus"></i>
+            <OpenModalButton
+              buttonText={"Create Direct Message"}
+              className={"create-channel-button"}
+              modalComponent={<CreateDirectMessageModal channels={directMessages} sessionUser={user} socket={socket} />}
+            />
+          </span>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default Channels;
