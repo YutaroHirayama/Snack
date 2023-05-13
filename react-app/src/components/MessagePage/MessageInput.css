@@ -16,24 +16,39 @@
 .send-bttn {
     align-self: flex-end;
     position: relative;
-    right: 18px;
-    bottom: 50px;
+    right: 7px;
+    bottom: 55px;
     border: none;
     background-color: transparent;
     border-radius: 5px;
     padding: 10px;
+    color: #d1d2d3;
+    width: 70px
 }
+
+
 
 .send-bttn:hover {
     background-color: rgba(211, 211, 211, 0.067);
     cursor: pointer;
+
 }
 
 .send-icon {
-    color: #d1d2d3;
+    /* color: #d1d2d3; */
     font-size: 1.3rem;
 }
 
+.send-bttn:disabled {
+    cursor: default;
+    background-color: inherit;
+    color: #6a6a6a;
+}
+
+/* .send-bttn:disabled:hover {
+    cursor: none;
+    color: #d1d2d3;
+} */
 
 
 .input-area-button-div {

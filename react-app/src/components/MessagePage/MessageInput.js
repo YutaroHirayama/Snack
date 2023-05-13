@@ -6,7 +6,10 @@ import "./MessageInput.css";
 import { useHistory, useParams } from "react-router-dom";
 
 const MessageInput = ({ user, channelId, socket, type, messageId }) => {
-    const icons = ["carrot", "fish", "burger", "bowl-food", "egg", "bacon", "lemon", "shrimp", "pizza-slice"]
+    const icons = ["carrot", "fish", "burger", "bowl-food", "egg",
+        "bacon", "lemon", "shrimp", "pizza-slice", "pepper-hot", "ice-cream",
+        "hotdog", "fish-fins", "drumstick-bite", "cookie", "apple-whole", "bowl-rice",
+        "candy-cane"]
     const history = useHistory();
     const [message, setMessage] = useState("");
     const [isSelected, setSelected] = useState(false);

@@ -59,7 +59,7 @@ const ThreadsPage = ({ user }) => {
                 <div className="close-threads-bttn-div">
                     <button
                         className="close-threads-bttn"
-                        onClick={closeThreads}>X</button>
+                        onClick={closeThreads}><i className="fa-solid fa-xmark"></i></button>
 
                 </div>
             </div>
@@ -94,7 +94,7 @@ const ThreadsPage = ({ user }) => {
                 <div className="close-threads-bttn-div">
                     <button
                         className="close-threads-bttn"
-                        onClick={closeThreads}>X</button>
+                        onClick={closeThreads}><i className="fa-solid fa-xmark"></i></button>
 
                 </div>
             </div>
