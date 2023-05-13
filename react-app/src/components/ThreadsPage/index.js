@@ -55,7 +55,7 @@ const ThreadsPage = ({ user }) => {
     if (!message || !message.threads || message.id !== parseInt(messageId)) return (
         <div>
             <div className="threads-header">
-                <h2>Thread</h2>
+                <h3>Thread</h3>
                 <div className="close-threads-bttn-div">
                     <button
                         className="close-threads-bttn"

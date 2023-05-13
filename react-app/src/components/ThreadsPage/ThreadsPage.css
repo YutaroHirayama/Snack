@@ -3,6 +3,7 @@
     flex-direction: column;
     width: 350px;
     padding-left: 20px;
+    border-left: 1px rgba(209, 210, 211, 0.3) solid
 }
 
 .close-threads-bttn-div {
