@@ -23,6 +23,7 @@ const MessageInput = ({ user, channelId, socket, type, messageId }) => {
         }
 
 
+
         const newMessage = await dispatch(createMessageThunk(message, channelId))
         if (newMessage.no_channel) {
             history.push(`/`)
@@ -32,6 +33,7 @@ const MessageInput = ({ user, channelId, socket, type, messageId }) => {
         socket.emit('chat', newMessage)
         setMessage('');
         setPressed(false);
+
     }
 
     const threadSubmit = async e => {
@@ -41,6 +43,8 @@ const MessageInput = ({ user, channelId, socket, type, messageId }) => {
             setPressed(false);
             return;
         }
+
+
 
         const newMessage = await dispatch(createThreadThunk(message, messageId))
 
@@ -52,6 +56,15 @@ const MessageInput = ({ user, channelId, socket, type, messageId }) => {
         socket.emit('chat', newMessage)
         setMessage('');
         setPressed(false);
+
+    }
+
+    const handleClick = e => {
+        e.preventDefault();
+        if (!pressed) {
+            setPressed(true)
+            e.target.form.requestSubmit();
+        }
     }
 
     const handleKeyDown = e => {
@@ -85,7 +98,7 @@ const MessageInput = ({ user, channelId, socket, type, messageId }) => {
             </textarea>
             <button
                 className="send-bttn"
-                type='submit'
+                onClick={handleClick}
                 disabled={!message || messageTooLong}>Send</button>
             {messageTooLong && <p>{`Message is ${message.length - 10000} characters too long.`}</p>}
         </form>
