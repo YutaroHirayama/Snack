@@ -67,12 +67,13 @@ const ChannelInfoModal = ({ channel, socket }) => {
     </>
   ) : (
     <>
-      <div className="dm-members-modal">
-        <h3>Channel Members</h3>
+      <div className="channel-info-members-modal">
+        <h2 id="dm-members-title">Direct Message Members</h2>
         {channel.members.map((user) => (
-          <div>
-            <div>
-              {user.firstName}, {user.lastName}
+          <div className="channel-members-list-container">
+            <img className="user-profile-pic" src={user.profilePic} />
+            <div className="list-name-lastname">
+              {user.firstName} {user.lastName}
             </div>
           </div>
         ))}
