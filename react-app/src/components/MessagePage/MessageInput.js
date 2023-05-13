@@ -47,7 +47,6 @@ const MessageInput = ({ user, channelId, socket, type, messageId }) => {
 
     return (
         <form
-
             onSubmit={type === 'thread' ? threadSubmit : messageSubmit}>
             <textarea
                 onSelect={() => setSelected(true)}
@@ -58,7 +57,6 @@ const MessageInput = ({ user, channelId, socket, type, messageId }) => {
                 onChange={e => setMessage(e.target.value)}
                 placeholder="Enter message"
             >
-
             </textarea>
             <button
                 className="send-bttn"

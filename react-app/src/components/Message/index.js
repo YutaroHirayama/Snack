@@ -54,39 +54,43 @@ const Message = ({ message, user, socket }) => {
 
 
     return (
-        <div>
-            <div className='message-profile'>
-
-            </div>
-            <div className='message-header'>
+        <div className='single-message-container'>
                 <img className="profile-pic-msg" src={message.user.profilePic}></img>
-                <span>{message.user.firstName} {message.user.lastName}</span>
-                <span> {message.createdAt} {message.user.id === user.id && <OpenModalButton
-                    buttonText={"Edit"}
-                    modalComponent={<EditMessageModal message={message} socket={socket} />}
-                />}
-                    {message.user.id === user.id && <OpenModalButton
-                        buttonText={"Delete"}
-                        modalComponent={<DeleteMessageModal message={message} socket={socket} />}
-                    />}
-                    <button
-                        onClick={() => loadReplies(message)}
-                    >{message.threads.length > 0 ? `${message.threads.length} replies` : "Reply"} </button>
-                </span>
-                <span>
-                    <OpenModalButton
-                        buttonText="Add reaction"
-                        modalComponent={<ReactionFormModal message={message} socket={socket} />}
-                    />
-                </span>
-            </div>
-            <div className="users-message">
-                <p>{message.message}</p>
+                <div className='single-message-details'>
+                    <div className='single-message-header'>
+                        <div className='single-message-user-timestamp'>
+                            <span className='single-message-user'>{message.user.firstName} {message.user.lastName}</span>
+                            <span className='single-message-timestamp'>{message.createdAt} </span>
+                        </div>
+                        <div className='single-message-header-button-container group-hover'>
+                            {message.user.id === user.id && <OpenModalButton
+                                buttonText={"Edit"}
+                                className='single-message-header-button'
+                                modalComponent={<EditMessageModal message={message} socket={socket} />}
+                            />}
+                            {message.user.id === user.id && <OpenModalButton
+                                buttonText={"Delete"}
+                                className='single-message-header-button'
+                                modalComponent={<DeleteMessageModal message={message} socket={socket} />}
+                            />}
+                            <button
+                                className='single-message-header-button'
+                                onClick={() => loadReplies(message)}
+                            >{message.threads.length > 0 ? `${message.threads.length} replies` : "Reply"} </button>
+                            <OpenModalButton
+                                buttonText="Add reaction"
+                                className='single-message-header-button'
+                                modalComponent={<ReactionFormModal message={message} socket={socket} />}
+                            />
+                        </div>
+                    </div>
+                <div className="users-message">{message.message}</div>
                 <div className='reaction-container'>
                     {reactions.length > 0 && reactions.map(r =>
                         <Reaction reaction={r[0]} count={r[1]} message={message} socket={socket} />
                     )}
                 </div>
+
             </div>
         </div>
     )
