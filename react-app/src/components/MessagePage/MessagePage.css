@@ -1,18 +1,40 @@
 .message-page {
-    margin-left: 30px;
-    height: 600px;
-    display: flex;
-    flex-direction: column;
+    margin: 0 30px;
+    display: grid;
+    grid-template-rows: 1fr 5fr 2fr;
+    grid-template-columns: 1;
     justify-content: space-between;
+    width: 100%
 }
 
 .message-page h2 {
     color: whitesmoke;
-    width: 50%;
     text-align: start;
 }
 
+.channel-info-modal {
+
+    background-color: white;
+    border: 5px white;
+    border-radius: 5px;
+    color: #d1d2d3;
+    cursor: pointer;
+    width: fit-content;
+    padding: 10px 30px;
+    margin: 20px 0px;
+    height: 5%
+
+}
 .messages-container {
-    height: 600px;
+    height: 100%;
+    width: 100%;
     overflow: scroll;
+}
+
+.message-input-container {
+    height: 100%;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    position: relative
 }

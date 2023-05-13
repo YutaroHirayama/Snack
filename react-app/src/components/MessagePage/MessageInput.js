@@ -40,22 +40,27 @@ const MessageInput = ({ user, channelId, socket, type, messageId }) => {
     const messageTooLong = message.length > 10000;
 
     return (
-        <form onSubmit={type === 'thread' ? threadSubmit : messageSubmit}>
-            <textarea
-                onSelect={() => setSelected(true)}
-                onBlur={() => setSelected(false)}
-                onKeyDown={(e) => console.log(e.target.value)}
-                className="message-textarea"
-                value={message}
-                onChange={e => setMessage(e.target.value)}
-                placeholder="Enter message"
-            ></textarea>
-            {isSelected && <h1>SELECTED!!!!!!!</h1>}
-            {messageTooLong && <p>{`Message is ${message.length - 10000} characters too long.`}</p>}
-            <button
-                type='submit'
-                disabled={!message || messageTooLong}>Send</button>
-        </form>
+        <div className='message-input'>
+            <form
+                className='message-input-form'
+                onSubmit={type === 'thread' ? threadSubmit : messageSubmit}>
+                <textarea
+                    onSelect={() => setSelected(true)}
+                    onBlur={() => setSelected(false)}
+                    onKeyDown={(e) => console.log(e.target.value)}
+                    className="message-textarea"
+                    value={message}
+                    onChange={e => setMessage(e.target.value)}
+                    placeholder="Enter message"
+                ></textarea>
+                {isSelected && <h1>SELECTED!!!!!!!</h1>}
+                {messageTooLong && <p>{`Message is ${message.length - 10000} characters too long.`}</p>}
+                <button
+                    className='input-form-submit'
+                    type='submit'
+                    disabled={!message || messageTooLong}>Send</button>
+            </form>
+        </div>
     )
 }
 

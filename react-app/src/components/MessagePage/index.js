@@ -68,6 +68,7 @@ const MessagePage = ({ user }) => {
     return (
         <div className='message-page'>
             <OpenModalButton
+                className='channel-info-modal'
                 buttonText={!channel.isDm ? channel.channelName :
                     Object.values(channel.members)
                         .filter((member) => member.id !== user.id)
@@ -82,7 +83,7 @@ const MessagePage = ({ user }) => {
 
             </div>
 
-            <div>
+            <div className='message-input-container'>
                 <MessageInput user={user} channelId={channel.id} socket={socket} type='message' />
             </div>
         </div>
