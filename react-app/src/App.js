@@ -46,11 +46,6 @@ function App() {
             </Route>
             </div>
 
-            <Switch>
-              <Route exact path="/">
-                {!sessionUser && <LandingPage isLoaded={isLoaded} />}
-              </Route>
-            </Switch>
 
             <div>
             <Route path="/channel/:channelId">
@@ -58,13 +53,18 @@ function App() {
               <MessagePage user={sessionUser} />
             </Route>
             </div>
-            <div>
+            <div className="threads-container">
             <Route path="/channel/:channelId/message/:messageId">
               {!sessionUser && <Redirect to="/" />}
               <ThreadsPage user={sessionUser} />
             </Route>
             </div>
           </div>
+            <Switch>
+              <Route exact path="/">
+                {!sessionUser && <LandingPage isLoaded={isLoaded} />}
+              </Route>
+            </Switch>
         </>
       )}
     </>
