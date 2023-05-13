@@ -1,15 +1,18 @@
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal"
 import { deleteChannelThunk } from "../../store/session";
+import { useHistory } from "react-router-dom";
 
 const ConfirmDeleteModal = ({ channelId, socket }) => {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
+    const history = useHistory()
 
     const confirmDelete = async () => {
         await dispatch(deleteChannelThunk(channelId))
-        socket.emit('chat', "deleted channel")
-        closeModal()
+        socket.emit('chat', "deleted channel");
+        closeModal();
+        history.push('/');
     }
 
     return (

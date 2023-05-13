@@ -12,6 +12,7 @@ import { fetchChannelThunk } from "../../store/channels";
 const EditChannelModal = ({ channel, socket }) => {
   const [channelName, setChannelName] = useState(channel.channelName);
   const [description, setDescription] = useState(channel.description);
+  const [errors, setErrors] = useState([])
   const [tab, setTab] = useState(true);
   const [users, setUsers] = useState([]);
   const [, forceRerender] = useState();
@@ -67,16 +68,26 @@ const EditChannelModal = ({ channel, socket }) => {
       channelName,
       description,
     };
-    await dispatch(editChannelThunk(updatedChannel))
+
+    const res = await dispatch(editChannelThunk(updatedChannel))
+    if (res?.errors) {
+      setErrors(res.errors)
+    } else {
     await dispatch(fetchChannelThunk(channel.id))
     socket.emit('chat', "updated channel")
     closeModal();
+    }
 
   };
   return (
     <>
       <form onSubmit={formSubmit}>
         <h3>Update Channel</h3>
+        <ul>
+        {errors.map((error, idx) => (
+          <li className='form-errors' key={idx}>{error}</li>
+        ))}
+        </ul>
         <label>
           Channel Name
           <input
@@ -92,7 +103,6 @@ const EditChannelModal = ({ channel, socket }) => {
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            required
           />
         </label>
 

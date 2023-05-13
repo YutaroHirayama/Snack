@@ -1,27 +1,111 @@
-#channels-container {
+#all-channels-container {
+    /* border: 1px solid white; */
+    width: 300px;
+    border-right: 1px rgba(209, 210, 211, 0.3) solid;
+    padding-right: 25px;
+    /* Set to auto when merged */
+    /* width: auto; */
+}
+
+
+.channels-container {
     display: flex;
     flex-direction: column;
 }
 
+/* .channels-container > button {} */
+
+#channel-channel-container {
+    /* border: 1px red solid; */
+    border-bottom: 1px rgba(209, 210, 211, 0.1) solid;
+    padding-bottom: 20px;
+}
+
 .create-channel-container {
-    display:  flex;
+    display: flex;
     justify-content: space-between;
 }
+
+#channels-directMessages-container {
+    margin-top: 0px;
+}
+
+.channel-titles {
+    margin-left: 8px;
+    /* margin-top: 5px; */
+}
+
+.channel-titles>h4 {
+    margin-left: 6px;
+    margin-bottom: 6px;
+    margin-top: 2px;
+}
+
+/*  */
 .create-channel-button {
     margin-top: 20px;
 
 }
 
-.channel-tag {
-    background: transparent;
-    height: 50px;
-    font-size: 20px;
-    color: white;
-    text-shadow: 1px 1px 1px rgb(3, 2, 2);
+.create-channel-button:hover {
     cursor: pointer;
 }
 
-#dms-container {
+.channel-tag {
+    margin: 2px 0px;
+    font-weight: bold;
+    align-items: center;
+    margin-left: 6px;
+    height: 20px;
+    border-radius: 4px;
+    padding-left: 4px;
+    overflow: hidden;
+
+    background: transparent;
+    font-size: 13px;
+    color: #d1d2d3;
+    text-decoration: none;
+    white-space: nowrap;
+
+}
+
+.channel-tag:hover {
+    cursor: pointer;
+    background-color: brown;
+}
+
+.selected-channel {
+    margin: 2px 0px;
+    font-weight: bold;
+    align-items: center;
+    margin-left: 6px;
+    height: 20px;
+    border-radius: 4px;
+    padding-left: 4px;
+    overflow: hidden;
+
+    background-color: red;
+    font-size: 13px;
+    color: #d1d2d3;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.dms-container {
     display: flex;
     flex-direction: column;
+}
+
+.hidden {
+    display: none;
+}
+
+.create-channel-button {
+    margin: 0;
+    background: transparent;
+    border: none;
+    font-size: 13px;
+    color: #d1d2d3;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
 }

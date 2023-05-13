@@ -21,6 +21,7 @@ function SignupFormModal() {
 		if (password === confirmPassword) {
 			const data = await dispatch(signUp(username, email, password, firstName, lastName, profilePic));
 			if (data) {
+				console.log('ERROR OBJECT FROM DB ----->',data)
 				setErrors(data);
 			} else {
 				closeModal();
@@ -34,77 +35,83 @@ function SignupFormModal() {
 
 	return (
 		<>
+		<div className="signup-form-modal">
+
+
 			<h1>Sign Up</h1>
 			<form onSubmit={handleSubmit}>
+				<div className="signup-form-prop">
 				<ul>
 					{errors.map((error, idx) => (
-						<li key={idx}>{error}</li>
+						<li className='form-error' key={idx}>{error}</li>
 					))}
 				</ul>
 				<label>
-					First Name
 					<input
 						type="text"
 						value={firstName}
 						onChange={(e) => setFirstName(e.target.value)}
+						placeholder="First name"
 						required
 					/>
 				</label>
 				<label>
-					Last Name
 					<input
 						type="text"
 						value={lastName}
 						onChange={(e) => setLastName(e.target.value)}
 						required
+						placeholder="Last name"
 					/>
 				</label>
 				<label>
-					Email
 					<input
 						type="text"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						required
+						placeholder="Email"
 					/>
 				</label>
 				<label>
-					Username
 					<input
 						type="text"
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
 						required
+						placeholder="Username"
 					/>
 				</label>
 				<label>
-					Profile Pic
 					<input
 						type="text"
 						value={profilePic}
 						onChange={(e) => setProfilePic(e.target.value)}
+						placeholder="Profile pic "
 					/>
 				</label>
 				<label>
-					Password
 					<input
 						type="password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						required
+						placeholder="Password"
 					/>
 				</label>
 				<label>
-					Confirm Password
 					<input
 						type="password"
 						value={confirmPassword}
 						onChange={(e) => setConfirmPassword(e.target.value)}
 						required
+						placeholder="Confirm password"
 					/>
 				</label>
-				<button type="submit">Sign Up</button>
+				<button className="signup-button" type="submit">Sign Up</button>
+				</div>
 			</form>
+			</div>
 		</>
 	);
 }

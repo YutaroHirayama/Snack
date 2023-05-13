@@ -33,6 +33,9 @@ def create_message(channelId):
     """
     channel_to_post_in = Channel.query.get(channelId)
 
+    if not channel_to_post_in:
+        return {'no_channel': 'Channel does not Exist'}, 404
+
     if current_user not in channel_to_post_in.members:
         return {'errors': ['Forbidden']}, 403
 
@@ -61,6 +64,9 @@ def update_message(messageId):
 
     message_to_update = Message.query.get(messageId)
 
+    if not message_to_update:
+        return {'no_message': 'Message does not exist'}
+
     if message_to_update.user_id != current_user.id:
         return {'errors': ['Forbidden']}, 403
 
@@ -83,6 +89,8 @@ def delete_message(messageId):
     """
 
     message_to_delete = Message.query.get(messageId)
+    if not message_to_delete:
+        return {'no_message': 'Message does not Exist'}, 404
 
     if message_to_delete.user_id != current_user.id:
         return {'errors': ['Forbidden']}, 403
@@ -103,6 +111,9 @@ def fetch_threads(messageId):
     """
     message = Message.query.get(messageId)
 
+    if not message:
+        return {'no_message': 'Message does not exist'}, 404
+
     return message.to_dict()
 
 
@@ -113,7 +124,10 @@ def create_thread(messageId):
     """
     This route creates threads for the specified message
     """
+
     message_to_add_to = Message.query.get(messageId)
+    if not message_to_add_to:
+        return {'no_message': 'Message does not Exist'}, 404
 
     if current_user not in message_to_add_to.channel.members:
         return {'errors': ['Forbidden']}, 403
@@ -130,6 +144,6 @@ def create_thread(messageId):
 
         db.session.add(new_thread)
         db.session.commit()
-        return new_thread.to_dict_no_ref()
+        return new_thread.to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
