@@ -26,11 +26,12 @@
     padding-right: 20px;
 
 }
+
 .messages-container {
     display: flex;
     flex-direction: column-reverse;
-    height: 65vh;
-    max-height: 65vh;
+    height: 55vh;
+    max-height: 55vh;
     width: 100%;
     overflow-y: scroll;
     overflow-x: hidden;

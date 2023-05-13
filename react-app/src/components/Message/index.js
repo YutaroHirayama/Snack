@@ -55,35 +55,35 @@ const Message = ({ message, user, socket }) => {
 
     return (
         <div className='single-message-container'>
-                <img className="profile-pic-msg" src={message.user.profilePic}></img>
-                <div className='single-message-details'>
-                    <div className='single-message-header'>
-                        <div className='single-message-user-timestamp'>
-                            <span className='single-message-user'>{message.user.firstName} {message.user.lastName}</span>
-                            <span className="time" title={getTime(message.createdAt).datetime}>{getTime(message.createdAt).time}</span>
-                        </div>
-                        <div className='single-message-header-button-container group-hover'>
-                            {message.user.id === user.id && <OpenModalButton
-                                buttonText={"Edit"}
-                                className='single-message-header-button'
-                                modalComponent={<EditMessageModal message={message} socket={socket} />}
-                            />}
-                            {message.user.id === user.id && <OpenModalButton
-                                buttonText={"Delete"}
-                                className='single-message-header-button'
-                                modalComponent={<DeleteMessageModal message={message} socket={socket} />}
-                            />}
-                            <button
-                                className='single-message-header-button'
-                                onClick={() => loadReplies(message)}
-                            >{message.threads.length > 0 ? `${message.threads.length} replies` : "Reply"} </button>
-                            <OpenModalButton
-                                buttonText="Add reaction"
-                                className='single-message-header-button'
-                                modalComponent={<ReactionFormModal message={message} socket={socket} />}
-                            />
-                        </div>
+            <img className="profile-pic-msg" src={message.user.profilePic}></img>
+            <div className='single-message-details'>
+                <div className='single-message-header'>
+                    <div className='single-message-user-timestamp'>
+                        <span className='single-message-user'>{message.user.firstName} {message.user.lastName} </span>
+                        <span className="time" title={getTime(message.createdAt).datetime}>{getTime(message.createdAt).time}</span>
                     </div>
+                    <div className='single-message-header-button-container group-hover'>
+                        {message.user.id === user.id && <OpenModalButton
+                            buttonText={"Edit"}
+                            className='single-message-header-button'
+                            modalComponent={<EditMessageModal message={message} socket={socket} />}
+                        />}
+                        {message.user.id === user.id && <OpenModalButton
+                            buttonText={"Delete"}
+                            className='single-message-header-button'
+                            modalComponent={<DeleteMessageModal message={message} socket={socket} />}
+                        />}
+                        <button
+                            className='single-message-header-button'
+                            onClick={() => loadReplies(message)}
+                        >{message.threads.length > 0 ? `${message.threads.length} replies` : "Reply"} </button>
+                        <OpenModalButton
+                            buttonText="Add reaction"
+                            className='single-message-header-button'
+                            modalComponent={<ReactionFormModal message={message} socket={socket} />}
+                        />
+                    </div>
+                </div>
                 <div className="users-message">{message.message}</div>
                 <div className='reaction-container'>
                     {reactions.length > 0 && reactions.map(r =>

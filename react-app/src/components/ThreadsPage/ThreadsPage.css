@@ -3,7 +3,6 @@
     flex-direction: column;
     width: 350px;
     padding-left: 20px;
-    border-left: 1px rgba(209, 210, 211, 0.3) solid
 }
 
 .close-threads-bttn-div {
@@ -29,7 +28,6 @@
 
 .thread-page {
     margin-left: 30px;
-    height: 540px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -40,6 +38,7 @@
     overflow: scroll;
     display: flex;
     flex-direction: column-reverse;
+    height: 40vh
 }
 
 .threads-header {

@@ -53,26 +53,28 @@ const ThreadsPage = ({ user }) => {
     }
 
     if (!message || !message.threads || message.id !== parseInt(messageId)) return (
-        <div>
-            <div className="threads-header">
-                <h3>Thread</h3>
-                <div className="close-threads-bttn-div">
-                    <button
-                        className="close-threads-bttn"
-                        onClick={closeThreads}><i className="fa-solid fa-xmark"></i></button>
+        <div className="threads-container">
+            <div>
+                <div className="threads-header">
+                    <h3>Thread</h3>
+                    <div className="close-threads-bttn-div">
+                        <button
+                            className="close-threads-bttn"
+                            onClick={closeThreads}><i className="fa-solid fa-xmark"></i></button>
 
-                </div>
-            </div>
-            <div className='thread-page'>
-                <div className="thread-message-div">
-                    <div className='message-header'>
-                        <img className="profile-pic-msg" src='/placeholder.jpg'></img>
-                        <span>{"--------"} {"--------"}</span>
                     </div>
-                    <p className="thread-message">{"--------"}</p>
                 </div>
-                <span className="replies-tag">{"--"} replies</span>
-                <div className='threads-container'>
+                <div className='thread-page'>
+                    <div className="thread-message-div">
+                        <div className='message-header'>
+                            <img className="profile-pic-msg" src='/placeholder.jpg'></img>
+                            <span>{"--------"} {"--------"}</span>
+                        </div>
+                        <p className="thread-message">{"--------"}</p>
+                    </div>
+                    <span className="replies-tag">{"--"} replies</span>
+                    <div className='threads-container'>
+                    </div>
                 </div>
             </div>
         </div>
@@ -88,7 +90,7 @@ const ThreadsPage = ({ user }) => {
     if (!isMember) return <Redirect to='/' />
 
     return (
-        <div>
+        <div >
             <div className="threads-header">
                 <h3>Thread</h3>
                 <div className="close-threads-bttn-div">
