@@ -65,7 +65,8 @@ export const deleteThreadThunk = threadId => async dispatch => {
         method: "DELETE"
     })
     if (res.ok) {
-        dispatch(deleteThreadAction(threadId))
+        const data = await dispatch(deleteThreadAction(threadId))
+        return data;
     } else {
         const errors = await res.json();
         return errors;
@@ -92,7 +93,7 @@ export default function reducer(state = initialState, action) {
                 return newState;
             }
         case DELETE_THREAD: {
-            const newState = {...state, currentMessage: {...state.currentMessage}};
+            const newState = { ...state, currentMessage: { ...state.currentMessage } };
             newState.currentMessage.threads = state.currentMessage.threads.filter(thread => thread.id != action.threadId);
             return newState;
         }
