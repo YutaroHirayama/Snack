@@ -11,13 +11,3 @@ body {
     grid-template-columns: 0.5fr 3fr auto;
 }
 
-<<<<<<< HEAD
-=======
-.threads-container {
-
-}
-
-body::-webkit-scrollbar-track {
-    color: transparent
-}
->>>>>>> css-yutaro

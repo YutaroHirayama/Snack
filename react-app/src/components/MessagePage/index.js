@@ -12,6 +12,7 @@ import ChannelInfoModal from "../ChannelInfoModal";
 import ThreadsPage from "../ThreadsPage";
 import { Redirect } from "react-router-dom";
 
+
 let socket
 
 const MessagePage = ({ user }) => {
@@ -82,8 +83,9 @@ const MessagePage = ({ user }) => {
             />
             </div>
             <div className='messages-container'>
-                {messages && messages.map(m => <Message key={m.id} message={m} user={user} socket={socket} />)}
-
+                <div>
+                    {messages && messages.map(m => <Message key={m.id} message={m} user={user} socket={socket} />)}
+                </div>
             </div>
 
             <div className='message-input-container'>
