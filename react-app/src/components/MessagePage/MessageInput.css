@@ -16,8 +16,22 @@
 .send-bttn {
     align-self: flex-end;
     position: relative;
-    right: 20px;
-    bottom: 40px;
+    right: 18px;
+    bottom: 50px;
+    border: none;
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.send-bttn:hover {
+    background-color: rgba(211, 211, 211, 0.067);
+    cursor: pointer;
+}
+
+.send-icon {
+    color: #d1d2d3;
+    font-size: 1.3rem;
 }
 
 
@@ -30,5 +44,3 @@
     padding-right: 20px;
 
 }
-
-

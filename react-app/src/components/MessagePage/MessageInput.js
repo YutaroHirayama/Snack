@@ -6,13 +6,16 @@ import "./MessageInput.css";
 import { useHistory, useParams } from "react-router-dom";
 
 const MessageInput = ({ user, channelId, socket, type, messageId }) => {
-    const history = useHistory()
+    const icons = ["carrot", "fish", "burger", "bowl-food", "egg", "bacon", "lemon", "shrimp", "pizza-slice"]
+    const history = useHistory();
     const [message, setMessage] = useState("");
-    const [isSelected, setSelected] = useState(false)
-    const [disabled, setDisabled] = useState(false)
-    const [pressed, setPressed] = useState(false)
+    const [isSelected, setSelected] = useState(false);
+    const [disabled, setDisabled] = useState(false);
+    const [icon, setIcon] = useState(icons[Math.floor(Math.random() * icons.length)])
+    const [pressed, setPressed] = useState(false);
     const dispatch = useDispatch();
-    const params = useParams()
+    const params = useParams();
+
 
     const messageSubmit = async e => {
         e.preventDefault();
@@ -21,7 +24,6 @@ const MessageInput = ({ user, channelId, socket, type, messageId }) => {
             setPressed(false);
             return;
         }
-
 
 
         const newMessage = await dispatch(createMessageThunk(message, channelId))
@@ -33,6 +35,7 @@ const MessageInput = ({ user, channelId, socket, type, messageId }) => {
         socket.emit('chat', newMessage)
         setMessage('');
         setPressed(false);
+        setIcon(icons[Math.floor(Math.random() * icons.length)]);
 
     }
 
@@ -56,6 +59,7 @@ const MessageInput = ({ user, channelId, socket, type, messageId }) => {
         socket.emit('chat', newMessage)
         setMessage('');
         setPressed(false);
+        setIcon(icons[Math.floor(Math.random() * icons.length)]);
 
     }
 
@@ -63,7 +67,7 @@ const MessageInput = ({ user, channelId, socket, type, messageId }) => {
         e.preventDefault();
         if (!pressed) {
             setPressed(true)
-            e.target.form.requestSubmit();
+            e.currentTarget.form.requestSubmit();
         }
     }
 
@@ -74,7 +78,7 @@ const MessageInput = ({ user, channelId, socket, type, messageId }) => {
             e.preventDefault()
             if (!pressed) {
                 setPressed(true)
-                e.target.form.requestSubmit();
+                e.currentTarget.form.requestSubmit();
             }
         }
     }
@@ -100,7 +104,7 @@ const MessageInput = ({ user, channelId, socket, type, messageId }) => {
                 <button
                     className="send-bttn"
                     onClick={handleClick}
-                    disabled={!message || messageTooLong}>Send</button>
+                    disabled={!message || messageTooLong}><i className={`send-icon fa-solid fa-${icon}`}></i></button>
                 {messageTooLong && <p>{`Message is ${message.length - 10000} characters too long.`}</p>}
 
             </div>
