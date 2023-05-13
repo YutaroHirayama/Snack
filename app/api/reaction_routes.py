@@ -10,9 +10,9 @@ reaction_routes = Blueprint('reactions', __name__)
 @reaction_routes.route('/<int:messageId>', methods=["POST"])
 @login_required
 def add_reaction(messageId):
-    '''
+    """
     This route create reaction for message by messageId
-    '''
+    """
 
     form = ReactionForm()
     form['csrf_token'].data = request.cookies['csrf_token']

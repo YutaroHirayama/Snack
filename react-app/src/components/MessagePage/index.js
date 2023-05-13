@@ -55,6 +55,7 @@ const MessagePage = ({ user }) => {
 
     }, [channelId])
 
+    if (!user) return <Redirect to='/' />
 
     if (!channel || !messages) return null;
 
