@@ -83,3 +83,16 @@
     display: flex;
     justify-content: center;
 }
+
+.create-channel-user-img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0px 5px;
+}
+
+.create-channel-img-container{
+    display: flex;
+    align-items: center;
+}

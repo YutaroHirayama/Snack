@@ -85,8 +85,9 @@ const CreateChannelModal = ({ sessionUser, socket }) => {
           <div id="create-channel-all-users">
             {users.map((user) => (
               <div className="create-channel-add-user">
-                <div>
-                  {user.firstName}, {user.lastName}
+                <div className="create-channel-img-container">
+                  <div><img className="create-channel-user-img" src={user.profilePic}/></div>
+                  {user.firstName} {user.lastName}
                 </div>
                 <div>
                   <button

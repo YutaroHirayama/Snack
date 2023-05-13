@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-around;
 }
-#allusers-channelusers-tab h3:hover {
+#allusers-channelusers-tab h4:hover {
     cursor: pointer;
     background-color: black;
     color: white;
@@ -14,4 +14,149 @@
 }
 .form-errors {
     color: red;
+}
+
+.channel-info-members-modal {
+    color: #1d1c1d;
+    width: 400px;
+}
+
+.channel-info-members-modal-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.channel-info-members-modal h2 {
+    background-color: brown;
+    margin: 0;
+    text-align: center;
+    padding: 10px 0px;
+    color: aliceblue;
+    width: 100%;
+}
+
+.channel-info-description {
+    border: 2px solid rgb(220, 141, 141);
+    height: 100px;
+    width: 80%;
+    margin: 5px;
+    border-radius: 10px;
+    padding: 5px;
+}
+.delete-edit-buttons{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+.delete-edit-buttons button{
+    background-color: rgb(28, 29, 30);
+    padding: 5px 50px;
+    color: aliceblue;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.delete-edit-buttons button:hover{
+    background-color: brown;
+}
+.user-profile-pic{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 5px;
+    margin-bottom: 10px;
+}
+
+.channel-members-list{
+   overflow: scroll;
+}
+
+.channel-members-list-container{
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+.channel-members-list-container:hover {
+    background-color: rgb(248, 174, 174);
+}
+.list-name-lastname{
+    margin-left: 10px;
+}
+
+.edit-channel-modal{
+    color: #1d1c1d;
+    width: 500px;
+    height:800px;
+    font-weight: bold;
+
+}
+.edit-channel-modal img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.edit-channel-modal h3{
+    background-color: brown;
+    margin: 0;
+    text-align: center;
+    padding: 10px 0px;
+    color: aliceblue;
+    width: 100%;
+}
+
+
+.channel-edit-name-descr{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 10px;
+}
+.channel-edit-name-descr input {
+    margin-left: 15px;
+    font-weight: bold;
+    font-size: 20px;
+    width: 60%;
+}
+.channel-edit-name-descr textarea {
+    resize: none;
+}
+
+.edit-channel-add-member {
+    display: flex;
+    justify-content: space-between;
+}
+.edit-channel-add-member button {
+    padding: 5px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 4px;
+}
+.edit-channel-add-member button:hover{
+    background-color: brown;
+    color: whitesmoke;
+}
+
+.submit-edit-channel{
+    font-weight: bold;
+    margin-bottom: 40px;
+    width: 80%;
+    padding: 10px 0;
+    font-size: 20px;
+}
+.submit-edit-channel:hover{
+    background-color: rgb(42, 43, 44);
+    color: aliceblue;
+    cursor: pointer;
+}
+.submit-edit-button-container{
+    display: flex;
+    justify-content: center;
+
 }

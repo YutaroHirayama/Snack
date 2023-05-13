@@ -83,8 +83,9 @@ const CreateDirectMessageModal = ({ channels, sessionUser, socket }) => {
           <div className="create-dm-all-users">
             {users.map((user) => (
               <div className="create-dm-add-user">
-                <div>
-                  {user.firstName}, {user.lastName}
+                <div className="create-dm-img-container">
+                  <div><img src={user.profilePic}/></div>
+                  {user.firstName} {user.lastName}
                 </div>
                 <button
                   className="add-user-to-dm-button"

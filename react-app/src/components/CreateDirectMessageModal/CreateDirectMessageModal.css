@@ -75,3 +75,16 @@
     display: flex;
     flex-direction: column;
 }
+
+.create-dm-img-container{
+    display: flex;
+    align-items: center;
+}
+
+.create-dm-img-container img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 5px;
+}
