@@ -1,0 +1,26 @@
+.thread-page {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.close-threads-bttn-div {
+    align-self: flex-end;
+
+}
+
+.close-threads-bttn {
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    color: lightgray;
+    font-weight: 900;
+    font-size: 1rem;
+    height: 40px;
+    width: 40px;
+}
+
+.close-threads-bttn:hover {
+    background-color: rgba(211, 211, 211, 0.067);
+    cursor: pointer;
+}

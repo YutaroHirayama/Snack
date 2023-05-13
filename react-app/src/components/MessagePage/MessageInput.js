@@ -60,10 +60,11 @@ const MessageInput = ({ user, channelId, socket, type, messageId }) => {
             >
 
             </textarea>
-            {messageTooLong && <p>{`Message is ${message.length - 10000} characters too long.`}</p>}
             <button
+                className="send-bttn"
                 type='submit'
                 disabled={!message || messageTooLong}>Send</button>
+            {messageTooLong && <p>{`Message is ${message.length - 10000} characters too long.`}</p>}
         </form>
     )
 }

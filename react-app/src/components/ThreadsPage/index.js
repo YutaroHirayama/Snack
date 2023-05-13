@@ -9,6 +9,7 @@ import MessageInput from "../MessagePage/MessageInput";
 import Message from "../Message";
 import { Redirect } from "react-router-dom";
 import DeleteMessageModal from "../Message/DeleteMessageModal";
+import './ThreadsPage.css'
 
 let threadSocket
 
@@ -19,7 +20,7 @@ const ThreadsPage = ({ user }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     let location = useLocation();
-    const { messageId } = useParams();
+    const { messageId, channelId } = useParams();
 
     useEffect(() => {
         threadSocket = io();
@@ -47,6 +48,10 @@ const ThreadsPage = ({ user }) => {
         }
     }
 
+    const closeThreads = e => {
+        history.push(`/channel/${channelId}`);
+    }
+
 
     if (!message || !message.threads) return null;
 
@@ -61,6 +66,12 @@ const ThreadsPage = ({ user }) => {
 
     return (
         <div className='thread-page'>
+            <div className="close-threads-bttn-div">
+                <button
+                    className="close-threads-bttn"
+                    onClick={closeThreads}>X</button>
+
+            </div>
             <img className="profile-pic-msg" src={message.user.profilePic}></img>
             <h3>{message.user.firstName} {message.user.lastName}</h3>
             <p>{message.message}</p>
