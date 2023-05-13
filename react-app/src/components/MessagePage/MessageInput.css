@@ -1,8 +1,34 @@
 .message-textarea {
-    width: 90%;
+    width: 100%;
     height: 100px;
     background: transparent;
     border: 2px solid gray;
     border-radius: 10px;
     box-shadow: 2px 2px 2px black;
+    align-self: flex-end;
+    font-family: 'Montserrat', sans-serif;
+    color: inherit;
+    font-size: inherit;
+    box-sizing: border-box;
+    padding: 15px;
 }
+
+.send-bttn {
+    align-self: flex-end;
+    position: relative;
+    right: 20px;
+    bottom: 40px;
+}
+
+
+
+.input-area-button-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-right: 20px;
+
+}
+
+

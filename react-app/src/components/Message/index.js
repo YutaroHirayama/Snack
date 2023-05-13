@@ -10,7 +10,7 @@ import { useLocation } from "react-router-dom";
 import Reaction from "../Reaction";
 import { useModal } from "../../context/Modal";
 import ReactionFormModal from "../Reaction/ReactionFormModal";
-
+import { getTime } from "../ThreadsPage";
 
 const Message = ({ message, user, socket }) => {
     const dispatch = useDispatch();
@@ -59,9 +59,10 @@ const Message = ({ message, user, socket }) => {
 
             </div>
             <div className='message-header'>
-                <img className="profile-pic-msg" src={message.user.profilePic}></img>
-                <span>{message.user.firstName} {message.user.lastName}</span>
-                <span> {message.createdAt} {message.user.id === user.id && <OpenModalButton
+                <img className="profile-pic-msg" src={message.user.profilePic || '/placeholder.jpg'}></img>
+                <span>{message.user.firstName} {message.user.lastName} </span>
+                <span className="time" title={getTime(message.createdAt).datetime}>{getTime(message.createdAt).time}</span>
+                <span> {message.user.id === user.id && <OpenModalButton
                     buttonText={"Edit"}
                     modalComponent={<EditMessageModal message={message} socket={socket} />}
                 />}

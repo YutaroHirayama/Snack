@@ -52,19 +52,7 @@ const ThreadsPage = ({ user }) => {
         history.push(`/channel/${channelId}`);
     }
 
-
-    if (!message || !message.threads) return null;
-
-    let isMember = false;
-    for (let member of message.channel.members) {
-        if (member.id === user.id) {
-            isMember = true;
-        }
-    }
-    console.log("MESSAGE ----> ", message)
-    if (!isMember) return <Redirect to='/' />
-
-    return (
+    if (!message || !message.threads || message.id !== parseInt(messageId)) return (
         <div>
             <div className="threads-header">
                 <h2>Thread</h2>
@@ -76,15 +64,57 @@ const ThreadsPage = ({ user }) => {
                 </div>
             </div>
             <div className='thread-page'>
-                <img className="profile-pic-msg" src={message.user.profilePic}></img>
-                <h3>{message.user.firstName} {message.user.lastName}</h3>
-                <p>{message.message}</p>
+                <div className="thread-message-div">
+                    <div className='message-header'>
+                        <img className="profile-pic-msg" src='/placeholder.jpg'></img>
+                        <span>{"--------"} {"--------"}</span>
+                    </div>
+                    <p className="thread-message">{"--------"}</p>
+                </div>
+                <span className="replies-tag">{"--"} replies</span>
+                <div className='threads-container'>
+                </div>
+            </div>
+        </div>
+    );
+
+    let isMember = false;
+    for (let member of message.channel.members) {
+        if (member.id === user.id) {
+            isMember = true;
+        }
+    }
+
+    if (!isMember) return <Redirect to='/' />
+
+    return (
+        <div>
+            <div className="threads-header">
+                <h3>Thread</h3>
+                <div className="close-threads-bttn-div">
+                    <button
+                        className="close-threads-bttn"
+                        onClick={closeThreads}>X</button>
+
+                </div>
+            </div>
+            <div className='thread-page'>
+                <div className="thread-message-div">
+                    <div className='message-header'>
+                        <img className="profile-pic-msg" src={message.user.profilePic || '/placeholder.jpg'}></img>
+                        <span>{message.user.firstName} {message.user.lastName}</span>
+                    </div>
+                    <p className="thread-message">{message.message}</p>
+                </div>
+                <span className="replies-tag">{message.threads.length} replies</span>
                 <div className='threads-container'>
                     <div>
                         {message?.threads.map(thread =>
                             <div key={thread.id}>
                                 <img className="profile-pic-msg" src={thread?.user.profilePic}></img>
-                                <span>{thread?.user.firstName} {thread?.user.lastName} {thread.createdAt}</span>
+                                <span className="names-in-threads">{thread?.user.firstName} {thread?.user.lastName} </span>
+                                <span className="time" title={getTime(thread.createdAt).datetime}>{getTime(thread.createdAt).time}</span>
+                                {console.log("CREATED AT ---> ", thread.createdAt, typeof thread.createdAt)}
                                 {thread?.user.id === user.id && <OpenModalButton
                                     buttonText={"Delete"}
                                     modalComponent={<DeleteMessageModal message={thread} socket={threadSocket} type={"thread"} channelId={message.channelId} />}
@@ -99,6 +129,58 @@ const ThreadsPage = ({ user }) => {
             </div>
         </div>
     )
+}
+
+export function getTime(timeDate) {
+    const dateObj = new Date(timeDate);
+    const timeZone = dateObj.toTimeString();
+
+    const year = dateObj.getFullYear();
+    const monthInteger = dateObj.getMonth() + 1;
+    const dayInt = dateObj.getDate();
+    const month = String(monthInteger).length === 1 ? `0${monthInteger}` : `${monthInteger}`;
+    const day = String(dayInt).length === 1 ? `0${dayInt}` : `${dayInt}`;
+
+    let monthWord;
+
+    switch (monthInteger) {
+        case 1: monthWord = 'January'
+        case 2: monthWord = 'February'
+        case 3: monthWord = 'March'
+        case 4: monthWord = 'April'
+        case 5: monthWord = 'May'
+        case 6: monthWord = 'June'
+        case 7: monthWord = 'July'
+        case 8: monthWord = 'August'
+        case 9: monthWord = 'September'
+        case 10: monthWord = 'October'
+        case 11: monthWord = 'November'
+        default: monthWord = 'December'
+    }
+
+    const militaryHours = dateObj.getHours();
+    const minutesInteger = dateObj.getMinutes();
+    const secondsInteger = dateObj.getSeconds();
+    const minutes = String(minutesInteger).length === 1
+        ? `0${minutesInteger}` : String(minutesInteger).length === 0
+            ? `00` : `${minutesInteger}`;
+    const seconds = String(secondsInteger).length === 1
+        ? `0${secondsInteger}` : String(secondsInteger).length === 0
+            ? `00` : `${secondsInteger}`;
+
+    const suffix = militaryHours >= 12 ? 'PM' : 'AM';
+    const hours = ((militaryHours + 11) % 12 + 1);
+
+    const zone = timeZone.slice(9);
+
+    const dayPostfix = dayInt === 1 ? 'st' : dayInt === 2 ? 'nd' : dayInt === 3 ? 'rd' : 'th'
+
+    return {
+        time: `${hours}:${minutes} ${suffix}`,
+        date: `${year}-${month}-${day}`,
+        zone,
+        datetime: `${monthWord} ${dayInt}${dayPostfix} at ${hours}:${minutes}:${seconds} ${suffix}`,
+    };
 }
 
 export default ThreadsPage;

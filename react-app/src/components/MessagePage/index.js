@@ -12,6 +12,7 @@ import ChannelInfoModal from "../ChannelInfoModal";
 import ThreadsPage from "../ThreadsPage";
 import { Redirect } from "react-router-dom";
 
+
 let socket
 
 const MessagePage = ({ user }) => {
