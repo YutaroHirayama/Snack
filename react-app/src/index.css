@@ -11,6 +11,4 @@ body {
     grid-template-columns: 0.5fr 3fr auto;
 }
 
-.threads-container {
-
-}
+.threads-container {}

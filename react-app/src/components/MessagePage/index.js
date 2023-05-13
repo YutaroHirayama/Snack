@@ -79,8 +79,9 @@ const MessagePage = ({ user }) => {
                 modalComponent={<ChannelInfoModal channel={channel} socket={socket} />}
             />
             <div className='messages-container'>
-                {messages && messages.map(m => <Message key={m.id} message={m} user={user} socket={socket} />)}
-
+                <div>
+                    {messages && messages.map(m => <Message key={m.id} message={m} user={user} socket={socket} />)}
+                </div>
             </div>
 
             <div>

@@ -102,7 +102,8 @@ const ThreadsPage = ({ user }) => {
                 <div className="thread-message-div">
                     <div className='message-header'>
                         <img className="profile-pic-msg" src={message.user.profilePic || '/placeholder.jpg'}></img>
-                        <span>{message.user.firstName} {message.user.lastName}</span>
+                        <span>{message.user.firstName} {message.user.lastName} </span>
+                        <span className="time" title={getTime(message.createdAt).datetime}>{getTime(message.createdAt).time}</span>
                     </div>
                     <p className="thread-message">{message.message}</p>
                 </div>
