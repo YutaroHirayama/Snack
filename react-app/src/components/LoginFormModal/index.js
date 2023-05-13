@@ -24,6 +24,7 @@ function LoginFormModal() {
   const loginDemoUser = (user) => {
     dispatch(login(user, "password"));
     closeModal()
+    
   }
 
   return (

@@ -37,30 +37,33 @@ const MessageInput = ({ user, channelId, socket, type, messageId }) => {
         setMessage('');
     }
 
+    const handleKeyDown = e => {
+        if (e.keyCode === 13 || e.key === 'Enter') {
+            e.target.form.requestSubmit();
+        }
+    }
+
     const messageTooLong = message.length > 10000;
 
     return (
-        <div className='message-input'>
-            <form
-                className='message-input-form'
-                onSubmit={type === 'thread' ? threadSubmit : messageSubmit}>
-                <textarea
-                    onSelect={() => setSelected(true)}
-                    onBlur={() => setSelected(false)}
-                    onKeyDown={(e) => console.log(e.target.value)}
-                    className="message-textarea"
-                    value={message}
-                    onChange={e => setMessage(e.target.value)}
-                    placeholder="Enter message"
-                ></textarea>
-                {isSelected && <h1>SELECTED!!!!!!!</h1>}
-                {messageTooLong && <p>{`Message is ${message.length - 10000} characters too long.`}</p>}
-                <button
-                    className='input-form-submit'
-                    type='submit'
-                    disabled={!message || messageTooLong}>Send</button>
-            </form>
-        </div>
+        <form
+            onSubmit={type === 'thread' ? threadSubmit : messageSubmit}>
+            <textarea
+                onSelect={() => setSelected(true)}
+                onBlur={() => setSelected(false)}
+                onKeyDown={handleKeyDown}
+                className="message-textarea"
+                value={message}
+                onChange={e => setMessage(e.target.value)}
+                placeholder="Enter message"
+            >
+            </textarea>
+            <button
+                className="send-bttn"
+                type='submit'
+                disabled={!message || messageTooLong}>Send</button>
+            {messageTooLong && <p>{`Message is ${message.length - 10000} characters too long.`}</p>}
+        </form>
     )
 }
 

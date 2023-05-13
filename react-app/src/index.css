@@ -5,3 +5,12 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-weight: 300
 }
+
+.home-page-main {
+    display: grid;
+    grid-template-columns: 0.5fr 3fr auto;
+}
+
+.threads-container {
+
+}

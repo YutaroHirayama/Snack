@@ -1,0 +1,57 @@
+.form-error {
+    color: red;
+    font-weight: bold;
+    width: 70%;
+}
+.signup-form-modal {
+    width: 450px;
+    height: 600px;
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    color: rgb(46, 46, 74);
+    align-items: center;
+    font-size: 20px;
+}
+
+.signup-form-modal h1 {
+    color: rgb(46, 46, 74);
+}
+
+.signup-form-prop {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 250px;
+    width: 420px;
+}
+.signup-form-prop label{
+    font-weight: bold;
+    height: 200px;
+
+}
+.signup-form-prop input{
+    font-weight: bold;
+    border-radius: 10px;
+    font-size: 25px;
+    margin-bottom: 10px;
+
+}
+.signup-button {
+    width: 70%;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    background-color: aliceblue;
+    color: black;
+    height: 60px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.signup-button:hover {
+    background-color: black;
+    color: aliceblue;
+}
