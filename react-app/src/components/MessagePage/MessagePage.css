@@ -37,6 +37,11 @@
     overflow-x: hidden;
     padding-top: 20px;
 }
+#messages-container-parent {
+    /* width:  */
+    width: 100%;
+
+}
 
 .message-input-container {
     height: 25vh;

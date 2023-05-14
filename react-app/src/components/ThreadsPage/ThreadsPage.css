@@ -55,6 +55,7 @@
 
 .thread-message {
     margin-bottom: 30px;
+    word-break: break-all;
 }
 
 .thread-message-div {

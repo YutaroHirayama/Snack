@@ -83,7 +83,7 @@ const MessagePage = ({ user }) => {
             />
             </div>
             <div className='messages-container'>
-                <div>
+                <div id="messages-container-parent">
                     {messages && messages.map(m => <Message key={m.id} message={m} user={user} socket={socket} />)}
                 </div>
             </div>
