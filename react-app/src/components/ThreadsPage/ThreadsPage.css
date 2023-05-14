@@ -95,3 +95,8 @@
 .thread-page .message-textarea {
     height: 90px
 }
+
+.single-thread-message-container {
+    display: flex;
+    flex-direction: row;
+}

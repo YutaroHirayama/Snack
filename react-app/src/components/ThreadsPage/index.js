@@ -113,16 +113,18 @@ const ThreadsPage = ({ user }) => {
                 <div className='threads-container'>
                     <div>
                         {message?.threads.map(thread =>
-                            <div key={thread.id}>
+                            <div key={thread.id} className='single-thread-message-container'>
                                 <img className="profile-pic-msg" src={thread?.user.profilePic}></img>
-                                <span className="names-in-threads">{thread?.user.firstName} {thread?.user.lastName} </span>
-                                <span className="time" title={getTime(thread.createdAt).datetime}>{getTime(thread.createdAt).time}</span>
-                                {console.log("CREATED AT ---> ", thread.createdAt, typeof thread.createdAt)}
-                                {thread?.user.id === user.id && <OpenModalButton
-                                    buttonText={"Delete"}
-                                    modalComponent={<DeleteMessageModal message={thread} socket={threadSocket} type={"thread"} channelId={message.channelId} />}
-                                />}
-                                <p>{thread?.threadMessage}</p>
+                                <div className='single-thread-message'>
+                                    <span className="names-in-threads">{thread?.user.firstName} {thread?.user.lastName} </span>
+                                    <span className="time" title={getTime(thread.createdAt).datetime}>{getTime(thread.createdAt).time}</span>
+
+                                    {thread?.user.id === user.id && <OpenModalButton
+                                        buttonText={"Delete"}
+                                        modalComponent={<DeleteMessageModal message={thread} socket={threadSocket} type={"thread"} channelId={message.channelId} />}
+                                    />}
+                                    <div>{thread?.threadMessage}</div>
+                                </div>
                             </div>)}
                     </div>
                 </div>
