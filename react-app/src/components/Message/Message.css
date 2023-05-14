@@ -1,17 +1,20 @@
 .single-message-container {
     display: flex;
-    flex-wrap: nowrap;
+    /* flex-wrap: wrap; */
     flex-direction: row;
     padding: 7px 0;
     margin: 0px 15px;
+
 }
 
 .single-message-container:hover {
     background-color: #272627;
 }
+
 .single-message-container .single-message-header-button-container {
     visibility: hidden;
 }
+
 .single-message-container:hover .single-message-header-button-container {
     visibility: visible;
     display: flex;
@@ -31,6 +34,7 @@
 .single-message-details {
     width: 100%;
 }
+
 .single-message-header {
     display: flex;
     flex-wrap: nowrap;
@@ -46,6 +50,7 @@
 .single-message-user-timestamp {
     padding-bottom: 10px
 }
+
 .single-message-timestamp {
     padding-left: 10px;
     font-size: 12px;
@@ -53,7 +58,9 @@
 
 .users-message {
     font-size: 14px;
-    padding-bottom: 7px
+    padding-bottom: 7px;
+    word-break: break-all;
+    /* white-space: normal; */
 }
 
 /* .single-message-header-button-container {
@@ -72,33 +79,40 @@
     padding: 1px 7px;
     margin: 2px
 }
+
 .single-message-header-button:hover {
     background-color: #4a494aa9;
 }
-.edit-message-form-modal{
+
+.edit-message-form-modal {
     width: 400px;
     height: 160px;
 }
+
 .edit-message-form-modal textarea {
     width: 90%;
     font-size: 20px;
 }
-.edit-message-form-modal button{
+
+.edit-message-form-modal button {
     padding: 10px 30px;
     width: 95%;
     border-radius: 10px;
     font-size: 20px;
     cursor: pointer;
 }
-.edit-message-form-modal button:hover{
+
+.edit-message-form-modal button:hover {
     background-color: brown;
     color: aliceblue;
 }
+
 .edit-messsage-send-button {
     display: flex;
     justify-content: center;
 
 }
+
 .message-textarea {
     resize: none;
     background-color: transparent;
@@ -110,7 +124,7 @@
     bottom: 25px;
 }
 
-.delete-message-modal{
+.delete-message-modal {
     width: 400px;
     height: 200px;
     background-color: rgb(49, 48, 48);
@@ -118,10 +132,11 @@
     text-align: center;
 }
 
-.delete-message-modal h2{
+.delete-message-modal h2 {
     margin: 0;
     padding-top: 10px;
 }
+
 .delete-message-modal-buttons {
     display: flex;
     flex-direction: column;
@@ -129,20 +144,23 @@
     padding: 0px 20px;
 }
 
-.yes-button-delete{
+.yes-button-delete {
     margin-bottom: 15px;
     padding: 10px 0;
     font-size: 20px;
     cursor: pointer;
 }
-.yes-button-delete:hover{
+
+.yes-button-delete:hover {
     background-color: rgb(112, 128, 243);
 }
-.no-button-delete{
+
+.no-button-delete {
     padding: 10px 0;
     font-size: 20px;
     cursor: pointer;
 }
-.no-button-delete:hover{
+
+.no-button-delete:hover {
     background-color: rgb(243, 116, 112);
 }
