@@ -8,7 +8,7 @@
 }
 
 .single-message-container:hover {
-    background-color: #272627;
+    background-color: #323132;;
 }
 
 .single-message-container .single-message-header-button-container {
@@ -81,7 +81,7 @@
 }
 
 .single-message-header-button:hover {
-    background-color: #4a494aa9;
+    background-color: #656365bd;
 }
 
 .edit-message-form-modal {

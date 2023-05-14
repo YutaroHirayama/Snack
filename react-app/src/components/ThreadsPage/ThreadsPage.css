@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     width: 350px;
-    padding-left: 20px;
 }
 
 .close-threads-bttn-div {
@@ -31,7 +30,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow: scroll;
 }
 
 .threads-container {
@@ -39,7 +37,9 @@
     display: flex;
     flex-direction: column-reverse;
     height: 40vh;
-    max-height: 40vh
+    max-height: 40vh;
+    overflow-x: hidden;
+    padding-bottom: 20px;
 }
 
 .threads-header {
@@ -55,7 +55,6 @@
 
 .thread-message {
     margin-bottom: 30px;
-    word-break: break-all;
 }
 
 .thread-message-div {
@@ -88,6 +87,8 @@
 
 .thread-page .profile-pic-msg {
     width: 35px;
+    max-width: 35px;
+    max-height: 35px;
     height: 35px;
     border-radius: 50%;
     object-fit: cover;
@@ -100,4 +101,49 @@
 .single-thread-message-container {
     display: flex;
     flex-direction: row;
+    padding: 5px 0;
+    max-width: 100%
+}
+
+.single-thread-message-container:hover {
+    background-color: #323132;
+}
+.single-thread-message-container .single-thread-delete-button {
+    visibility: hidden
+}
+
+.single-thread-message-container:hover .single-thread-delete-button {
+    visibility: visible
+}
+
+.single-thread-delete-button {
+    font-size: 12px;
+    border: 1px transparent;
+    border-radius: 5px;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    padding: 2px 7px;
+    margin: 2px
+}
+
+.single-thread-delete-button:hover {
+    background-color: #656365bd;
+}
+.single-thread-message {
+    display: flex;
+    flex-direction: column;
+    width: 100%
+}
+
+.single-thread-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 5px;
+    padding-bottom: 5px;
+}
+
+.single-thread-profile-pic {
+    display: flex
 }

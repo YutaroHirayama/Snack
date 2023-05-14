@@ -62,7 +62,7 @@ const Message = ({ message, user, socket }) => {
                         <span className='single-message-user'>{message.user.firstName} {message.user.lastName} </span>
                         <span className="time" title={getTime(message.createdAt).datetime}>{getTime(message.createdAt).time}</span>
                     </div>
-                    <div className='single-message-header-button-container group-hover'>
+                    <div className='single-message-header-button-container'>
                         {message.user.id === user.id && <OpenModalButton
                             buttonText={"Edit"}
                             className='single-message-header-button'
