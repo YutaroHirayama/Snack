@@ -86,7 +86,7 @@
 
 .edit-message-form-modal {
     width: 400px;
-    height: 160px;
+    height: auto;
     margin: 15px;
 }
 
@@ -170,4 +170,9 @@
 
 .no-button-delete:hover {
     background-color: rgb(243, 116, 112);
+}
+
+.errors {
+    font-size: small;
+    color: red;
 }

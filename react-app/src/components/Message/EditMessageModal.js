@@ -40,7 +40,7 @@ const EditMessageModal = ({ message, socket }) => {
             placeholder="Enter message"
           ></textarea>
           {messageTooLong && (
-            <p>{`Message is ${
+            <p className="errors">{`Message is ${
               _message.length - 10000
             } characters too long.`}</p>
           )}
