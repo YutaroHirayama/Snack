@@ -11,6 +11,7 @@ const CreateChannelModal = ({ sessionUser, socket }) => {
   const [description, setDescription] = useState("");
   const [users, setUsers] = useState([]);
   const [channelUsers, setChannelUsers] = useState([]);
+  const [errors, setErrors] = useState([])
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const history = useHistory();
@@ -43,11 +44,14 @@ const CreateChannelModal = ({ sessionUser, socket }) => {
       addUsers: channelUsers,
     };
 
-    const res = await dispatch(createChannelThunk(newChannel));
-    socket.emit("chat", "created channel");
-    closeModal();
-
-    history.push(`/channel/${res}`);
+  const res = await dispatch(createChannelThunk(newChannel))
+    if(res?.errors) {
+      setErrors(res.errors)
+    } else {
+    socket.emit('chat', "created channel")
+    closeModal()
+    history.push(`/channel/${res}`)
+    }
   };
 
   return (
@@ -55,6 +59,11 @@ const CreateChannelModal = ({ sessionUser, socket }) => {
       <div className="create-channel-modal">
         <form onSubmit={formSubmit}>
           <h3>Create Channel</h3>
+          <ul>
+            {errors.map((error, idx) => (
+              <li className='form-errors' key={idx}>{error}</li>
+            ))}
+          </ul>
           <div className="channel-name-desc">
             <div className="create-channel-name">
               <label>
@@ -75,7 +84,6 @@ const CreateChannelModal = ({ sessionUser, socket }) => {
                   type="text"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  required
                   placeholder="Channel description"
                 />
               </label>
