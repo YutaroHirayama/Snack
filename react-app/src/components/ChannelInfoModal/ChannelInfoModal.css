@@ -1,5 +1,5 @@
 #channel-info-modal-container {
-    max-height: 80%;
+    height: 80%;
 }
 
 
@@ -15,7 +15,8 @@
 }
 
 #edit-channel-all-users {
-    height: 340px;
+    max-height: 300px;
+    height: auto;
     overflow: scroll;
 }
 
@@ -83,7 +84,7 @@
 }
 
 .channel-members-list {
-    height: 500px;
+    height: 350px;
     overflow: scroll;
 }
 
