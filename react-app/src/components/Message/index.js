@@ -76,7 +76,7 @@ const Message = ({ message, user, socket }) => {
                         <button
                             className='single-message-header-button'
                             onClick={() => loadReplies(message)}
-                        >{message.threads.length > 1 ? `${message.threads.length} replies` : message.threads.length > 0 ? `${message.threads.length} reply` :  'Reply'} </button>
+                        >Reply</button>
                         <OpenModalButton
                             buttonText="Add reaction"
                             className='single-message-header-button'
