@@ -1,4 +1,5 @@
-import "./ChannelInfoModal.css";
+// import "./ChannelInfoModal.css";
+import "./UpdateChannelModal.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -13,7 +14,7 @@ const EditChannelModal = ({ channel, socket }) => {
   const [channelName, setChannelName] = useState(channel.channelName);
   const [description, setDescription] = useState(channel.description);
   const [errors, setErrors] = useState([]);
-  const [tab, setTab] = useState(true);
+  const [tab, setTab] = useState(false);
   const [users, setUsers] = useState([]);
   const [, forceRerender] = useState();
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const EditChannelModal = ({ channel, socket }) => {
     fetchUsers();
   }, []);
 
-  useEffect(() => {}, [users]);
+  useEffect(() => { }, [users]);
 
   const fetchUsers = async () => {
     const res = await fetch("/api/users/");
@@ -82,26 +83,30 @@ const EditChannelModal = ({ channel, socket }) => {
     <>
       <div className="edit-channel-modal">
         <form onSubmit={formSubmit}>
-          <h3>Update Channel</h3>
-          <ul>
-            {errors.map((error, idx) => (
-              <li className="form-errors" key={idx}>
-                {error}
-              </li>
-            ))}
-          </ul>
-          <div className="channel-edit-name-descr">
-            <label>
-              Channel Name
+          <div id="edit-channel-modal-info">
+            <h3>Update Channel</h3>
+            <ul>
+              {errors.map((error, idx) => (
+                <li className="form-errors" key={idx}>
+                  {error}
+                </li>
+              ))}
+            </ul>
+            {/* <div id="channel-info-members-modal-container"> */}
+            <div className="channel-edit-name-descr">
+              <label>
+                Channel Name
+              </label>
               <input
+                className="update-channel-inputfeild"
                 type="text"
                 value={channelName}
                 onChange={(e) => setChannelName(e.target.value)}
                 required
               />
-            </label>
-            <label>
-              Channel Description
+              <label>
+                Channel Description
+              </label>
               <textarea
                 rows="5"
                 cols="30"
@@ -109,14 +114,20 @@ const EditChannelModal = ({ channel, socket }) => {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
-            </label>
+              {/* </div> */}
+            </div>
+
           </div>
           <div id="allusers-channelusers-tab">
-            <div>
-              <h4 onClick={() => setTab(false)}>Channel Users</h4>
+            <div className={tab ? "tab-close" : "tab-open"}>
+              <h4 onClick={() => setTab(false)}
+
+              >Channel Users</h4>
             </div>
-            <div>
-              <h4 onClick={() => setTab(true)}>All Users</h4>
+            <div className={!tab ? "tab-close" : "tab-open"}>
+              <h4 onClick={() => setTab(true)}
+
+              >All Users</h4>
             </div>
           </div>
           <div id="edit-channel-all-users">

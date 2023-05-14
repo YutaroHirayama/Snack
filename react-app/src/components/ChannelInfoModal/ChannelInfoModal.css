@@ -1,5 +1,5 @@
 #channel-info-modal-container {
-    max-height: 90%;
+    max-height: 80%;
 }
 
 
@@ -10,12 +10,12 @@
 
 #allusers-channelusers-tab h4:hover {
     cursor: pointer;
-    background-color: black;
-    color: white;
+    /* background-color: black; */
+    /* color: white; */
 }
 
 #edit-channel-all-users {
-    height: 500px;
+    height: 340px;
     overflow: scroll;
 }
 
@@ -104,7 +104,7 @@
 .edit-channel-modal {
     color: #1d1c1d;
     width: 500px;
-    height: 800px;
+    height: 750px;
     font-weight: bold;
 
 }
@@ -129,19 +129,27 @@
 .channel-edit-name-descr {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    align-items: center;
     margin-left: 10px;
+    gap: 8px;
+    margin: 0;
 }
 
 .channel-edit-name-descr input {
     margin-left: 15px;
     font-weight: bold;
     font-size: 20px;
-    width: 60%;
+    width: 80%;
+
 }
 
 .channel-edit-name-descr textarea {
     resize: none;
+    margin-left: 15px;
+    font-weight: bold;
+    font-size: 20px;
+    width: 80%;
 }
 
 .edit-channel-add-member {
@@ -226,4 +234,41 @@
 
 #dm-members-title {
     margin-bottom: 20px;
+}
+
+/* EDIT SPECIFIC CSS */
+
+
+#edit-channel-modal-info {
+    /* display: flex;
+    flex-direction: column;
+
+     */
+    justify-content: center;
+}
+
+.update-channel-inputfeild {
+    width: 100%;
+}
+
+/* TABS */
+#allusers-channelusers-tab {
+    height: 50px;
+    margin-bottom: 12px;
+}
+
+.tab-open {
+    display: flex;
+    justify-content: center;
+    width: 140px;
+    padding-bottom: 5px;
+    border-bottom: 2px rgba(209, 210, 211, 0.8) solid;
+}
+
+.tab-close {
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    width: 140px;
+
 }

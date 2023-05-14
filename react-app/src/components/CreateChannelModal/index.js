@@ -59,6 +59,7 @@ const CreateChannelModal = ({ sessionUser, socket }) => {
             <div className="create-channel-name">
               <label>
                 <input
+                  className="create-channel-inputfeild"
                   type="text"
                   value={channelName}
                   onChange={(e) => setChannelName(e.target.value)}
@@ -70,6 +71,7 @@ const CreateChannelModal = ({ sessionUser, socket }) => {
             <div className="create-channel-textarea">
               <label>
                 <textarea
+                  className="create-channel-inputfeild"
                   rows="5"
                   cols="40"
                   type="text"
