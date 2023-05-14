@@ -87,11 +87,18 @@
 .edit-message-form-modal {
     width: 400px;
     height: 160px;
+    margin: 15px;
+}
+
+.edit-message-form-modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 
 .edit-message-form-modal textarea {
-    width: 90%;
-    font-size: 20px;
+    color:#272627;
 }
 
 .edit-message-form-modal button {
