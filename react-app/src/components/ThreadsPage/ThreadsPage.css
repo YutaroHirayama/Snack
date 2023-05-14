@@ -42,6 +42,9 @@
     padding-bottom: 20px;
 }
 
+.threads-container_ {
+    padding-right: 20px
+}
 .threads-header {
     display: flex;
     align-items: center;
