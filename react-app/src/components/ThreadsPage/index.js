@@ -65,10 +65,10 @@ const ThreadsPage = ({ user }) => {
                     </div>
                 </div>
                 <div className='thread-page'>
-                    <div className="thread-message-div">
-                        <div className='message-header'>
-                            <img className="profile-pic-msg" src='/placeholder.jpg'></img>
-                            <span>{"--------"} {"--------"}</span>
+                    <img className="profile-pic-msg" src='/placeholder.jpg'></img>
+                    <div className="single-message-details">
+                        <div className='single-message-header'>
+
                         </div>
                         <p className="thread-message">{"--------"}</p>
                     </div>
@@ -101,27 +101,44 @@ const ThreadsPage = ({ user }) => {
                 </div>
             </div>
             <div className='thread-page'>
-                <div className="thread-message-div">
-                    <div className='message-header'>
+                <div className="single-thread-message-container">
+                    <div className='single-thread-profile-pic'>
                         <img className="profile-pic-msg" src={message.user.profilePic || '/placeholder.jpg'}></img>
-                        <span>{message.user.firstName} {message.user.lastName} </span>
-                        <span className="time" title={getTime(message.createdAt).datetime}>{getTime(message.createdAt).time}</span>
                     </div>
-                    <p className="thread-message">{message.message}</p>
+                    <div className='single-thread-message'>
+                        <div className='single-thread-header'>
+                            <div className='single-thread-header-info'>
+                                <span>{message.user.firstName} {message.user.lastName} </span>
+                                <span className="time" title={getTime(message.createdAt).datetime}>{getTime(message.createdAt).time}</span>
+                            </div>
+                        </div>
+                        <div className="thread-message">{message.message}</div>
+                    </div>
                 </div>
-                <span className="replies-tag">{message.threads.length} replies</span>
+                <div className='thread-replies'>
+                    <span className="replies-tag">{message.threads.length} replies ---------------------------------</span>
+                </div>
                 <div className='threads-container'>
                     <div>
                         {message?.threads.map(thread =>
-                            <div key={thread.id} className="single-thread-container">
-                                <img className="profile-pic-msg" src={thread?.user.profilePic}></img>
-                                <span className="names-in-threads">{thread?.user.firstName} {thread?.user.lastName} </span>
-                                <span className="time" title={getTime(thread.createdAt).datetime}>{getTime(thread.createdAt).time}</span>
-                                {thread?.user.id === user.id && <OpenModalButton
-                                    buttonText={"Delete"}
-                                    modalComponent={<DeleteMessageModal message={thread} socket={threadSocket} type={"thread"} channelId={message.channelId} />}
-                                />}
-                                <p>{thread?.threadMessage}</p>
+                            <div key={thread.id} className='single-thread-message-container'>
+                                <div className='single-thread-profile-pic'>
+                                    <img className="profile-pic-msg" src={thread?.user.profilePic}></img>
+                                </div>
+                                <div className='single-thread-message'>
+                                    <div className='single-thread-header'>
+                                        <div className='single-thread-header-info'>
+                                            <span className="names-in-threads">{thread?.user.firstName} {thread?.user.lastName} </span>
+                                            <span className="time" title={getTime(thread.createdAt).datetime}>{getTime(thread.createdAt).time}</span>
+                                        </div>
+                                        {thread?.user.id === user.id && <OpenModalButton
+                                            buttonText={"Delete"}
+                                            className='single-thread-delete-button'
+                                            modalComponent={<DeleteMessageModal message={thread} socket={threadSocket} type={"thread"} channelId={message.channelId} />}
+                                        />}
+                                    </div>
+                                    <div>{thread?.threadMessage}</div>
+                                </div>
                             </div>)}
                     </div>
                 </div>

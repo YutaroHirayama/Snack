@@ -19,12 +19,16 @@
     font-weight: bold;
     background-color: transparent;
     border: 5px white;
-    border-radius: 5px;
+    border-radius: 8px;
     color: #d1d2d3;
     cursor: pointer;
     width: fit-content;
-    padding-right: 20px;
+    padding-right: 10px;
 
+}
+
+.channel-info-modal:hover {
+    background-color: #656365bd
 }
 
 .messages-container {
@@ -35,10 +39,9 @@
     width: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
-    padding-top: 20px;
+    padding: 22px 0;
 }
 #messages-container-parent {
-    /* width:  */
     width: 100%;
 
 }
@@ -50,4 +53,9 @@
     display: flex;
     flex-direction: column;
     position: relative
+}
+
+
+.thread-message-div {
+
 }
