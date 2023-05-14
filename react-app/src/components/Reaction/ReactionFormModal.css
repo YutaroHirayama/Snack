@@ -17,8 +17,9 @@
     cursor: pointer;
     font-size: 14px;
     border-radius: 10px;
-    border: transparent;
-    background: #2f2e2f
+    border: 1px transparent solid;
+    background: #2f2e2f;
+    margin: 1px;
 }
 
 .actuall-reaction:hover {

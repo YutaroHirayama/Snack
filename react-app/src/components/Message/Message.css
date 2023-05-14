@@ -125,6 +125,9 @@
     background-color: transparent;
 }
 
+.reaction-container {
+    padding: 3px 0;
+}
 .send-bttn {
     position: relative;
     right: 70px;
