@@ -48,7 +48,7 @@ function SignupFormModal() {
 				<div className="signup-form-prop">
 				<ul>
 					{errors.map((error, idx) => (
-						<li className='form-error' key={idx}>{error}</li>
+						<li className='signup-form-error' key={idx}>{error}</li>
 					))}
 				</ul>
 				<label>

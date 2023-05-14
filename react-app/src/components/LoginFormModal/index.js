@@ -34,7 +34,7 @@ function LoginFormModal() {
           <div className="login-form-prop">
             <ul>
               {errors.map((error, idx) => (
-                <li key={idx}>{error}</li>
+                <li className='form-error' key={idx}>{error}</li>
               ))}
             </ul>
             <label>
