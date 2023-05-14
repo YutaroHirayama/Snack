@@ -14,8 +14,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
-    profile_pic = db.Column(db.String(255))
-    hashed_password = db.Column(db.String(255), nullable=False)
+    profile_pic = db.Column(db.String(255), default='https://img.favpng.com/1/15/9/scalable-vector-graphics-computer-icons-user-profile-portable-network-graphics-png-favpng-n05BjRqcBz9Ub9NtAbz8GXEaN.jpg')
+    hashed_password = db.Column(db.String(20), nullable=False)
 
     channels_owned = db.relationship("Channel", back_populates="owner")
     messages = db.relationship('Message', back_populates='user')
