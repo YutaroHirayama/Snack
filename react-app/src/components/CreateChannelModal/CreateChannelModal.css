@@ -1,4 +1,114 @@
 #create-channel-all-users {
-    height: 500px;
+    height: 400px;
     overflow: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.create-channel-add-user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.create-channel-add-user:hover {
+    background-color: rgb(250, 215, 215);
+}
+
+.create-channel-modal {
+    background-color: rgb(237, 237, 218);
+    color: #1d1c1d;
+    font-weight: bold;
+    width: 400px;
+}
+
+.create-channel-modal h3 {
+    background-color: rgb(221, 37, 37);
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 0;
+    color: aliceblue;
+}
+
+.add-user-to-channel-button {
+    padding: 5px 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.add-user-to-channel-button:hover {
+    background-color: rgb(221, 37, 37);
+    color: aliceblue;
+    cursor: pointer;
+}
+
+.channel-name-desc {
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+    align-content: center;
+}
+
+.create-channel-name input {
+
+    padding: 10px;
+    font-weight: bold;
+}
+
+.create-channel-textarea {
+
+    margin-top: 10px;
+    font-weight: bold;
+    /* padding: 10px; */
+}
+
+.create-channel-textarea textarea {
+    padding: 10px;
+    resize: none;
+}
+
+.create-channel-submit {
+    padding: 10px 20px;
+    width: 80%;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.create-channel-submit:hover {
+    background-color: rgb(221, 37, 37);
+    color: aliceblue;
+}
+
+.create-channel-submit-div {
+    display: flex;
+    justify-content: center;
+}
+
+.create-channel-user-img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0px 5px;
+}
+
+.create-channel-img-container {
+    display: flex;
+    align-items: center;
+}
+
+.create-channel-inputfeild {
+    width: 94%;
+
 }

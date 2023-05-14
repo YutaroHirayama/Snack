@@ -13,22 +13,9 @@ const LandingPage = ({ isLoaded }) => {
                     <nav>
                         <ul>
                             <div className="navbar-container">
-                                <div>
-                                    <li>
-                                        <a href="#about">About</a>
-                                    </li>
-                                    <li>
-                                        <a href="#features">Features</a>
-                                    </li>
-                                    <li>
-                                        <a href="#contact">Contact</a>
-                                    </li>
-                                </div>
-                                <div>
-                                    <li>
-                                        <Navigation isLoaded={isLoaded} />
-                                    </li>
-                                </div>
+                                <li>
+                                    <Navigation isLoaded={isLoaded} />
+                                </li>
                             </div >
                         </ul >
                     </nav >

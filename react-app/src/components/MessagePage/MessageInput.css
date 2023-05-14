@@ -1,8 +1,62 @@
 .message-textarea {
-    width: 90%;
+    width: 100%;
     height: 100px;
     background: transparent;
     border: 2px solid gray;
     border-radius: 10px;
     box-shadow: 2px 2px 2px black;
+    align-self: flex-end;
+    font-family: 'Montserrat', sans-serif;
+    color: inherit;
+    font-size: inherit;
+    box-sizing: border-box;
+    padding: 15px;
+}
+
+.send-bttn {
+    align-self: flex-end;
+    position: relative;
+    right: 7px;
+    bottom: 55px;
+    border: none;
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 10px;
+    color: #d1d2d3;
+    width: 70px
+}
+
+
+
+.send-bttn:hover {
+    background-color: rgba(211, 211, 211, 0.067);
+    cursor: pointer;
+
+}
+
+.send-icon {
+    /* color: #d1d2d3; */
+    font-size: 1.3rem;
+}
+
+.send-bttn:disabled {
+    cursor: default;
+    background-color: inherit;
+    color: #6a6a6a;
+}
+
+/* .send-bttn:disabled:hover {
+    cursor: none;
+    color: #d1d2d3;
+} */
+
+
+.input-area-button-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-right: 20px;
+    padding-left: 20px;
+
 }

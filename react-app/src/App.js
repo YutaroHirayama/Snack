@@ -31,40 +31,40 @@ function App() {
         <>
           <div className="home-page-main">
             <div>
-            <Route path="/">
-              {sessionUser && (
-                <>
-                  <Navigation isLoaded={isLoaded} />
-                  <Channels
-                    channels={sessionUser.channels}
-                    user={sessionUser}
-                    isLoaded={isLoaded}
-                    socket={socket}
-                  />
-                </>
-              )}
-            </Route>
+              <Route path="/">
+                {sessionUser && (
+                  <>
+                    <Navigation isLoaded={isLoaded} />
+                    <Channels
+                      channels={sessionUser.channels}
+                      user={sessionUser}
+                      isLoaded={isLoaded}
+                      socket={socket}
+                    />
+                  </>
+                )}
+              </Route>
             </div>
 
 
-            <div>
-            <Route path="/channel/:channelId">
-              {!sessionUser && <Redirect to="/" />}
-              <MessagePage user={sessionUser} />
-            </Route>
+            <div className='message-page-container'>
+              <Route path="/channel/:channelId">
+                {!sessionUser && <Redirect to="/" />}
+                <MessagePage user={sessionUser} />
+              </Route>
             </div>
-            <div className="threads-container">
-            <Route path="/channel/:channelId/message/:messageId">
-              {!sessionUser && <Redirect to="/" />}
-              <ThreadsPage user={sessionUser} />
-            </Route>
+            <div className="threads-container_">
+              <Route path="/channel/:channelId/message/:messageId">
+                {!sessionUser && <Redirect to="/" />}
+                <ThreadsPage user={sessionUser} />
+              </Route>
             </div>
           </div>
-            <Switch>
-              <Route exact path="/">
-                {!sessionUser && <LandingPage isLoaded={isLoaded} />}
-              </Route>
-            </Switch>
+          <Switch>
+            <Route exact path="/">
+              {!sessionUser && <LandingPage isLoaded={isLoaded} />}
+            </Route>
+          </Switch>
         </>
       )}
     </>

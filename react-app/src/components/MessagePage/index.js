@@ -12,6 +12,7 @@ import ChannelInfoModal from "../ChannelInfoModal";
 import ThreadsPage from "../ThreadsPage";
 import { Redirect } from "react-router-dom";
 
+
 let socket
 
 const MessagePage = ({ user }) => {
@@ -55,6 +56,7 @@ const MessagePage = ({ user }) => {
 
     }, [channelId])
 
+    if (!user) return <Redirect to='/' />
 
     if (!channel || !messages) return null;
 
@@ -66,9 +68,11 @@ const MessagePage = ({ user }) => {
     if (!isMember) return <Redirect to='/' />
 
     return (
-        <div className='message-page'>
+        <>
+            <div className='message-page-header'>
             <OpenModalButton
-                buttonText={!channel.isDm ? channel.channelName :
+                className='channel-info-modal'
+                buttonText={!channel.isDm ? `# ${channel.channelName}` :
                     Object.values(channel.members)
                         .filter((member) => member.id !== user.id)
                         .map((member) => `${member.firstName} ${member.lastName}`)
@@ -77,15 +81,17 @@ const MessagePage = ({ user }) => {
                 // onItemClick={closeMenu}
                 modalComponent={<ChannelInfoModal channel={channel} socket={socket} />}
             />
+            </div>
             <div className='messages-container'>
-                {messages && messages.map(m => <Message key={m.id} message={m} user={user} socket={socket} />)}
-
+                <div id="messages-container-parent">
+                    {messages && messages.map(m => <Message key={m.id} message={m} user={user} socket={socket} />)}
+                </div>
             </div>
 
-            <div>
+            <div className='message-input-container'>
                 <MessageInput user={user} channelId={channel.id} socket={socket} type='message' />
             </div>
-        </div>
+        </>
 
     )
 }

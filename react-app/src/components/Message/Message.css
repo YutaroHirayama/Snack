@@ -1,18 +1,123 @@
-.message-header {
-    font-weight: bold;
-    color: whitesmoke;
-    font-size: larger;
+.single-message-container {
+    display: flex;
+    /* flex-wrap: wrap; */
+    flex-direction: row;
+    padding: 7px 0;
+    margin: 0px 15px;
+
 }
 
-.users-message {
-    color: whitesmoke;
+.single-message-container:hover {
+    background-color: #323132;
+}
+
+.single-message-container .single-message-header-button-container {
+    visibility: hidden;
+}
+
+.single-message-container:hover .single-message-header-button-container {
+    visibility: visible;
+    display: flex;
+    border: 1px rgba(209, 210, 211, 0.15) solid;
+    border-radius: 5px;
 }
 
 .profile-pic-msg {
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     object-fit: cover;
+    padding-top: 3px;
+    padding-right: 10px
+}
+
+.single-message-details {
+    width: 100%;
+}
+
+.single-message-header {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.single-message-user {
+    font-size: 16px;
+    font-weight: bold
+}
+
+.single-message-user-timestamp {
+    padding-bottom: 10px
+}
+
+.single-message-timestamp {
+    padding-left: 10px;
+    font-size: 12px;
+}
+
+.users-message {
+    font-size: 14px;
+    padding-bottom: 7px;
+    word-break: break-all;
+    /* white-space: normal; */
+}
+
+/* .single-message-header-button-container {
+    display: flex;
+    border: 1px rgba(209, 210, 211, 0.15) solid;
+    border-radius: 5px;
+    padding: 1px
+} */
+.single-message-header-button {
+    font-size: 11px;
+    border: 1px transparent;
+    border-radius: 5px;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    padding: 1px 7px;
+    margin: 2px
+}
+
+.single-message-header-button:hover {
+    background-color: #656365bd;
+}
+
+.edit-message-form-modal {
+    width: 400px;
+    height: auto;
+    margin: 15px;
+}
+
+.edit-message-form-modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.edit-message-form-modal textarea {
+    color:#272627;
+}
+
+.edit-message-form-modal button {
+    padding: 10px 30px;
+    width: 95%;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.edit-message-form-modal button:hover {
+    background-color: brown;
+    color: aliceblue;
+}
+
+.edit-messsage-send-button {
+    display: flex;
+    justify-content: center;
+
 }
 
 .message-textarea {
@@ -24,4 +129,50 @@
     position: relative;
     right: 70px;
     bottom: 25px;
+}
+
+.delete-message-modal {
+    width: 400px;
+    height: 200px;
+    background-color: rgb(49, 48, 48);
+    color: aliceblue;
+    text-align: center;
+}
+
+.delete-message-modal h2 {
+    margin: 0;
+    padding-top: 10px;
+}
+
+.delete-message-modal-buttons {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    padding: 0px 20px;
+}
+
+.yes-button-delete {
+    margin-bottom: 15px;
+    padding: 10px 0;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.yes-button-delete:hover {
+    background-color: rgb(112, 128, 243);
+}
+
+.no-button-delete {
+    padding: 10px 0;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.no-button-delete:hover {
+    background-color: rgb(243, 116, 112);
+}
+
+.errors {
+    font-size: small;
+    color: red;
 }

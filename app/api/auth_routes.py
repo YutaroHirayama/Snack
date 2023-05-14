@@ -80,17 +80,32 @@ def sign_up():
 
         tm2 = Message(
             user_id=1,
-            message="To start a Snack chat, begin by clicking 'create' icon next to 'Direct Messages' on your left",
+            message="To start a Snack chat, begin by clicking 'Create Direct Message' under your 'Direct Messages' panel on your left.",
             created_at=datetime.now()
         )
 
         tm3 = Message(
             user_id=1,
-            message="To start a Snack channel, begin by clicking 'create' icon next to 'Channels' on your left",
+            message="To start a Snack channel, click 'Create Channel' under the 'Channels' panel on your left.",
+            created_at=datetime.now()
+        )
+        tm4 = Message(
+            user_id=1,
+            message="You can edit, delete, or add/remove members in channels you have created by selecting the Channel name at the top of your chat window.",
+            created_at=datetime.now()
+        )
+        tm5 = Message(
+            user_id=1,
+            message="If you hover over any message, you can add reactions or send a reply! You can also edit/delete any of your own messages.",
+            created_at=datetime.now()
+        )
+        tm6 = Message(
+            user_id=1,
+            message="Have fun snacking and share your snacks with everyone!",
             created_at=datetime.now()
         )
 
-        tutorial_messages = [tm1, tm2, tm3]
+        tutorial_messages = [tm1, tm2, tm3, tm4, tm5, tm6]
 
         general_channel = Channel.query.get(1)
         tutorial_channel = Channel(
