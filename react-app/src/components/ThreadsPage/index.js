@@ -108,7 +108,7 @@ const ThreadsPage = ({ user }) => {
                     <div className='single-thread-message'>
                         <div className='single-thread-header'>
                             <div className='single-thread-header-info'>
-                                <span>{message.user.firstName} {message.user.lastName} </span>
+                                <span className="names-in-threads">{message.user.firstName} {message.user.lastName} </span>
                                 <span className="time" title={getTime(message.createdAt).datetime}>{getTime(message.createdAt).time}</span>
                             </div>
                         </div>
