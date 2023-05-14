@@ -25,7 +25,7 @@ const ChannelInfoModal = ({ channel, socket }) => {
   };
 
   return !channel.isDm ? (
-    <>
+    <div id="channel-info-modal-container">
       <div className="channel-info-members-modal">
         <div className="channel-info-members-modal-container">
           <h2>{channel.channelName}</h2>
@@ -64,9 +64,9 @@ const ChannelInfoModal = ({ channel, socket }) => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   ) : (
-    <>
+    <div  id="channel-info-modal-container">
       <div className="channel-info-members-modal">
         <h2 id="dm-members-title">Direct Message Members</h2>
         {channel.members.map((user) => (
@@ -78,7 +78,7 @@ const ChannelInfoModal = ({ channel, socket }) => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 export default ChannelInfoModal;

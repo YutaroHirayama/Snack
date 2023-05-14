@@ -1,3 +1,8 @@
+#channel-info-modal-container {
+    max-height: 90%;
+}
+
+
 #allusers-channelusers-tab {
     display: flex;
     justify-content: space-around;
@@ -77,6 +82,7 @@
 }
 
 .channel-members-list {
+    height: 500px;
     overflow: scroll;
 }
 
