@@ -101,15 +101,23 @@ const ThreadsPage = ({ user }) => {
                 </div>
             </div>
             <div className='thread-page'>
-                <div className="thread-message-div">
-                    <div className='message-header'>
+                <div className="single-thread-message-container">
+                    <div className='single-thread-profile-pic'>
                         <img className="profile-pic-msg" src={message.user.profilePic || '/placeholder.jpg'}></img>
-                        <span>{message.user.firstName} {message.user.lastName} </span>
-                        <span className="time" title={getTime(message.createdAt).datetime}>{getTime(message.createdAt).time}</span>
                     </div>
-                    <p className="thread-message">{message.message}</p>
+                    <div className='single-thread-message'>
+                        <div className='single-thread-header'>
+                            <div className='single-thread-header-info'>
+                                <span>{message.user.firstName} {message.user.lastName} </span>
+                                <span className="time" title={getTime(message.createdAt).datetime}>{getTime(message.createdAt).time}</span>
+                            </div>
+                        </div>
+                        <div className="thread-message">{message.message}</div>
+                    </div>
                 </div>
-                <span className="replies-tag">{message.threads.length} replies</span>
+                <div className='thread-replies'>
+                    <span className="replies-tag">{message.threads.length} replies ---------------------------------</span>
+                </div>
                 <div className='threads-container'>
                     <div>
                         {message?.threads.map(thread =>
