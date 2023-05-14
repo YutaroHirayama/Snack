@@ -50,30 +50,56 @@ const LandingPage = ({ isLoaded }) => {
                     <div className="about-content">
                         <h2>About Snack</h2>
                         <p>
-                            Connect the right people, find anything you need and automate the
-                            rest. That’s work in Snack, your productivity platform.
+                            Snack is a Slack-clone project aimed at creting a live-chat application
+                            with such features as:
                         </p>
-                    </div>
-                </section >
-                <section id=" features">
-                    <div className="features-content">
-                        <h2>Features</h2>
                         <ul>
-                            <li>Feature 1</li>
-                            <li>Feature 2</li>
-                            <li>Feature 3</li>
-                            {/* Add more features as needed */}
+                            <li className="features-li">
+                                live chat updating in real-time,
+                            </li>
+                            <li className="features-li">
+                                channels for people to group into,
+                            </li>
+                            <li className="features-li">
+                                threads to reply to each other's messages,
+                            </li>
+                            <li className="features-li">
+                                and reactions to show love and support at one or two clicks
+                            </li>
                         </ul>
                     </div>
                 </section >
-                <section id=" contact">
-                    <div className="contact-content">
-                        <h2>Contact Us</h2>
-                        <p>
-                            Feel free to get in touch with us for any inquiries or support.
-                        </p>
-                        <a>contact@snack.com</a>
-                    </div >
+                <section id="about-devs">
+                    <div className="about-content">
+                        <h2>About the Devs</h2>
+                        <div id="about-blocks">
+                            <div className="dev">
+                                <img className="dev-image" src="/placeholder.jpg"></img>
+                                <h4>Yutaro</h4>
+                                <a className="github-link" href="https://github.com/YutaroHirayama">GitHub <i className="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                <p className="about-dev-text">Phasellus faucibus scelerisque eleifend donec. Ut consequat semper viverra nam libero justo. </p>
+                            </div>
+                            <div className="dev">
+                                <img className="dev-image" src="/placeholder.jpg"></img>
+                                <h4>Corbin</h4>
+                                <a className="github-link" href="https://github.com/CorbinBullard">GitHub <i className="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                <p className="about-dev-text">Phasellus faucibus scelerisque eleifend donec. Ut consequat semper viverra nam libero justo. </p>
+                            </div>
+                            <div className="dev">
+                                <img className="dev-image" src="/placeholder.jpg"></img>
+                                <h4>Emir</h4>
+                                <a className="github-link" href="https://github.com/Coverman9">GitHub <i className="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                <p className="about-dev-text">Phasellus faucibus scelerisque eleifend donec. Ut consequat semper viverra nam libero justo. </p>
+                            </div>
+                            <div className="dev">
+                                <img className="dev-image" src="/serghei.jpeg"></img>
+                                <h4>Serghei</h4>
+                                <a className="github-link" href="https://github.com/MineevSerghei">GitHub <i className="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                <p className="about-dev-text">Phasellus faucibus scelerisque eleifend donec. Ut consequat semper viverra nam libero justo. </p>
+                            </div>
+
+                        </div>
+                    </div>
                 </section >
                 <footer>
                     <p>&copy; 2023 Snack. All rights reserved.</p>
