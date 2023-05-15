@@ -86,7 +86,7 @@ const LandingPage = ({ isLoaded }) => {
                                 <p className="about-dev-text">Phasellus faucibus scelerisque eleifend donec. Ut consequat semper viverra nam libero justo. </p>
                             </div>
                             <div className="dev">
-                                <img className="dev-image" src="/placeholder.jpg"></img>
+                                <img className="dev-image" src="/emir.jpeg"></img>
                                 <h4>Emir</h4>
                                 <a className="github-link" href="https://github.com/Coverman9">GitHub <i className="fa-solid fa-arrow-up-right-from-square"></i></a>
                                 <p className="about-dev-text">Phasellus faucibus scelerisque eleifend donec. Ut consequat semper viverra nam libero justo. </p>
