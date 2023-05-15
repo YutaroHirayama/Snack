@@ -32,17 +32,12 @@ const Channels = ({ channels, user, socket }) => {
     if (!element.isDm) userChannels.push(element);
     else directMessages.push(element);
   });
-  // const channels = useSelector(state => state.channels);
-  // fill the channels state with all channels current User is a member of OR owns
-  // convert channels into an array
 
-  // console.log(isSelected)
+
   useEffect(() => {
     setIsSelected(location.pathname.split('/')[2])
 
-    console.log("IS THIS RUNNING?", isSelected)
-    //dispatch thunk to fetch all channels That a user is a member of OR owns by user ID
-    //console.log("CHANNELS: ", channels);
+
     socket.on("chat", (chat) => {
 
       dispatch(authenticate())
@@ -56,16 +51,8 @@ const Channels = ({ channels, user, socket }) => {
   }, [dispatch]);
 
   const onChannelClick = channelId => {
-    console.log(channelId)
     setIsSelected(channelId)
 
-
-    // history.push(`/channel/${channelId}`);
-
-    // const request = dispatch(fetchChannelThunk(channelId))
-    // if (request.errors) {
-    //   alert("Channel Not Found")
-    // }
   }
 
 

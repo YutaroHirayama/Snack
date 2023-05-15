@@ -41,6 +41,19 @@
     overflow-x: hidden;
     padding: 22px 0;
 }
+.messages-container::-webkit-scrollbar {
+    width: 12px;
+}
+
+.messages-container::-webkit-scrollbar-track {
+    background: transparent
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+    background-color: #2b2e36;
+    border-radius: 10px;
+    border: none
+}
 #messages-container-parent {
     width: 100%;
 

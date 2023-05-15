@@ -53,8 +53,7 @@ const CreateDirectMessageModal = ({ channels, sessionUser, socket }) => {
 
     if (!ableToCreate) {
       alert("This Direct Message Channel Already Exists");
-      console.log("Cannot Create!");
-      // closeModal() // Do we want this???
+
       return;
     }
     const res = await dispatch(createChannelThunk(newChannel));
@@ -65,7 +64,7 @@ const CreateDirectMessageModal = ({ channels, sessionUser, socket }) => {
   };
 
   function canCreate(currentDmUsers, channelMembers) {
-    console.log("Channel members : ", channelMembers);
+
     if (currentDmUsers.length !== Object.keys(channelMembers).length)
       return true;
 

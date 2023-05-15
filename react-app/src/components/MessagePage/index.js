@@ -41,13 +41,7 @@ const MessagePage = ({ user }) => {
         socket.on("chat", (chat) => {
 
             newChannel = dispatch(fetchChannelThunk(channelId))
-            // console.log('newChannel ----->', newChannel)
-            // let msgArr = newChannel.channel.messages
-            // console.log(msgArr)
-            // setMessages(...msgArr)
 
-            // let msgArr = Object.values(msg.messages)
-            // setMessages(messages => [...messages, chat])
         })
         return (() => {
 

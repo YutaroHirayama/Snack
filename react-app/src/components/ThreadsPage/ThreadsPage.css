@@ -41,6 +41,19 @@
     overflow-x: hidden;
     padding-bottom: 20px;
 }
+.threads-container::-webkit-scrollbar {
+    width: 12px;
+}
+
+.threads-container::-webkit-scrollbar-track {
+    background: transparent
+}
+
+.threads-container::-webkit-scrollbar-thumb {
+    background-color: #2b2e36;
+    border-radius: 10px;
+    border: none
+}
 
 .threads-container_ {
     padding-right: 20px
