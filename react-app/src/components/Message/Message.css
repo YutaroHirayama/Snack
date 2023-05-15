@@ -125,6 +125,9 @@
     background-color: transparent;
 }
 
+.reaction-container {
+    padding: 3px 0;
+}
 .send-bttn {
     position: relative;
     right: 70px;
@@ -175,4 +178,35 @@
 .errors {
     font-size: small;
     color: red;
+}
+
+.message-replies-button {
+    margin: 8px 0;
+    background-color: transparent;
+    border: 1px transparent solid;
+    border-radius: 5px;
+    color: rgb(0, 170, 255);
+    cursor: pointer;
+    padding: 3px 10px;
+}
+
+.message-replies-button .message-reply-hidden {
+    visibility: hidden
+}
+
+.message-replies-button:hover .message-reply-hidden {
+    visibility: visible
+}
+.message-replies-button:hover {
+    border: 1px #939596 solid;
+    background-color: #1d1c1d;
+}
+.message-reply-view-thread {
+    color: #939596;
+    padding-left: 10px;
+    padding-right: 100px;
+}
+
+.message-reply-caret {
+    color: #939596;
 }

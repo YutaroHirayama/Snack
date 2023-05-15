@@ -18,6 +18,11 @@ def username_exists(form, field):
     if user:
         raise ValidationError('Username is already in use.')
 
+def profile_check(form, field):
+    profilePic = field.data
+    if profilePic:
+        if(not profilePic.endswith(('.png','.jpg','.jpeg'))):
+            raise ValidationError('Profile picture URL must end in .png, .jpg, or .jpeg')
 
 class SignUpForm(FlaskForm):
     username = StringField(
@@ -26,4 +31,4 @@ class SignUpForm(FlaskForm):
     password = StringField('password', validators=[DataRequired(), Length(min=5, max=20, message='Password must be between 5 and 20 characters.')])
     firstName = StringField('firstName', validators=[DataRequired(), Length(min=1, max=50, message='First name must be less than 50 characters.')])
     lastName = StringField('lastName', validators=[DataRequired(), Length(min=1, max=50, message='Last name must be less than 50 characters.')])
-    profilePic = StringField('profilePic')
+    profilePic = StringField('profilePic', validators=[profile_check])

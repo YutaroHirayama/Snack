@@ -76,7 +76,7 @@ const Message = ({ message, user, socket }) => {
                         <button
                             className='single-message-header-button'
                             onClick={() => loadReplies(message)}
-                        >{message.threads.length > 0 ? `${message.threads.length} replies` : "Reply"} </button>
+                        >Reply</button>
                         <OpenModalButton
                             buttonText="Add reaction"
                             className='single-message-header-button'
@@ -90,7 +90,15 @@ const Message = ({ message, user, socket }) => {
                         <Reaction reaction={r[0]} count={r[1]} message={message} socket={socket} />
                     )}
                 </div>
-
+                {message.threads.length > 0 && (
+                <button
+                    className='message-replies-button'
+                    onClick={() => loadReplies(message)}>
+                    {message.threads.length > 1 ? `${message.threads.length} replies ` : `${message.threads.length} reply `}
+                    <span className='message-reply-hidden message-reply-view-thread'>    View Thread</span>
+                    <span className='message-reply-hidden message-reply-caret'>{'>'}</span>
+                </button>
+                )}
             </div>
         </div>
     )

@@ -1,11 +1,18 @@
 .form-error {
     color: red;
     font-weight: bold;
-    width: 70%;
+    width: 80%
+}
+
+.signup-form-error {
+    color: red;
+    font-weight: bold;
+    width: 80%;
+    font-size: 12px;
 }
 .signup-form-modal {
     width: 450px;
-    height: 600px;
+    height: 700px;
     background-color: aliceblue;
     display: flex;
     flex-direction: column;
