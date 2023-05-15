@@ -14,8 +14,8 @@ import { Redirect } from "react-router-dom";
 
 
 
-
-const MessagePage = ({ user, socket }) => {
+let socket;
+const MessagePage = ({ user }) => {
 
     const channel = useSelector(state => state.channels?.currentChannel?.channel);
     const messages = channel?.messages ? Object.values(channel.messages) : false
@@ -35,7 +35,7 @@ const MessagePage = ({ user, socket }) => {
 
     let newChannel;
     useEffect(() => {
-
+        socket = io();
 
         dispatch(fetchChannelThunk(parseInt(channelId)))
         socket.on("chat", (chat) => {
@@ -70,17 +70,17 @@ const MessagePage = ({ user, socket }) => {
     return (
         <>
             <div className='message-page-header'>
-            <OpenModalButton
-                className='channel-info-modal'
-                buttonText={!channel.isDm ? `# ${channel.channelName}` :
-                    Object.values(channel.members)
-                        .filter((member) => member.id !== user.id)
-                        .map((member) => `${member.firstName} ${member.lastName}`)
-                        .join(", ")
-                }
-                // onItemClick={closeMenu}
-                modalComponent={<ChannelInfoModal channel={channel} socket={socket} />}
-            />
+                <OpenModalButton
+                    className='channel-info-modal'
+                    buttonText={!channel.isDm ? `# ${channel.channelName}` :
+                        Object.values(channel.members)
+                            .filter((member) => member.id !== user.id)
+                            .map((member) => `${member.firstName} ${member.lastName}`)
+                            .join(", ")
+                    }
+                    // onItemClick={closeMenu}
+                    modalComponent={<ChannelInfoModal channel={channel} socket={socket} />}
+                />
             </div>
             <div className='messages-container'>
                 <div id="messages-container-parent">
