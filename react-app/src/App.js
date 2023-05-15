@@ -50,7 +50,7 @@ function App() {
             <div className='message-page-container'>
               <Route path="/channel/:channelId">
                 {!sessionUser && <Redirect to="/" />}
-                <MessagePage user={sessionUser} />
+                <MessagePage user={sessionUser} socket={socket} />
               </Route>
             </div>
             <div className="threads-container_">

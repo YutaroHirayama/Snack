@@ -13,9 +13,9 @@ import ThreadsPage from "../ThreadsPage";
 import { Redirect } from "react-router-dom";
 
 
-let socket
 
-const MessagePage = ({ user }) => {
+
+const MessagePage = ({ user, socket }) => {
 
     const channel = useSelector(state => state.channels?.currentChannel?.channel);
     const messages = channel?.messages ? Object.values(channel.messages) : false
@@ -35,7 +35,7 @@ const MessagePage = ({ user }) => {
 
     let newChannel;
     useEffect(() => {
-        socket = io();
+
 
         dispatch(fetchChannelThunk(parseInt(channelId)))
         socket.on("chat", (chat) => {
