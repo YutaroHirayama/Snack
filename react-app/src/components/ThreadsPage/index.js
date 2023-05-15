@@ -137,7 +137,7 @@ const ThreadsPage = ({ user }) => {
                                             modalComponent={<DeleteMessageModal message={thread} socket={threadSocket} type={"thread"} channelId={message.channelId} />}
                                         />}
                                     </div>
-                                    <div>{thread?.threadMessage}</div>
+                                    <div className="thread-message">{thread?.threadMessage}</div>
                                 </div>
                             </div>)}
                     </div>
