@@ -232,7 +232,7 @@ export const signUp =
         }
       } else {
         const data = await response.json();
-        console.log('500 ERROR ----->', data)
+
         return data
       }
     };
@@ -243,11 +243,11 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER: {
       const newState = { user: action.payload };
-      // console.log("NEWSTATE: ", newState);
+
       const newChannels = {};
       newState.user.channels.forEach((channel) => {
         newChannels[channel.id] = channel;
-        // making members into an object
+
         const newChannelMembers = {};
         newChannels[channel.id].members.forEach((member) => {
           newChannelMembers[member.id] = member;

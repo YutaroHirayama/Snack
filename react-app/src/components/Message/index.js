@@ -19,7 +19,7 @@ const Message = ({ message, user, socket }) => {
 
     const allReactions = Object.values(message.reactions)
     const timestamp = new Date(message.createdAt);
-    // console.log('timestamp -->', timestamp, typeof timestamp)
+
 
     const loadReplies = (message) => {
 

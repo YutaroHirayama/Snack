@@ -26,7 +26,7 @@ function SignupFormModal() {
 				data = await dispatch(signUp(username, email, password, firstName, lastName, profilePic));
 			}
 			if (data) {
-				console.log('ERROR OBJECT FROM DB ----->',data)
+
 				setErrors(data);
 			} else {
 				closeModal();

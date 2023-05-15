@@ -63,7 +63,7 @@ export const fetchChannelThunk = (channelId) => async (dispatch) => {
 
   if (res.ok) {
     const channel = await res.json();
-    // console.log('Current Channel----->', channel)
+
     dispatch(fetchChannelAction(channel));
     return channel
   } else {
