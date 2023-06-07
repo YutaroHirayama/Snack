@@ -1,12 +1,12 @@
-# Flask React Project
+# Snack
 
-This is the starter for the Flask React project.
+Snack is a snack themed live chat web application inspired by Slack. 
 
 ## Getting started
 1. Clone this repository (only this branch)
 
 2. Install dependencies
-
+ 
       ```bash
       pipenv install -r requirements.txt
       ```
