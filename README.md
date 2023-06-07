@@ -20,6 +20,35 @@ Check out [Snack](https://snack-slack.onrender.com/) here.
   <img src="https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white" />
 </div>
 
+## Features
+
+### Channels
+Logged-in users can: 
+* Create a new channel with any number of users
+* Read/View all channels you are a member of
+* Update channels they have created
+* Delete channels they have created
+
+### Messages
+Logged-in users can: 
+* Create a message in any channel or direct message they are a member of
+* Read/View all messages of any channel or direct message they are a member of
+* Update messages they have posted
+* Delete/Remove messages they have posted
+
+### Threads/Replies
+Logged-in users can: 
+* Create a reply to a message
+* Read/View all replies of a message
+* Delete/Remove replies they have posted
+
+### Reactions
+Logged-in users can: 
+* Add a reaction to any message
+* Read/View all reactions on messages
+* Delete/Remove reactions they have added
+
+
 ## Create and Edit Channels
 <img src="./react-app/public/channelsgif.gif" width="1000px">
 
