@@ -20,6 +20,16 @@ Check out [Snack](https://snack-slack.onrender.com/) here.
   <img src="https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white" />
 </div>
 
+
+## Create and Edit Channels
+<img src="./react-app/public/channelsgif.gif" width="1000px">
+
+## Live Chat and Reaction with WebSockets
+<img src="./react-app/public/websocketsgif.gif" width="1000px">
+
+## Reply to Messages
+<img src="./react-app/public/replygif.gif" width="1000px">
+
 ## Features
 
 ### Channels
@@ -47,16 +57,6 @@ Logged-in users can:
 * Add a reaction to any message
 * Read/View all reactions on messages
 * Delete/Remove reactions they have added
-
-
-## Create and Edit Channels
-<img src="./react-app/public/channelsgif.gif" width="1000px">
-
-## Live Chat and Reaction with WebSockets
-<img src="./react-app/public/websocketsgif.gif" width="1000px">
-
-## Reply to Messages
-<img src="./react-app/public/replygif.gif" width="1000px">
 
 
 ## API Routes
