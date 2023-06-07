@@ -21,11 +21,11 @@ Check out [Snack](https://snack-slack.onrender.com/) here.
 </div>
 
 
-## Create and Edit Channels
-<img src="./react-app/public/channelsgif.gif" width="1000px">
-
 ## Live Chat and Reaction with WebSockets
 <img src="./react-app/public/websocketsgif.gif" width="1000px">
+
+## Create and Edit Channels
+<img src="./react-app/public/channelsgif.gif" width="1000px">
 
 ## Reply to Messages
 <img src="./react-app/public/replygif.gif" width="1000px">
