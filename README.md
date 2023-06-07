@@ -32,8 +32,14 @@ Check out [Snack](https://snack-slack.onrender.com/) here.
   <img src="https://github.com/devicons/devicon/blob/master/icons/css3/css3-plain-wordmark.svg"  title="CSS3" alt="CSS" width="40" height="40"/>&nbsp;
 </div>
 
+## Create and Edit Channels
+<img src="./react-app/public/channelsgif.gif" width="1000px">
+
 ## Live Chat and Reaction with WebSockets
 <img src="./react-app/public/websocketsgif.gif" width="1000px">
+
+## Reply to Messages
+<img src="./react-app/public/replygif.gif" width="1000px">
 
 
 ## API Routes
