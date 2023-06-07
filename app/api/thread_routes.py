@@ -9,7 +9,9 @@ thread_routes = Blueprint('threads', __name__)
 
 @thread_routes.route("/<int:threadId>", methods=["DELETE"])
 def delete_thread(threadId):
-    """This route deletes a thread given the thread Id"""
+    """
+    This route deletes a thread given the thread Id
+    """
 
 
     thread_to_delete = Thread.query.get(threadId)
