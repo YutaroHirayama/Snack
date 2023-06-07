@@ -107,7 +107,8 @@ def delete_message(messageId):
 @message_routes.route('/<int:messageId>')
 @login_required
 def fetch_threads(messageId):
-    """This route grabs all threads from a message Id
+    """
+    This route grabs all threads from a message Id
     """
     message = Message.query.get(messageId)
 
