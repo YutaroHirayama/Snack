@@ -21,7 +21,7 @@ Check out [Snack](https://snack-slack.onrender.com/) here.
 </div>
 
 
-## Live Chat and Reaction with WebSockets
+## Live Chat and Reactions with WebSockets
 <img src="./react-app/public/websocketsgif.gif" width="1000px">
 
 ## Create and Edit Channels
