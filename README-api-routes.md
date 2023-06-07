@@ -1,32 +1,6 @@
-# Snack
-
-# Documentation
-
 ## API Routes
 
-### -------------
-* URL: `/`
-
-* METHOD: `GET`
-
-```
-    This route will direct to the public directory in our
-    react builds in the production environment for favicon
-    or index.html requests
-
-```
-
-### -------------
-* URL: `/<path:path>`
-
-* METHOD: `GET`
-
-```
-    This route will direct to the public directory in our
-    react builds in the production environment for favicon
-    or index.html requests
-
-```
+### Authentication
 
 ### -------------
 * URL: `/api/auth/`
@@ -78,6 +52,30 @@
 
 ```
 
+### Users
+
+### -------------
+* URL: `/api/users/`
+
+* METHOD: `GET`
+
+```
+    Query for all users and returns them in a list of user dictionaries
+
+```
+
+### -------------
+* URL: `/api/users/<int:id>`
+
+* METHOD: `GET`
+
+```
+    Query for a user by id and returns that user in a dictionary
+
+```
+
+### Channels
+
 ### -------------
 * URL: `/api/channels`
 
@@ -121,15 +119,7 @@
 
 ```
 
-### -------------
-* URL: `/api/docs`
-
-* METHOD: `GET`
-
-```
-    Returns all API routes and their doc strings
-
-```
+### Messages
 
 ### -------------
 * URL: `/api/messages/<int:messageId>`
@@ -142,16 +132,6 @@
 ```
 
 ### -------------
-* URL: `/api/messages/<int:messageId>/threads`
-
-* METHOD: `POST`
-
-```
-    This route creates threads for the specified message
-
-```
-
-### -------------
 * URL: `/api/messages/channels/<int:channelId>`
 
 * METHOD: `POST`
@@ -160,6 +140,8 @@
     This route creates messages in the specified channel
 
 ```
+
+### Reactions
 
 ### -------------
 * URL: `/api/reactions/<int:messageId>`
@@ -181,6 +163,18 @@
 
 ```
 
+### Threads
+
+### -------------
+* URL: `/api/messages/<int:messageId>/threads`
+
+* METHOD: `POST`
+
+```
+    This route creates threads for the specified message
+
+```
+
 ### -------------
 * URL: `/api/threads/<int:threadId>`
 
@@ -188,25 +182,5 @@
 
 ```
     This route deletes a thread given the thread Id
-
-```
-
-### -------------
-* URL: `/api/users/`
-
-* METHOD: `GET`
-
-```
-    Query for all users and returns them in a list of user dictionaries
-
-```
-
-### -------------
-* URL: `/api/users/<int:id>`
-
-* METHOD: `GET`
-
-```
-    Query for a user by id and returns that user in a dictionary
 
 ```
