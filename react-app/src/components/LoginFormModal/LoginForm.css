@@ -1,62 +1,79 @@
 .login-form-modal {
-    width: 400px;
-    height: 500px;
-    background-color: aliceblue;
+    width: 300px;
+    height: auto;
+    /* background-color: aliceblue; */
     display: flex;
     flex-direction: column;
-    color: rgb(46, 46, 74);
+    color: whitesmoke;
     align-items: center;
     font-size: 20px;
 }
+
 .login-form-modal h1 {
-    color: rgb(46, 46, 74);
+    color: whitesmoke;
+    margin-bottom: 5px;
+    padding-bottom: none;
 }
-.login-form-prop{
+
+.login-form-prop {
+    width: 90%;
     font-weight: bold;
-    height: 200px;
+    /* height: 200px; */
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 5px;
 }
-.login-form-prop input{
-    font-weight: bold;
-    border-radius: 10px;
-    font-size: 25px;
-    margin-bottom: 10px;
 
+.login-form-prop input {
+    width: 98%;
+    color: whitesmoke;
+    background-color: #141414;
+    border-radius: 5px;
+    padding: 10px;
 }
+
 .login-button {
-    width: 10   0%;
+    width: 105%;
     text-align: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 10px;
-    background-color: aliceblue;
+    /* padding-top: 10px;
+        padding-bottom: 10px; */
+    border-radius: 5px;
+    background-color: whitesmoke;
     color: black;
-    height: 60px;
+    height: 40px;
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
+    margin-top: 10px;
 }
+
 .login-button:hover {
     background-color: black;
     color: aliceblue;
 }
 
 .demo-user-buttons {
-    margin-top: 20px;
+    margin-top: 10px;
     display: flex;
+    justify-content: space-between;
+    gap: 10px;
 }
+
 .demo-user-button {
+    border-radius: 5px;
     padding: 10px;
-    width: 90%;
-    margin-left: 10px;
+    width: 50%;
     font-weight: bold;
     cursor: pointer;
+    margin-bottom: 15px;
 }
+
 .david:hover {
     background-color: rgb(83, 83, 216);
     color: aliceblue;
 }
+
 .victoria:hover {
     background-color: rgb(215, 81, 227);
     color: aliceblue;

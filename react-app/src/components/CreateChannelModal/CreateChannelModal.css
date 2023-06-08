@@ -6,7 +6,28 @@
     flex-direction: column;
 }
 
+#create-channel-all-users::-webkit-scrollbar {
+    width: 12px;
+}
+
+#create-channel-all-users::-webkit-scrollbar-track {
+    background: transparent
+}
+
+#create-channel-all-users::-webkit-scrollbar-thumb {
+    background-color: #2b2e36;
+    border-radius: 10px;
+    border: none
+}
+
+#create-channel-title {
+    align-self: center;
+    text-align: center;
+    padding: 15px 0px;
+}
+
 .create-channel-add-user {
+    color: whitesmoke;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -14,19 +35,22 @@
     margin-right: 5px;
 }
 
+
+
 .create-channel-add-user:hover {
-    background-color: rgb(250, 215, 215);
+    background-color: rgb(96, 96, 96);
+    border-radius: 5px;
 }
 
 .create-channel-modal {
-    background-color: rgb(237, 237, 218);
+    /* background-color: rgb(237, 237, 218); */
     color: #1d1c1d;
     font-weight: bold;
     width: 400px;
 }
 
 .create-channel-modal h3 {
-    background-color: rgb(221, 37, 37);
+    /* background-color: rgb(221, 37, 37); */
     padding-left: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -35,11 +59,26 @@
 }
 
 .add-user-to-channel-button {
+    background-color: rgb(28, 29, 30);
+    padding: 5px 50px;
+    color: whitesmoke;
     padding: 5px 15px;
     margin-top: 5px;
     margin-bottom: 5px;
     font-weight: bold;
     border-radius: 5px;
+    margin-right: 5px;
+}
+.button-disabled {
+    background-color: rgb(84, 84, 84);
+    padding: 5px 50px;
+    color: whitesmoke;
+    padding: 5px 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-right: 5px;
 }
 
 .add-user-to-channel-button:hover {
@@ -56,9 +95,11 @@
 }
 
 .create-channel-name input {
-
+    color: whitesmoke;
+    background-color: #141414;
+    border-radius: 5px;
     padding: 10px;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 
 .create-channel-textarea {
@@ -69,12 +110,19 @@
 }
 
 .create-channel-textarea textarea {
+    color: whitesmoke;
+    background-color: #141414;
+    border-radius: 5px;
     padding: 10px;
     resize: none;
 }
 
 .create-channel-submit {
-    padding: 10px 20px;
+    background-color: rgb(28, 29, 30);
+    padding: 5px 50px;
+    color: whitesmoke;
+
+    padding: 5px 10px;
     width: 80%;
     font-weight: bold;
     font-size: 20px;
@@ -91,6 +139,7 @@
 }
 
 .create-channel-submit-div {
+    border-top: 1px solid rgb(203, 203, 203, 0.4);
     display: flex;
     justify-content: center;
 }

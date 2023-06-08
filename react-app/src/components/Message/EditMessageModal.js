@@ -44,7 +44,7 @@ const EditMessageModal = ({ message, socket }) => {
               _message.length - 10000
             } characters too long.`}</p>
           )}
-          <div className="edit-messsage-send-button">
+          <div className="edit-message-send-button">
             <button type="submit" disabled={!_message || messageTooLong}>
               Send
             </button>

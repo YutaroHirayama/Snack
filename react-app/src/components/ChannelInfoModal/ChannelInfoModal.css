@@ -1,7 +1,19 @@
 #channel-info-modal-container {
-    height: 80%;
+    /* height: 80%; */
+    /* width: fit-content; */
+    /* padding: 85px; */
 }
 
+.edit-channel-label {
+    color: whitesmoke;
+    align-self: flex-start;
+    margin-left: 45px;
+}
+
+h3 {
+    color: whitesmoke;
+    margin-left: 15px;
+}
 
 #allusers-channelusers-tab {
     display: flex;
@@ -14,10 +26,32 @@
     /* color: white; */
 }
 
+#update-channel-title {
+    margin-top: 10px;
+
+}
+
 #edit-channel-all-users {
-    max-height: 300px;
-    height: auto;
+    height: 330px;
     overflow: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#edit-channel-all-users::-webkit-scrollbar {
+    width: 12px;
+}
+
+#edit-channel-all-users::-webkit-scrollbar-track {
+    background: transparent
+}
+
+#edit-channel-all-users::-webkit-scrollbar-thumb {
+    background-color: #2b2e36;
+    border-radius: 10px;
+    border: none
 }
 
 .form-errors {
@@ -27,10 +61,11 @@
 
 .channel-info-members-modal {
     color: #1d1c1d;
-    width: 400px;
+    width: 380px;
 }
 
 .channel-info-members-modal-container {
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -38,8 +73,8 @@
 }
 
 .channel-info-members-modal h2 {
-    background-color: brown;
-    margin: 0;
+    /* background-color: brown; */
+    margin-top: 5px;
     text-align: center;
     padding: 10px 0px;
     color: aliceblue;
@@ -47,7 +82,8 @@
 }
 
 .channel-info-description {
-    border: 2px solid rgb(220, 141, 141);
+    color: whitesmoke;
+    border: 1px solid rgb(203, 203, 203, 0.4);
     height: 100px;
     width: 80%;
     margin: 5px;
@@ -64,11 +100,12 @@
 .delete-edit-buttons button {
     background-color: rgb(28, 29, 30);
     padding: 5px 50px;
-    color: aliceblue;
+    color: whitesmoke;
     cursor: pointer;
     font-weight: bold;
     border-radius: 5px;
 }
+
 
 .delete-edit-buttons button:hover {
     background-color: brown;
@@ -79,34 +116,55 @@
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
-    margin-left: 5px;
-    margin-bottom: 10px;
+    margin-left: 10px;
+    /* margin-bottom: 10px; */
 }
 
 .channel-members-list {
     height: 350px;
     overflow: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.channel-members-list::-webkit-scrollbar {
+    width: 12px;
+}
+
+.channel-members-list::-webkit-scrollbar-track {
+    background: transparent
+}
+
+.channel-members-list::-webkit-scrollbar-thumb {
+    background-color: #2b2e36;
+    border-radius: 10px;
+    border: none
 }
 
 .channel-members-list-container {
+    color: whitesmoke;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    font-weight: bold;
-    font-size: 20px;
+    /* margin-left: 5px;
+    margin-right: 5px; */
 }
 
 .channel-members-list-container:hover {
-    background-color: rgb(248, 174, 174);
+    background-color: rgb(96, 96, 96);
+    border-radius: 5px;
 }
 
 .list-name-lastname {
-    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .edit-channel-modal {
     color: #1d1c1d;
-    width: 500px;
-    height: 750px;
+    width: 450px;
+    /* height: 750px; */
     font-weight: bold;
 
 }
@@ -119,7 +177,7 @@
 }
 
 .edit-channel-modal h3 {
-    background-color: brown;
+
     margin: 0;
     text-align: center;
     padding: 10px 0px;
@@ -139,28 +197,42 @@
 }
 
 .channel-edit-name-descr input {
-    margin-left: 15px;
-    font-weight: bold;
-    font-size: 20px;
+    color: whitesmoke;
+    background-color: #141414;
+    border-radius: 5px;
+    padding: 10px;
     width: 80%;
 
 }
 
 .channel-edit-name-descr textarea {
+    color: whitesmoke;
+    background-color: #141414;
+    border-radius: 5px;
+    padding: 10px;
     resize: none;
-    margin-left: 15px;
-    font-weight: bold;
-    font-size: 20px;
     width: 80%;
 }
 
 .edit-channel-add-member {
+    color: whitesmoke;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin: 0px 10px;
+}
+
+.edit-channel-add-member div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .edit-channel-add-member button {
-    padding: 5px 30px;
+    background-color: rgb(28, 29, 30);
+    padding: 5px 50px;
+    color: whitesmoke;
+    padding: 5px 20px;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
@@ -173,12 +245,19 @@
 }
 
 .submit-edit-channel {
-    font-weight: bold;
-    margin-bottom: 40px;
+    background-color: rgb(28, 29, 30);
+    padding: 5px 50px;
+    color: whitesmoke;
+
+    padding: 5px 10px;
     width: 80%;
-    padding: 10px 0;
+    font-weight: bold;
     font-size: 20px;
-    border-radius: 10px;
+    text-align: center;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .submit-edit-channel:hover {
@@ -257,6 +336,7 @@
 #allusers-channelusers-tab {
     height: 50px;
     margin-bottom: 12px;
+    color: whitesmoke;
 }
 
 .tab-open {

@@ -41,17 +41,15 @@ function SignupFormModal() {
 	return (
 		<>
 		<div className="signup-form-modal">
-
-
 			<h1>Sign Up</h1>
-			<form onSubmit={handleSubmit}>
-				<div className="signup-form-prop">
+			<form onSubmit={handleSubmit} id="sign-up-form">
+
 				<ul>
 					{errors.map((error, idx) => (
 						<li className='signup-form-error' key={idx}>{error}</li>
 					))}
 				</ul>
-				<label>
+
 					<input
 						type="text"
 						value={firstName}
@@ -59,8 +57,6 @@ function SignupFormModal() {
 						placeholder="First name"
 						required
 					/>
-				</label>
-				<label>
 					<input
 						type="text"
 						value={lastName}
@@ -68,8 +64,6 @@ function SignupFormModal() {
 						required
 						placeholder="Last name"
 					/>
-				</label>
-				<label>
 					<input
 						type="text"
 						value={email}
@@ -77,8 +71,6 @@ function SignupFormModal() {
 						required
 						placeholder="Email"
 					/>
-				</label>
-				<label>
 					<input
 						type="text"
 						value={username}
@@ -86,16 +78,12 @@ function SignupFormModal() {
 						required
 						placeholder="Username"
 					/>
-				</label>
-				<label>
 					<input
 						type="text"
 						value={profilePic}
 						onChange={(e) => setProfilePic(e.target.value)}
 						placeholder="Profile pic "
 					/>
-				</label>
-				<label>
 					<input
 						type="password"
 						value={password}
@@ -103,8 +91,6 @@ function SignupFormModal() {
 						required
 						placeholder="Password"
 					/>
-				</label>
-				<label>
 					<input
 						type="password"
 						value={confirmPassword}
@@ -112,9 +98,8 @@ function SignupFormModal() {
 						required
 						placeholder="Confirm password"
 					/>
-				</label>
+
 				<button className="signup-button" type="submit">Sign Up</button>
-				</div>
 			</form>
 			</div>
 		</>

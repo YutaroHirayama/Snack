@@ -84,7 +84,7 @@ const EditChannelModal = ({ channel, socket }) => {
       <div className="edit-channel-modal">
         <form onSubmit={formSubmit}>
           <div id="edit-channel-modal-info">
-            <h3>Update Channel</h3>
+            <h3 id="update-channel-title">Update Channel</h3>
             <ul>
               {errors.map((error, idx) => (
                 <li className="form-errors" key={idx}>
@@ -94,7 +94,7 @@ const EditChannelModal = ({ channel, socket }) => {
             </ul>
             {/* <div id="channel-info-members-modal-container"> */}
             <div className="channel-edit-name-descr">
-              <label>
+              <label className="edit-channel-label">
                 Channel Name
               </label>
               <input
@@ -104,7 +104,7 @@ const EditChannelModal = ({ channel, socket }) => {
                 onChange={(e) => setChannelName(e.target.value)}
                 required
               />
-              <label>
+              <label className="edit-channel-label">
                 Channel Description
               </label>
               <textarea
