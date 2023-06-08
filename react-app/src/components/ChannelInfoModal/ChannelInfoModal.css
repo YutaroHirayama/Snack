@@ -3,11 +3,13 @@
     /* width: fit-content; */
     /* padding: 85px; */
 }
+
 .edit-channel-label {
     color: whitesmoke;
     align-self: flex-start;
     margin-left: 45px;
 }
+
 h3 {
     color: whitesmoke;
     margin-left: 15px;
@@ -23,10 +25,12 @@ h3 {
     /* background-color: black; */
     /* color: white; */
 }
+
 #update-channel-title {
     margin-top: 10px;
 
 }
+
 #edit-channel-all-users {
     height: 330px;
     overflow: scroll;
@@ -35,6 +39,7 @@ h3 {
     flex-direction: column;
     gap: 5px;
 }
+
 #edit-channel-all-users::-webkit-scrollbar {
     width: 12px;
 }
@@ -95,11 +100,12 @@ h3 {
 .delete-edit-buttons button {
     background-color: rgb(28, 29, 30);
     padding: 5px 50px;
-    color: aliceblue;
+    color: whitesmoke;
     cursor: pointer;
     font-weight: bold;
     border-radius: 5px;
 }
+
 
 .delete-edit-buttons button:hover {
     background-color: brown;
@@ -223,6 +229,9 @@ h3 {
 }
 
 .edit-channel-add-member button {
+    background-color: rgb(28, 29, 30);
+    padding: 5px 50px;
+    color: whitesmoke;
     padding: 5px 20px;
     border-radius: 5px;
     cursor: pointer;
@@ -236,12 +245,19 @@ h3 {
 }
 
 .submit-edit-channel {
-    font-weight: bold;
-    margin: 15px 0px;
+    background-color: rgb(28, 29, 30);
+    padding: 5px 50px;
+    color: whitesmoke;
+
+    padding: 5px 10px;
     width: 80%;
-    padding: 10px 0;
+    font-weight: bold;
     font-size: 20px;
-    border-radius: 10px;
+    text-align: center;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .submit-edit-channel:hover {

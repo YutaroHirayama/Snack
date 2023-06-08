@@ -14,64 +14,90 @@
     color: aliceblue;
 }
 
-.add-user-to-channel-button{
+.add-user-to-channel-button {
     padding: 5px 15px;
     margin-top: 5px;
     margin-bottom: 5px;
     font-weight: bold;
     border-radius: 5px;
 }
-.add-user-to-channel-button:hover{
-    background-color:rgb(221, 37, 37);
+
+.add-user-to-channel-button:hover {
+    background-color: rgb(221, 37, 37);
     color: aliceblue;
     cursor: pointer;
 }
 
-.create-dm-add-user{
+.create-dm-add-user {
     color: whitesmoke;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-left: 5px;
-        margin-right: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 5px;
+    margin-right: 5px;
 }
-.create-dm-add-user:hover{
+
+.create-dm-add-user:hover {
     background-color: rgb(96, 96, 96);
-        border-radius: 5px;
-}
-.add-user-to-dm-button{
-    padding: 5px 15px;
-        margin-top: 5px;
-        margin-bottom: 5px;
-        font-weight: bold;
-        border-radius: 5px;
-        margin-right: 5px;
-}
-.add-user-to-dm-button:hover{
-    background-color:rgb(221, 37, 37);
-    color: aliceblue;
-    cursor: pointer;
-}
-.create-dm-submit{
-    padding: 10px 20px;
-    width: 80%;
-    font-weight: bold;
-    font-size: 20px;
-    text-align: center;
     border-radius: 5px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+}
+
+.add-user-to-dm-button {
+    background-color: rgb(28, 29, 30);
+    padding: 5px 50px;
+    color: whitesmoke;
+    padding: 5px 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+.button-disabled {
+    background-color: rgb(84, 84, 84);
+    padding: 5px 50px;
+    color: whitesmoke;
+    padding: 5px 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.add-user-to-dm-button:hover {
+    background-color: rgb(221, 37, 37);
+    color: aliceblue;
     cursor: pointer;
 }
-.create-dm-submit:hover{
-    background-color:rgb(221, 37, 37);
+
+.create-dm-submit {
+    background-color: rgb(28, 29, 30);
+        padding: 5px 50px;
+        color: whitesmoke;
+
+        padding: 5px 10px;
+        width: 80%;
+        font-weight: bold;
+        font-size: 20px;
+        text-align: center;
+        border-radius: 5px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        cursor: pointer;
+}
+
+.create-dm-submit:hover {
+    background-color: rgb(221, 37, 37);
     color: aliceblue;
 }
-.create-dm-submit-div{
+
+.create-dm-submit-div {
     border-top: 1px solid rgb(203, 203, 203, 0.4);
-        display: flex;
-        justify-content: center;
+    display: flex;
+    justify-content: center;
 }
+
 .create-dm-all-users {
     height: 400px;
     overflow: scroll;
@@ -79,6 +105,7 @@
     display: flex;
     flex-direction: column;
 }
+
 .create-dm-all-users::-webkit-scrollbar {
     width: 12px;
 }
@@ -93,7 +120,7 @@
     border: none
 }
 
-.create-dm-img-container{
+.create-dm-img-container {
     display: flex;
     align-items: center;
 }

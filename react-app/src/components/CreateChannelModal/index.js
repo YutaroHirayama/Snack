@@ -101,7 +101,7 @@ const CreateChannelModal = ({ sessionUser, socket }) => {
                 </div>
                 <div>
                   <button
-                    className="add-user-to-channel-button"
+                    className={!channelUsers.includes(user.id) ?"add-user-to-channel-button" : "button-disabled"}
                     disabled={channelUsers.includes(user.id)}
                     onClick={() => addUser(user.id)}
                   >

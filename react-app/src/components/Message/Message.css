@@ -69,6 +69,7 @@
     border-radius: 5px;
     padding: 1px
 } */
+
 .single-message-header-button {
     font-size: 11px;
     border: 1px transparent;
@@ -98,15 +99,16 @@
 }
 
 .edit-message-form-modal textarea {
-    color:#272627;
+    color: whitesmoke;
 }
 
 .edit-message-form-modal button {
-    padding: 10px 30px;
-    width: 95%;
-    border-radius: 10px;
-    font-size: 20px;
+    background-color: rgb(28, 29, 30);
+    padding: 5px 50px;
+    color: whitesmoke;
     cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
 }
 
 .edit-message-form-modal button:hover {
@@ -114,13 +116,14 @@
     color: aliceblue;
 }
 
-.edit-messsage-send-button {
+.edit-message-send-button {
     display: flex;
     justify-content: center;
 
 }
 
 .message-textarea {
+    border-radius: 5px;
     resize: none;
     background-color: transparent;
 }
@@ -128,6 +131,7 @@
 .reaction-container {
     padding: 3px 0;
 }
+
 .send-bttn {
     position: relative;
     right: 70px;
@@ -137,7 +141,7 @@
 .delete-message-modal {
     width: 400px;
     height: 200px;
-    background-color: rgb(49, 48, 48);
+    /* background-color: rgb(49, 48, 48); */
     color: aliceblue;
     text-align: center;
 }
@@ -155,10 +159,12 @@
 }
 
 .yes-button-delete {
-    margin-bottom: 15px;
-    padding: 10px 0;
-    font-size: 20px;
+    background-color: rgb(28, 29, 30);
+    padding: 5px 50px;
+    color: whitesmoke;
     cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
 }
 
 .yes-button-delete:hover {
@@ -166,9 +172,12 @@
 }
 
 .no-button-delete {
-    padding: 10px 0;
-    font-size: 20px;
+    background-color: rgb(28, 29, 30);
+    padding: 5px 50px;
+    color: whitesmoke;
     cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
 }
 
 .no-button-delete:hover {
@@ -197,10 +206,12 @@
 .message-replies-button:hover .message-reply-hidden {
     visibility: visible
 }
+
 .message-replies-button:hover {
     border: 1px #939596 solid;
     background-color: #1d1c1d;
 }
+
 .message-reply-view-thread {
     color: #939596;
     padding-left: 10px;
