@@ -11,6 +11,7 @@ import HomePage from "./components/HomePage";
 import { Redirect } from "react-router-dom";
 import ThreadsPage from "./components/ThreadsPage";
 import Channels from "./components/Channels";
+import PageNotFound from "./components/PageNotFound";
 import { io } from "socket.io-client";
 import "./index.css";
 
@@ -63,6 +64,9 @@ function App() {
           <Switch>
             <Route exact path="/">
               {!sessionUser && <LandingPage isLoaded={isLoaded} />}
+            </Route>
+            <Route path="*">
+                  <PageNotFound />
             </Route>
           </Switch>
         </>
