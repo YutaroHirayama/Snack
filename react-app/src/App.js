@@ -13,6 +13,7 @@ import ThreadsPage from "./components/ThreadsPage";
 import Channels from "./components/Channels";
 import { io } from "socket.io-client";
 import "./index.css";
+import AboutPage from "./components/AboutPage";
 
 let socket;
 
@@ -51,6 +52,10 @@ function App() {
               <Route path="/channel/:channelId">
                 {!sessionUser && <Redirect to="/" />}
                 <MessagePage user={sessionUser} />
+              </Route>
+              <Route path="/aboutus">
+                {!sessionUser && <Redirect to="/" />}
+                <AboutPage />
               </Route>
             </div>
             <div className="threads-container_">
