@@ -1,7 +1,9 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField
 from wtforms.validators import DataRequired, Email, ValidationError, Length
 from app.models import User
+from ..api.aws_helpers import ALLOWED_EXTENSIONS
 
 def user_exists(form, field):
     # Checking if user exists
@@ -18,11 +20,12 @@ def username_exists(form, field):
     if user:
         raise ValidationError('Username is already in use.')
 
-def profile_check(form, field):
-    profilePic = field.data
-    if profilePic:
-        if(not profilePic.endswith(('.png','.jpg','.jpeg'))):
-            raise ValidationError('Profile picture URL must end in .png, .jpg, or .jpeg')
+# old validator for url strings validation
+# def profile_check(form, field):
+#     profilePic = field.data
+#     if profilePic:
+#         if(not profilePic.endswith(('.png','.jpg','.jpeg'))):
+#             raise ValidationError('Profile picture URL must end in .png, .jpg, or .jpeg')
 
 class SignUpForm(FlaskForm):
     username = StringField(
@@ -31,4 +34,5 @@ class SignUpForm(FlaskForm):
     password = StringField('password', validators=[DataRequired(), Length(min=5, max=20, message='Password must be between 5 and 20 characters.')])
     firstName = StringField('firstName', validators=[DataRequired(), Length(min=1, max=50, message='First name must be less than 50 characters.')])
     lastName = StringField('lastName', validators=[DataRequired(), Length(min=1, max=50, message='Last name must be less than 50 characters.')])
-    profilePic = StringField('profilePic', validators=[profile_check])
+    # profilePic = StringField('profilePic', validators=[profile_check])
+    profilePic = FileField('Image File', validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
