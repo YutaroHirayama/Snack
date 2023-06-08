@@ -62,8 +62,8 @@
     /* padding-top: 10px;
     padding-bottom: 10px; */
     border-radius: 5px;
-    background-color: whitesmoke;
-    color: black;
+    background-color: rgb(28, 29, 30);
+    color: whitesmoke;
     height: 40px;
     font-size: 20px;
     font-weight: bold;
@@ -74,6 +74,6 @@
 
 .signup-button:hover {
 
-    background-color: black;
-    color: aliceblue;
+    background-color: brown;
+    
 }

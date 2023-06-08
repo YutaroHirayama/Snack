@@ -1,5 +1,5 @@
 .login-form-modal {
-    width: 300px;
+    width: 330px;
     height: auto;
     /* background-color: aliceblue; */
     display: flex;
@@ -39,8 +39,8 @@
     /* padding-top: 10px;
         padding-bottom: 10px; */
     border-radius: 5px;
-    background-color: whitesmoke;
-    color: black;
+    background-color: rgb(28, 29, 30);
+    color: whitesmoke;
     height: 40px;
     font-size: 20px;
     font-weight: bold;
@@ -49,21 +49,24 @@
 }
 
 .login-button:hover {
-    background-color: black;
-    color: aliceblue;
+    background-color: brown;
+
 }
 
 .demo-user-buttons {
+    width: 100%;
     margin-top: 10px;
     display: flex;
-    justify-content: space-between;
-    gap: 10px;
+    justify-content: space-around;
+    gap: 15px;
 }
 
 .demo-user-button {
+    background-color: rgb(28, 29, 30);
+    color: whitesmoke;
     border-radius: 5px;
     padding: 10px;
-    width: 50%;
+    width: 100%;
     font-weight: bold;
     cursor: pointer;
     margin-bottom: 15px;
