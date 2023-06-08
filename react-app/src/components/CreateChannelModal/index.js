@@ -58,7 +58,7 @@ const CreateChannelModal = ({ sessionUser, socket }) => {
     <>
       <div className="create-channel-modal">
         <form onSubmit={formSubmit}>
-          <h3>Create Channel</h3>
+          <h3 id="create-channel-title">Create Channel</h3>
           <ul>
             {errors.map((error, idx) => (
               <li className='form-errors' key={idx}>{error}</li>

@@ -3,7 +3,11 @@
     /* width: fit-content; */
     /* padding: 85px; */
 }
-
+.edit-channel-label {
+    color: whitesmoke;
+    align-self: flex-start;
+    margin-left: 45px;
+}
 h3 {
     color: whitesmoke;
     margin-left: 15px;
@@ -19,11 +23,30 @@ h3 {
     /* background-color: black; */
     /* color: white; */
 }
+#update-channel-title {
+    margin-top: 10px;
 
+}
 #edit-channel-all-users {
-    max-height: 300px;
-    height: auto;
+    height: 330px;
     overflow: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+#edit-channel-all-users::-webkit-scrollbar {
+    width: 12px;
+}
+
+#edit-channel-all-users::-webkit-scrollbar-track {
+    background: transparent
+}
+
+#edit-channel-all-users::-webkit-scrollbar-thumb {
+    background-color: #2b2e36;
+    border-radius: 10px;
+    border: none
 }
 
 .form-errors {
@@ -134,8 +157,8 @@ h3 {
 
 .edit-channel-modal {
     color: #1d1c1d;
-    width: 500px;
-    height: 750px;
+    width: 450px;
+    /* height: 750px; */
     font-weight: bold;
 
 }
@@ -148,7 +171,7 @@ h3 {
 }
 
 .edit-channel-modal h3 {
-    background-color: brown;
+
     margin: 0;
     text-align: center;
     padding: 10px 0px;
@@ -168,28 +191,40 @@ h3 {
 }
 
 .channel-edit-name-descr input {
-    margin-left: 15px;
-    font-weight: bold;
-    font-size: 20px;
+    color: whitesmoke;
+    background-color: #141414;
+    border-radius: 5px;
+    padding: 10px;
     width: 80%;
 
 }
 
 .channel-edit-name-descr textarea {
+    color: whitesmoke;
+    background-color: #141414;
+    border-radius: 5px;
+    padding: 10px;
     resize: none;
-    margin-left: 15px;
-    font-weight: bold;
-    font-size: 20px;
     width: 80%;
 }
 
 .edit-channel-add-member {
+    color: whitesmoke;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.edit-channel-add-member div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .edit-channel-add-member button {
-    padding: 5px 30px;
+    padding: 5px 20px;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
@@ -203,7 +238,7 @@ h3 {
 
 .submit-edit-channel {
     font-weight: bold;
-    margin-bottom: 40px;
+    margin: 15px 0px;
     width: 80%;
     padding: 10px 0;
     font-size: 20px;
@@ -286,6 +321,7 @@ h3 {
 #allusers-channelusers-tab {
     height: 50px;
     margin-bottom: 12px;
+    color: whitesmoke;
 }
 
 .tab-open {
