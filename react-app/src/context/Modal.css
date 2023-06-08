@@ -19,8 +19,10 @@
 }
 
 #modal-content {
+
+  border: 1px rgb(250, 250, 250, 0.2) solid;
   position: absolute;
-  background-color: white;
-  border-radius: 5px;
+  background-color: #1d1c1d;;
+  border-radius: 10px;
   max-height: 80%;
 }
