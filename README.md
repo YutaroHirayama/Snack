@@ -140,10 +140,41 @@ Logged-in users can:
 ### -------------
 * URL: `/api/channels`
 
+* METHOD: `GET`
+
+```
+    This route gets all channels that are in the db
+
+```
+
+### -------------
+* URL: `/api/channels/<int:id>`
+
+* METHOD: `GET`
+
+```
+    This route get one channel by channel_id
+
+```
+
+### -------------
+* URL: `/api/channels`
+
 * METHOD: `POST`
 
 ```
     This route creates a channel for the logged-in user
+
+```
+
+### -------------
+* URL: `/api/channels/<int:id>`
+
+* METHOD: `PUT`
+
+```
+    This route updates the name and description of the channel specified by id
+    for the logged-in user if that user is the owner
 
 ```
 
@@ -183,6 +214,16 @@ Logged-in users can:
 ### Messages
 
 ### -------------
+* URL: `/api/messages/channels/<int:channelId>`
+
+* METHOD: `GET`
+
+```
+    This route gets all messages in the specified channel
+    
+```
+
+### -------------
 * URL: `/api/messages/<int:messageId>`
 
 * METHOD: `GET`
@@ -199,6 +240,26 @@ Logged-in users can:
 
 ```
     This route creates messages in the specified channel
+
+```
+
+### -------------
+* URL: `/api/messages/<int:messageId>`
+
+* METHOD: `PUT`
+
+```
+    This route updates the specified message
+
+```
+
+### -------------
+* URL: `/api/messages/<int:messageId>`
+
+* METHOD: `DELETE`
+
+```
+    This route deletes the message specified by id if the logged-in user is the message creator.
 
 ```
 
