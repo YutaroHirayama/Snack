@@ -44,13 +44,13 @@ const CreateChannelModal = ({ sessionUser, socket }) => {
       addUsers: channelUsers,
     };
 
-  const res = await dispatch(createChannelThunk(newChannel))
-    if(res?.errors) {
+    const res = await dispatch(createChannelThunk(newChannel))
+    if (res?.errors) {
       setErrors(res.errors)
     } else {
-    socket.emit('chat', "created channel")
-    closeModal()
-    history.push(`/channel/${res}`)
+      socket.emit('chat', "created channel")
+      closeModal()
+      history.push(`/channel/${res}`)
     }
   };
 
@@ -96,7 +96,7 @@ const CreateChannelModal = ({ sessionUser, socket }) => {
             {users.map((user) => (
               <div className="create-channel-add-user">
                 <div className="create-channel-img-container">
-                  <div><img className="create-channel-user-img" src={user.profilePic}/></div>
+                  <div><img className="create-channel-user-img" src={user.profilePic} /></div>
                   {user.firstName} {user.lastName}
                 </div>
                 <div>
