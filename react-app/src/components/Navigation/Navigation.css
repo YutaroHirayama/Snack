@@ -48,3 +48,9 @@
 .site-icon-link {
   padding: 20px;
 }
+
+.about-link{
+  color: whitesmoke;
+  text-decoration: none;
+  font-size: 14px;
+}
