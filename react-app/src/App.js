@@ -15,6 +15,7 @@ import PageNotFound from "./components/PageNotFound";
 import { io } from "socket.io-client";
 import "./index.css";
 import AboutPage from "./components/AboutPage";
+import Welcome from "./components/Welcome";
 
 let socket;
 
@@ -48,27 +49,23 @@ function App() {
               </Route>
             </div>
 
-
-            <div className='message-page-container'>
+            <div className="message-page-container">
               <Switch>
                 <Route path="/channel/:channelId">
                   {!sessionUser && <Redirect to="/" />}
                   <MessagePage user={sessionUser} />
                 </Route>
-                <Route exact path='/'>
-                {sessionUser &&
-                  <h2>Welcome</h2>
-                }
+                <Route exact path="/">
+                  {sessionUser && <Welcome />}
                 </Route>
-                <Route path='*'>
+                <Route path="/aboutus">
+                  {!sessionUser && <Redirect to="/" />}
+                  <AboutPage />
+                </Route>
+                <Route path="*">
                   <PageNotFound />
                 </Route>
               </Switch>
-              <Route path="/aboutus">
-                {!sessionUser && <Redirect to="/" />}
-                <AboutPage />
-              </Route>
-
             </div>
             <div className="threads-container_">
               <Route path="/channel/:channelId/message/:messageId">
