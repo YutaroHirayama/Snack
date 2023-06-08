@@ -42,12 +42,15 @@ section {
 
 section h1 {
     font-size: 50px;
+    color: rgb(235, 235, 235);
+    text-shadow: 3px 3px 3px rgb(171, 81, 81);
 }
 
 .hero-h2 {
     font-size: 50px;
-    color: sandybrown;
+    color: rgb(171, 81, 81);
     margin-bottom: 20px;
+    text-shadow: 1px 1px 1px rgb(0, 0, 0);
 }
 
 footer {
@@ -59,7 +62,8 @@ footer {
 
 /* Hero section styles */
 #hero {
-    background-image: url("./images/slack-back.png");
+    background-position: center;
+    background-image: url("./images/background.jpg");
     background-size: cover;
     color: #fff;
     text-align: center;

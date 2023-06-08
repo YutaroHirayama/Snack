@@ -50,14 +50,25 @@ function App() {
 
 
             <div className='message-page-container'>
-              <Route path="/channel/:channelId">
-                {!sessionUser && <Redirect to="/" />}
-                <MessagePage user={sessionUser} />
-              </Route>
+              <Switch>
+                <Route path="/channel/:channelId">
+                  {!sessionUser && <Redirect to="/" />}
+                  <MessagePage user={sessionUser} />
+                </Route>
+                <Route exact path='/'>
+                {sessionUser &&
+                  <h2>Welcome</h2>
+                }
+                </Route>
+                <Route path='*'>
+                  <PageNotFound />
+                </Route>
+              </Switch>
               <Route path="/aboutus">
                 {!sessionUser && <Redirect to="/" />}
                 <AboutPage />
               </Route>
+
             </div>
             <div className="threads-container_">
               <Route path="/channel/:channelId/message/:messageId">
@@ -69,9 +80,6 @@ function App() {
           <Switch>
             <Route exact path="/">
               {!sessionUser && <LandingPage isLoaded={isLoaded} />}
-            </Route>
-            <Route path="*">
-                  <PageNotFound />
             </Route>
           </Switch>
         </>

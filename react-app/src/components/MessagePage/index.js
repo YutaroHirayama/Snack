@@ -9,7 +9,6 @@ import { fetchChannelThunk } from "../../store/channels";
 import { useParams } from 'react-router-dom';
 import OpenModalButton from "../OpenModalButton";
 import ChannelInfoModal from "../ChannelInfoModal";
-import ThreadsPage from "../ThreadsPage";
 import { Redirect } from "react-router-dom";
 
 
