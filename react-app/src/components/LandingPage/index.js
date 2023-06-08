@@ -28,22 +28,24 @@ const LandingPage = ({ isLoaded }) => {
                             Snack is a messaging and collaboration platform that brings teams
                             together.
                         </p>
-                        <div>
-                            {/* <Link to={"/signup"}>Sign Up</Link> */}
-                            <OpenModalButton
-                                buttonText="Sign Up"
-                                className="btn"
-                                modalComponent={<SignupFormModal />}
-                            />
-                        </div >
-                        <div>
-                            {/* <Link to={"/login"}>Log In</Link> */}
-                            <OpenModalButton
-                                buttonText="Log In"
-                                className="btn"
-                                modalComponent={<LoginFormModal />}
-                            />
-                        </div >
+                        <div className='landing-page-login-buttons'>
+                            <div>
+                                {/* <Link to={"/signup"}>Sign Up</Link> */}
+                                <OpenModalButton
+                                    buttonText="Sign Up"
+                                    className="btn"
+                                    modalComponent={<SignupFormModal />}
+                                />
+                            </div >
+                            <div>
+                                {/* <Link to={"/login"}>Log In</Link> */}
+                                <OpenModalButton
+                                    buttonText="Log In"
+                                    className="btn"
+                                    modalComponent={<LoginFormModal />}
+                                />
+                            </div >
+                        </div>
                     </div >
                 </section >
                 <section id=" about">
