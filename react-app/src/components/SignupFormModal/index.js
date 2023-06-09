@@ -10,21 +10,42 @@ function SignupFormModal() {
 	const [username, setUsername] = useState("");
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
-	const [profilePic, setProfilePic] = useState("");
+	const [profilePic, setProfilePic] = useState(null);
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 
+	const handleFileChange = e => {
+		setProfilePic(e.target.files[0]);
+	}
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (password === confirmPassword) {
 			let data;
-			if(profilePic.length === 0) {
-				data = await dispatch(signUp(username, email, password, firstName, lastName))
-			} else {
-				data = await dispatch(signUp(username, email, password, firstName, lastName, profilePic));
+
+			const formData = new FormData();
+
+			formData.append("username", username);
+			formData.append("email", email);
+			formData.append("password", password);
+			formData.append("firstName", firstName);
+			formData.append("lastName", lastName);
+
+			if (profilePic) {
+
+				if (profilePic.size > 1024 * 1024) {
+					setErrors([
+						"The profile image must be less than 1 MB",
+					]);
+					return;
+				}
+				formData.append("profilePic", profilePic);
 			}
+
+			data = await dispatch(signUp(formData));
+
 			if (data) {
 
 				setErrors(data);
@@ -40,15 +61,15 @@ function SignupFormModal() {
 
 	return (
 		<>
-		<div className="signup-form-modal">
-			<h1>Sign Up</h1>
-			<form onSubmit={handleSubmit} id="sign-up-form">
+			<div className="signup-form-modal">
+				<h1>Sign Up</h1>
+				<form onSubmit={handleSubmit} id="sign-up-form" encType="multipart/form-data">
 
-				<ul>
-					{errors.map((error, idx) => (
-						<li className='signup-form-error' key={idx}>{error}</li>
-					))}
-				</ul>
+					<ul>
+						{errors.map((error, idx) => (
+							<li className='signup-form-error' key={idx}>{error}</li>
+						))}
+					</ul>
 
 					<input
 						type="text"
@@ -65,6 +86,7 @@ function SignupFormModal() {
 						placeholder="Last name"
 					/>
 					<input
+						name="email"
 						type="text"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
@@ -72,6 +94,7 @@ function SignupFormModal() {
 						placeholder="Email"
 					/>
 					<input
+						name="username"
 						type="text"
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
@@ -79,10 +102,9 @@ function SignupFormModal() {
 						placeholder="Username"
 					/>
 					<input
-						type="text"
-						value={profilePic}
-						onChange={(e) => setProfilePic(e.target.value)}
-						placeholder="Profile pic "
+						type="file"
+						accept=".png,.jpg,.jpeg"
+						onChange={handleFileChange}
 					/>
 					<input
 						type="password"
@@ -99,8 +121,8 @@ function SignupFormModal() {
 						placeholder="Confirm password"
 					/>
 
-				<button className="signup-button" type="submit">Sign Up</button>
-			</form>
+					<button className="signup-button" type="submit">Sign Up</button>
+				</form>
 			</div>
 		</>
 	);
