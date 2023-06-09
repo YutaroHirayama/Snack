@@ -34,10 +34,17 @@ function SignupFormModal() {
 			formData.append("lastName", lastName);
 
 			if (profilePic) {
+
+				if (profilePic.size > 1024 * 1024) {
+					setErrors([
+						"The profile image must be less than 1 MB",
+					]);
+					return;
+				}
 				formData.append("profilePic", profilePic);
 			}
 
-			data = await dispatch(signUp(formData))//username, email, password, firstName, lastName, profilePic));
+			data = await dispatch(signUp(formData));
 
 			if (data) {
 
