@@ -14,6 +14,7 @@ function SignupFormModal() {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [errors, setErrors] = useState([]);
+	const [submitLoading, setSubmitLoading] = useState(false);
 	const { closeModal } = useModal();
 
 	const handleFileChange = e => {
@@ -22,6 +23,8 @@ function SignupFormModal() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setSubmitLoading(true);
+
 		if (password === confirmPassword) {
 			let data;
 
@@ -39,6 +42,7 @@ function SignupFormModal() {
 					setErrors([
 						"The profile image must be less than 1 MB",
 					]);
+					setSubmitLoading(false);
 					return;
 				}
 				formData.append("profilePic", profilePic);
@@ -49,6 +53,7 @@ function SignupFormModal() {
 			if (data) {
 
 				setErrors(data);
+				setSubmitLoading(false);
 			} else {
 				closeModal();
 			}
@@ -56,6 +61,7 @@ function SignupFormModal() {
 			setErrors([
 				"Confirm Password field must be the same as the Password field",
 			]);
+			setSubmitLoading(false);
 		}
 	};
 
@@ -121,7 +127,7 @@ function SignupFormModal() {
 						placeholder="Confirm password"
 					/>
 
-					<button className="signup-button" type="submit">Sign Up</button>
+					<button disabled={submitLoading} className="signup-button" type="submit">Sign Up</button>
 				</form>
 			</div>
 		</>
