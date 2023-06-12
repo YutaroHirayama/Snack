@@ -84,6 +84,7 @@ def sign_up():
                 print()
                 print('--'*30)
                 print()
+                print('upload --> ', upload)
                 print("BEFORE return upload, 400")
                 print()
                 print('--'*30)
