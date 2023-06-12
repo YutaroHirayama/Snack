@@ -17,14 +17,14 @@ import "./index.css";
 import AboutPage from "./components/AboutPage";
 import Welcome from "./components/Welcome";
 
-let socket;
+// let socket;
 
 function App() {
   const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
-    socket = io();
+    // socket = io();
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
@@ -42,7 +42,7 @@ function App() {
                       channels={sessionUser.channels}
                       user={sessionUser}
                       isLoaded={isLoaded}
-                      socket={socket}
+
                     />
                   </>
                 )}

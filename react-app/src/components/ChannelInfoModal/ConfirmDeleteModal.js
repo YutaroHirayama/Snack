@@ -11,7 +11,7 @@ const ConfirmDeleteModal = ({ channelId, socket }) => {
 
   const confirmDelete = async () => {
     await dispatch(deleteChannelThunk(channelId));
-    socket.emit("chat", "deleted channel");
+    // socket.emit("chat", "deleted channel");
     closeModal();
     history.push("/");
   };

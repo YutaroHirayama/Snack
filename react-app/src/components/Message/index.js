@@ -12,7 +12,7 @@ import { useModal } from "../../context/Modal";
 import ReactionFormModal from "../Reaction/ReactionFormModal";
 import { getTime } from "../ThreadsPage";
 
-const Message = ({ message, user, socket }) => {
+const Message = ({ message, user }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     let location = useLocation()
@@ -66,12 +66,12 @@ const Message = ({ message, user, socket }) => {
                         {message.user.id === user.id && <OpenModalButton
                             buttonText={"Edit"}
                             className='single-message-header-button'
-                            modalComponent={<EditMessageModal message={message} socket={socket} />}
+                            modalComponent={<EditMessageModal message={message} />}
                         />}
                         {message.user.id === user.id && <OpenModalButton
                             buttonText={"Delete"}
                             className='single-message-header-button'
-                            modalComponent={<DeleteMessageModal message={message} socket={socket} />}
+                            modalComponent={<DeleteMessageModal message={message} />}
                         />}
                         <button
                             className='single-message-header-button'
@@ -80,24 +80,24 @@ const Message = ({ message, user, socket }) => {
                         <OpenModalButton
                             buttonText="Add reaction"
                             className='single-message-header-button'
-                            modalComponent={<ReactionFormModal message={message} socket={socket} />}
+                            modalComponent={<ReactionFormModal message={message} />}
                         />
                     </div>
                 </div>
                 <div className="users-message">{message.message}</div>
                 <div className='reaction-container'>
                     {reactions.length > 0 && reactions.map(r =>
-                        <Reaction reaction={r[0]} count={r[1]} message={message} socket={socket} />
+                        <Reaction reaction={r[0]} count={r[1]} message={message} />
                     )}
                 </div>
                 {message.threads.length > 0 && (
-                <button
-                    className='message-replies-button'
-                    onClick={() => loadReplies(message)}>
-                    {message.threads.length > 1 ? `${message.threads.length} replies ` : `${message.threads.length} reply `}
-                    <span className='message-reply-hidden message-reply-view-thread'>    View Thread</span>
-                    <span className='message-reply-hidden message-reply-caret'>{'>'}</span>
-                </button>
+                    <button
+                        className='message-replies-button'
+                        onClick={() => loadReplies(message)}>
+                        {message.threads.length > 1 ? `${message.threads.length} replies ` : `${message.threads.length} reply `}
+                        <span className='message-reply-hidden message-reply-view-thread'>    View Thread</span>
+                        <span className='message-reply-hidden message-reply-caret'>{'>'}</span>
+                    </button>
                 )}
             </div>
         </div>

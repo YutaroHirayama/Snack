@@ -8,7 +8,7 @@ from .models import db, User
 from .api import user_routes, auth_routes, channel_routes, message_routes, thread_routes, reaction_routes
 from .seeds import seed_commands
 from .config import Config
-from .socket_io import socketio
+# from .socket_io import socketio
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
@@ -37,7 +37,7 @@ db.init_app(app)
 Migrate(app, db)
 
 #initialize app with socket
-socketio.init_app(app)
+# socketio.init_app(app)
 
 # Application Security
 CORS(app)
@@ -99,5 +99,5 @@ def not_found(e):
     return app.send_static_file('index.html')
 
 # run socket
-if __name__ == '__main__':
-    socketio.run(app)
+# if __name__ == '__main__':
+#     socketio.run(app)

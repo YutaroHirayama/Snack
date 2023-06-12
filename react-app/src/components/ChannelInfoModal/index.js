@@ -5,7 +5,7 @@ import OpenModalButton from "../OpenModalButton";
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
 import EditChannelModal from "./EditChannelModal";
 
-const ChannelInfoModal = ({ channel, socket }) => {
+const ChannelInfoModal = ({ channel }) => {
   const sessionUser = useSelector((state) => state.session.user);
   const [owner, setOwner] = useState([]);
   const [channelUsers, setChannelUsers] = useState([]);
@@ -40,13 +40,13 @@ const ChannelInfoModal = ({ channel, socket }) => {
               <OpenModalButton
                 buttonText={"Edit"}
                 modalComponent={
-                  <EditChannelModal channel={channel} socket={socket} />
+                  <EditChannelModal channel={channel} />
                 }
               />
               <OpenModalButton
                 buttonText={"Delete"}
                 modalComponent={
-                  <ConfirmDeleteModal channelId={channel.id} socket={socket} />
+                  <ConfirmDeleteModal channelId={channel.id} />
                 }
               />
             </>
@@ -66,7 +66,7 @@ const ChannelInfoModal = ({ channel, socket }) => {
       </div>
     </div>
   ) : (
-    <div  id="channel-info-modal-container">
+    <div id="channel-info-modal-container">
       <div className="channel-info-members-modal">
         <h2 id="dm-members-title">Direct Message Members</h2>
         {channel.members.map((user) => (

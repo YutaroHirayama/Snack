@@ -4,7 +4,7 @@ import { fetchMessagesThunk } from "../../store/messages";
 import Message from "../Message";
 import MessageInput from "./MessageInput";
 import "./MessagePage.css";
-import { io } from 'socket.io-client';
+// import { io } from 'socket.io-client';
 import { fetchChannelThunk } from "../../store/channels";
 import { useParams } from 'react-router-dom';
 import OpenModalButton from "../OpenModalButton";
@@ -13,7 +13,7 @@ import { Redirect } from "react-router-dom";
 
 
 
-let socket;
+// let socket;
 const MessagePage = ({ user }) => {
 
     const channel = useSelector(state => state.channels?.currentChannel?.channel);
@@ -34,18 +34,18 @@ const MessagePage = ({ user }) => {
 
     let newChannel;
     useEffect(() => {
-        socket = io();
+        // socket = io();
 
         dispatch(fetchChannelThunk(parseInt(channelId)))
-        socket.on("chat", (chat) => {
+        // newChannel = dispatch(fetchChannelThunk(channelId))
+        // socket.on("chat", (chat) => {
 
-            newChannel = dispatch(fetchChannelThunk(channelId))
 
-        })
-        return (() => {
+        // })
+        // return (() => {
 
-            socket.disconnect()
-        })
+        //     socket.disconnect()
+        // })
 
     }, [channelId])
 
@@ -72,17 +72,17 @@ const MessagePage = ({ user }) => {
                             .join(", ")
                     }
                     // onItemClick={closeMenu}
-                    modalComponent={<ChannelInfoModal channel={channel} socket={socket} />}
+                    modalComponent={<ChannelInfoModal channel={channel} />}
                 />
             </div>
             <div className='messages-container'>
                 <div id="messages-container-parent">
-                    {messages && messages.map(m => <Message key={m.id} message={m} user={user} socket={socket} />)}
+                    {messages && messages.map(m => <Message key={m.id} message={m} user={user} />)}
                 </div>
             </div>
 
             <div className='message-input-container'>
-                <MessageInput user={user} channelId={channel.id} socket={socket} type='message' />
+                <MessageInput user={user} channelId={channel.id} type='message' />
             </div>
         </>
 

@@ -5,7 +5,7 @@ import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
 import "./CreateDirectMessageModal.css";
 
-const CreateDirectMessageModal = ({ channels, sessionUser, socket }) => {
+const CreateDirectMessageModal = ({ channels, sessionUser }) => {
   const [users, setUsers] = useState([]);
 
   const [channelUsers, setChannelUsers] = useState([]);
@@ -57,7 +57,7 @@ const CreateDirectMessageModal = ({ channels, sessionUser, socket }) => {
       return;
     }
     const res = await dispatch(createChannelThunk(newChannel));
-    socket.emit("chat", "created dm");
+    // socket.emit("chat", "created dm");
     closeModal();
 
     history.push(`/channel/${res}`);
@@ -83,11 +83,11 @@ const CreateDirectMessageModal = ({ channels, sessionUser, socket }) => {
             {users.map((user) => (
               <div className="create-dm-add-user">
                 <div className="create-dm-img-container">
-                  <div><img src={user.profilePic}/></div>
+                  <div><img src={user.profilePic} /></div>
                   {user.firstName} {user.lastName}
                 </div>
                 <button
-                  className={!channelUsers.includes(user.id) ?"add-user-to-dm-button" : "button-disabled"}
+                  className={!channelUsers.includes(user.id) ? "add-user-to-dm-button" : "button-disabled"}
                   disabled={channelUsers.includes(user.id)}
                   onClick={() => addUser(user.id)}
                 >

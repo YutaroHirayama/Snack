@@ -4,7 +4,7 @@ import { addReactionThunk, removeReactionThunk } from "../../store/channels";
 import { useModal } from "../../context/Modal";
 import "./ReactionFormModal.css"
 
-const Reaction = ({ reaction, count, message, socket }) => {
+const Reaction = ({ reaction, count, message }) => {
   const sessionUser = useSelector((state) => state.session.user);
   const [used, setUsed] = useState(false);
   const dispatch = useDispatch();
@@ -23,12 +23,12 @@ const Reaction = ({ reaction, count, message, socket }) => {
       const newReaction = await dispatch(
         addReactionThunk(reaction, messageId, userId)
       );
-      socket.emit("chat", newReaction);
+      // socket.emit("chat", newReaction);
       closeModal();
     } else {
       if (reactionId) {
         await dispatch(removeReactionThunk(reactionId, messageId));
-        socket.emit("chat", "DELETED");
+        // socket.emit("chat", "DELETED");
         closeModal();
       }
     }

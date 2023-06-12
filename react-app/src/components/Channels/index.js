@@ -4,7 +4,7 @@ import "./Channels.css";
 import OpenModalButton from "../OpenModalButton";
 import CreateChannelModal from "../CreateChannelModal";
 import { fetchChannelThunk } from "../../store/channels";
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
 import { authenticate } from "../../store/session";
 import { NavLink, useHistory, useLocation, useParams } from "react-router-dom";
 import CreateDirectMessageModal from "../CreateDirectMessageModal";
@@ -14,7 +14,7 @@ import CreateDirectMessageModal from "../CreateDirectMessageModal";
 
 
 
-const Channels = ({ channels, user, socket }) => {
+const Channels = ({ channels, user }) => {
   // const userChannels = [];
   const userChannels = [];
   const directMessages = [];
@@ -35,18 +35,18 @@ const Channels = ({ channels, user, socket }) => {
 
 
   useEffect(() => {
-    setIsSelected(location.pathname.split('/')[2])
+    // setIsSelected(location.pathname.split('/')[2])
+
+    dispatch(authenticate())
+
+    // socket.on("chat", (chat) => {
 
 
-    socket.on("chat", (chat) => {
+    // })
 
-      dispatch(authenticate())
-
-    })
-
-    return (() => {
-      socket.disconnect()
-    })
+    // return (() => {
+    //   socket.disconnect()
+    // })
 
   }, [dispatch]);
 
@@ -71,7 +71,7 @@ const Channels = ({ channels, user, socket }) => {
     }
   }
 
-  if (!socket) return null
+  // if (!socket) return null
 
   return (
     <div id="all-channels-container">
@@ -96,7 +96,7 @@ const Channels = ({ channels, user, socket }) => {
             <OpenModalButton
               buttonText="Create Channel"
               className={"create-channel-button"}
-              modalComponent={<CreateChannelModal sessionUser={user} socket={socket} />}
+              modalComponent={<CreateChannelModal sessionUser={user} />}
             />
           </span>
         </div>
@@ -123,7 +123,7 @@ const Channels = ({ channels, user, socket }) => {
             <OpenModalButton
               buttonText={"Create Direct Message"}
               className={"create-channel-button"}
-              modalComponent={<CreateDirectMessageModal channels={directMessages} sessionUser={user} socket={socket} />}
+              modalComponent={<CreateDirectMessageModal channels={directMessages} sessionUser={user} />}
             />
           </span>
         </div>

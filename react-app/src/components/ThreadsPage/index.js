@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchMessageThunk } from "../../store/messages";
-import { io } from 'socket.io-client';
+// import { io } from 'socket.io-client';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
 import OpenModalButton from "../OpenModalButton";
 import ChannelInfoModal from "../ChannelInfoModal";
@@ -11,7 +11,7 @@ import { Redirect } from "react-router-dom";
 import DeleteMessageModal from "../Message/DeleteMessageModal";
 import './ThreadsPage.css'
 
-let threadSocket
+// let threadSocket
 
 const ThreadsPage = ({ user }) => {
 
@@ -23,18 +23,18 @@ const ThreadsPage = ({ user }) => {
     const { messageId, channelId } = useParams();
 
     useEffect(() => {
-        threadSocket = io();
+        // threadSocket = io();
         fetchMessage();
+        dispatch(fetchMessageThunk(messageId))
 
-        threadSocket.on("chat", (chat) => {
+        // threadSocket.on("chat", (chat) => {
 
-            dispatch(fetchMessageThunk(messageId))
 
-        })
-        return (() => {
+        // })
+        // return (() => {
 
-            threadSocket.disconnect()
-        })
+        //     threadSocket.disconnect()
+        // })
 
     }, [messageId])
 
@@ -134,7 +134,7 @@ const ThreadsPage = ({ user }) => {
                                         {thread?.user.id === user.id && <OpenModalButton
                                             buttonText={"Delete"}
                                             className='single-thread-delete-button'
-                                            modalComponent={<DeleteMessageModal message={thread} socket={threadSocket} type={"thread"} channelId={message.channelId} />}
+                                            modalComponent={<DeleteMessageModal message={thread} type={"thread"} channelId={message.channelId} />}
                                         />}
                                     </div>
                                     <div className="thread-message">{thread?.threadMessage}</div>
@@ -143,7 +143,7 @@ const ThreadsPage = ({ user }) => {
                     </div>
                 </div>
                 <div>
-                    <MessageInput user={user} messageId={message.id} socket={threadSocket} type='thread' />
+                    <MessageInput user={user} messageId={message.id} type='thread' />
                 </div>
             </div>
         </div>

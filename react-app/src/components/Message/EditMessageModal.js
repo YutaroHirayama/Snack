@@ -5,7 +5,7 @@ import { useModal } from "../../context/Modal";
 import "./Message.css";
 import { useHistory } from "react-router-dom";
 
-const EditMessageModal = ({ message, socket }) => {
+const EditMessageModal = ({ message }) => {
   const history = useHistory();
   const { closeModal } = useModal();
 
@@ -22,7 +22,7 @@ const EditMessageModal = ({ message, socket }) => {
       history.push(`/`);
       return;
     }
-    socket.emit("chat", newMessage);
+    // socket.emit("chat", newMessage);
     // setMessage('');
     closeModal();
   };
@@ -40,9 +40,8 @@ const EditMessageModal = ({ message, socket }) => {
             placeholder="Enter message"
           ></textarea>
           {messageTooLong && (
-            <p className="errors">{`Message is ${
-              _message.length - 10000
-            } characters too long.`}</p>
+            <p className="errors">{`Message is ${_message.length - 10000
+              } characters too long.`}</p>
           )}
           <div className="edit-message-send-button">
             <button type="submit" disabled={!_message || messageTooLong}>

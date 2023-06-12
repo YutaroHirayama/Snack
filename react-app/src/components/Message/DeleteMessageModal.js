@@ -5,7 +5,7 @@ import { useHistory, useLocation, useParams } from "react-router-dom";
 import { deleteThreadThunk } from "../../store/messages";
 import "./Message.css"
 
-const DeleteMessageModal = ({ message, socket, type, channelId }) => {
+const DeleteMessageModal = ({ message, type, channelId }) => {
   const { closeModal } = useModal();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -19,7 +19,7 @@ const DeleteMessageModal = ({ message, socket, type, channelId }) => {
         history.push(`/channel/${channelId}`);
         return;
       }
-      socket.emit("chat", "DELETED");
+      // socket.emit("chat", "DELETED");
       closeModal();
     } else {
       const deletedMessage = await dispatch(deleteMessageThunk(message.id));
@@ -29,7 +29,7 @@ const DeleteMessageModal = ({ message, socket, type, channelId }) => {
         history.push(`/`);
         return;
       }
-      socket.emit("chat", "DELETED");
+      // socket.emit("chat", "DELETED");
       closeModal();
       history.push(`/channel/${message.channelId}`);
     }
