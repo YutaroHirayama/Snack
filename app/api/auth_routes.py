@@ -77,7 +77,7 @@ def sign_up():
         print()
 
         if image:
-            image.filename= get_unique_filename(image.filename)
+            image.filename = get_unique_filename(image.filename)
             upload = upload_file_to_s3(image)
 
             if "url" not in upload:
