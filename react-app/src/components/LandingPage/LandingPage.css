@@ -42,12 +42,15 @@ section {
 
 section h1 {
     font-size: 50px;
+    color: rgb(235, 235, 235);
+    text-shadow: 3px 3px 3px rgb(171, 81, 81);
 }
 
 .hero-h2 {
     font-size: 50px;
-    color: sandybrown;
+    color: rgb(171, 81, 81);
     margin-bottom: 20px;
+    text-shadow: 1px 1px 1px rgb(0, 0, 0);
 }
 
 footer {
@@ -59,7 +62,8 @@ footer {
 
 /* Hero section styles */
 #hero {
-    background-image: url("./images/slack-back.png");
+    background-position: center;
+    background-image: url("./images/background.jpg");
     background-size: cover;
     color: #fff;
     text-align: center;
@@ -73,12 +77,16 @@ footer {
 
 /* Button style */
 .btn {
+    background-color: rgb(28, 29, 30);
+    color: whitesmoke;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+
     display: inline-block;
     padding: 10px 20px;
-    background-color: #d1d2d3;
-    color: #0056B3;
     text-decoration: none;
-    border-radius: 4px;
+
     transition: background-color 0.3s ease;
     margin-left: 15px;
     margin-right: 15px;
@@ -88,7 +96,7 @@ footer {
 }
 
 .btn:hover {
-    background-color: #0056B3;
+    background-color: brown;
     color: #D9E0E7
 }
 
@@ -130,4 +138,10 @@ footer {
 
 .fa-arrow-up-right-from-square {
     font-size: 0.7rem;
+}
+
+.landing-page-login-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }

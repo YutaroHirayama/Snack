@@ -11,8 +11,11 @@ import HomePage from "./components/HomePage";
 import { Redirect } from "react-router-dom";
 import ThreadsPage from "./components/ThreadsPage";
 import Channels from "./components/Channels";
+import PageNotFound from "./components/PageNotFound";
 import { io } from "socket.io-client";
 import "./index.css";
+import AboutPage from "./components/AboutPage";
+import Welcome from "./components/Welcome";
 
 let socket;
 
@@ -46,12 +49,23 @@ function App() {
               </Route>
             </div>
 
-
-            <div className='message-page-container'>
-              <Route path="/channel/:channelId">
-                {!sessionUser && <Redirect to="/" />}
-                <MessagePage user={sessionUser} />
-              </Route>
+            <div className="message-page-container">
+              <Switch>
+                <Route path="/channel/:channelId">
+                  {!sessionUser && <Redirect to="/" />}
+                  <MessagePage user={sessionUser} />
+                </Route>
+                <Route exact path="/">
+                  {sessionUser && <Welcome />}
+                </Route>
+                <Route path="/aboutus">
+                  {!sessionUser && <Redirect to="/" />}
+                  <AboutPage />
+                </Route>
+                <Route path="*">
+                  <PageNotFound />
+                </Route>
+              </Switch>
             </div>
             <div className="threads-container_">
               <Route path="/channel/:channelId/message/:messageId">

@@ -87,7 +87,7 @@ const CreateDirectMessageModal = ({ channels, sessionUser, socket }) => {
                   {user.firstName} {user.lastName}
                 </div>
                 <button
-                  className="add-user-to-dm-button"
+                  className={!channelUsers.includes(user.id) ?"add-user-to-dm-button" : "button-disabled"}
                   disabled={channelUsers.includes(user.id)}
                   onClick={() => addUser(user.id)}
                 >

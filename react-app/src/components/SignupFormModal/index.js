@@ -10,24 +10,50 @@ function SignupFormModal() {
 	const [username, setUsername] = useState("");
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
-	const [profilePic, setProfilePic] = useState("");
+	const [profilePic, setProfilePic] = useState(null);
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [errors, setErrors] = useState([]);
+	const [submitLoading, setSubmitLoading] = useState(false);
 	const { closeModal } = useModal();
+
+	const handleFileChange = e => {
+		setProfilePic(e.target.files[0]);
+	}
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setSubmitLoading(true);
+
 		if (password === confirmPassword) {
 			let data;
-			if(profilePic.length === 0) {
-				data = await dispatch(signUp(username, email, password, firstName, lastName))
-			} else {
-				data = await dispatch(signUp(username, email, password, firstName, lastName, profilePic));
+
+			const formData = new FormData();
+
+			formData.append("username", username);
+			formData.append("email", email);
+			formData.append("password", password);
+			formData.append("firstName", firstName);
+			formData.append("lastName", lastName);
+
+			if (profilePic) {
+
+				if (profilePic.size > 1024 * 1024) {
+					setErrors([
+						"The profile image must be less than 1 MB",
+					]);
+					setSubmitLoading(false);
+					return;
+				}
+				formData.append("profilePic", profilePic);
 			}
+
+			data = await dispatch(signUp(formData));
+
 			if (data) {
 
 				setErrors(data);
+				setSubmitLoading(false);
 			} else {
 				closeModal();
 			}
@@ -35,23 +61,22 @@ function SignupFormModal() {
 			setErrors([
 				"Confirm Password field must be the same as the Password field",
 			]);
+			setSubmitLoading(false);
 		}
 	};
 
 	return (
 		<>
-		<div className="signup-form-modal">
+			<div className="signup-form-modal">
+				<h1>Sign Up</h1>
+				<form onSubmit={handleSubmit} id="sign-up-form" encType="multipart/form-data">
 
+					<ul>
+						{errors.map((error, idx) => (
+							<li className='signup-form-error' key={idx}>{error}</li>
+						))}
+					</ul>
 
-			<h1>Sign Up</h1>
-			<form onSubmit={handleSubmit}>
-				<div className="signup-form-prop">
-				<ul>
-					{errors.map((error, idx) => (
-						<li className='signup-form-error' key={idx}>{error}</li>
-					))}
-				</ul>
-				<label>
 					<input
 						type="text"
 						value={firstName}
@@ -59,8 +84,6 @@ function SignupFormModal() {
 						placeholder="First name"
 						required
 					/>
-				</label>
-				<label>
 					<input
 						type="text"
 						value={lastName}
@@ -68,34 +91,22 @@ function SignupFormModal() {
 						required
 						placeholder="Last name"
 					/>
-				</label>
-				<label>
 					<input
+						name="email"
 						type="text"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						required
 						placeholder="Email"
 					/>
-				</label>
-				<label>
 					<input
+						name="username"
 						type="text"
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
 						required
 						placeholder="Username"
 					/>
-				</label>
-				<label>
-					<input
-						type="text"
-						value={profilePic}
-						onChange={(e) => setProfilePic(e.target.value)}
-						placeholder="Profile pic "
-					/>
-				</label>
-				<label>
 					<input
 						type="password"
 						value={password}
@@ -103,8 +114,6 @@ function SignupFormModal() {
 						required
 						placeholder="Password"
 					/>
-				</label>
-				<label>
 					<input
 						type="password"
 						value={confirmPassword}
@@ -112,10 +121,16 @@ function SignupFormModal() {
 						required
 						placeholder="Confirm password"
 					/>
-				</label>
-				<button className="signup-button" type="submit">Sign Up</button>
-				</div>
-			</form>
+					<label id="upload-label">Upload a Profile Picture (Optional)</label>
+					<input
+						id="upload-profile-pic"
+						type="file"
+						accept=".png,.jpg,.jpeg"
+						onChange={handleFileChange}
+					/>
+
+					<button disabled={submitLoading} className="signup-button" type="submit">Sign Up</button>
+				</form>
 			</div>
 		</>
 	);

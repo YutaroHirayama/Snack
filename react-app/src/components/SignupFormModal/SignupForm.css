@@ -10,55 +10,98 @@
     width: 80%;
     font-size: 12px;
 }
+
 .signup-form-modal {
-    width: 450px;
-    height: 700px;
-    background-color: aliceblue;
+    width: 400px;
+    height: auto;
+    /* background-color: aliceblue; */
     display: flex;
     flex-direction: column;
-    color: rgb(46, 46, 74);
+    color: whitesmoke;
     align-items: center;
     font-size: 20px;
 }
 
 .signup-form-modal h1 {
-    color: rgb(46, 46, 74);
+    color: whitesmoke;
+    margin-bottom: 5px;
+    padding-bottom: none;
 }
 
-.signup-form-prop {
+#sign-up-form {
+
+    width: 90%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
-    height: 250px;
-    width: 420px;
-}
-.signup-form-prop label{
-    font-weight: bold;
-    height: 200px;
-
-}
-.signup-form-prop input{
-    font-weight: bold;
-    border-radius: 10px;
-    font-size: 25px;
+    gap: 5px;
+    justify-content: center;
+    /* height: 250px; */
+    /* width: 420px; */
     margin-bottom: 10px;
+}
+
+.sign-up-form-label {
+    /* font-weight: bold; */
+    /* height: 200px; */
 
 }
+
+#sign-up-form input {
+    width: 100%;
+    color: whitesmoke;
+    background-color: #141414;
+    border-radius: 5px;
+    padding: 10px;
+}
+
 .signup-button {
-    width: 70%;
+    width: 106%;
     text-align: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 10px;
-    background-color: aliceblue;
-    color: black;
-    height: 60px;
+    /* padding-top: 10px;
+    padding-bottom: 10px; */
+    border-radius: 5px;
+    background-color: rgb(28, 29, 30);
+    color: whitesmoke;
+    height: 40px;
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
+    padding: 0px 10px;
+    margin-top: 10px;
 }
+
 .signup-button:hover {
-    background-color: black;
-    color: aliceblue;
+
+    background-color: brown;
+
+}
+
+#upload-label {
+    font-size: 15px;
+    margin-bottom: 10px;
+    margin-top: 15px;
+    align-self: flex-start;
+}
+
+#upload-profile-pic {
+    padding: 0px;
+}
+
+#upload-profile-pic::file-selector-button {
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #141414;
+    color: whitesmoke;
+    border: 1px solid rgb(203, 203, 203, 0.4);
+    cursor: pointer;
+}
+
+#sign-up-form input:-webkit-autofill,
+#sign-up-form input:-webkit-autofill:hover,
+#sign-up-form input:-webkit-autofill:focus,
+#sign-up-form input:-webkit-autofill:active {
+    -webkit-text-fill-color: rgb(243, 243, 240) !important;
+    -webkit-box-shadow: 0 0 0 30px rgb(14, 14, 14) inset !important;
 }
