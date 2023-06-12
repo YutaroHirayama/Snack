@@ -97,3 +97,11 @@
     border: 1px solid rgb(203, 203, 203, 0.4);
     cursor: pointer;
 }
+
+#sign-up-form input:-webkit-autofill,
+#sign-up-form input:-webkit-autofill:hover,
+#sign-up-form input:-webkit-autofill:focus,
+#sign-up-form input:-webkit-autofill:active {
+    -webkit-text-fill-color: rgb(243, 243, 240) !important;
+    -webkit-box-shadow: 0 0 0 30px rgb(14, 14, 14) inset !important;
+}
