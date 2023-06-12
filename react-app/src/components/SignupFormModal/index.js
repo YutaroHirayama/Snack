@@ -108,11 +108,6 @@ function SignupFormModal() {
 						placeholder="Username"
 					/>
 					<input
-						type="file"
-						accept=".png,.jpg,.jpeg"
-						onChange={handleFileChange}
-					/>
-					<input
 						type="password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
@@ -125,6 +120,13 @@ function SignupFormModal() {
 						onChange={(e) => setConfirmPassword(e.target.value)}
 						required
 						placeholder="Confirm password"
+					/>
+					<label id="upload-label">Upload a Profile Picture (Optional)</label>
+					<input
+						id="upload-profile-pic"
+						type="file"
+						accept=".png,.jpg,.jpeg"
+						onChange={handleFileChange}
 					/>
 
 					<button disabled={submitLoading} className="signup-button" type="submit">Sign Up</button>

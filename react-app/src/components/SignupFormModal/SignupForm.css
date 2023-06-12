@@ -77,3 +77,23 @@
     background-color: brown;
 
 }
+
+#upload-label {
+    font-size: 15px;
+    margin-bottom: 10px;
+    margin-top: 15px;
+    align-self: flex-start;
+}
+
+#upload-profile-pic {
+    padding: 0px;
+}
+
+#upload-profile-pic::file-selector-button {
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #141414;
+    color: whitesmoke;
+    border: 1px solid rgb(203, 203, 203, 0.4);
+    cursor: pointer;
+}
