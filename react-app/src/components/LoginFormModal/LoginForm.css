@@ -81,3 +81,11 @@
     background-color: rgb(215, 81, 227);
     color: aliceblue;
 }
+
+.login-form-prop input:-webkit-autofill,
+.login-form-prop input:-webkit-autofill:hover,
+.login-form-prop input:-webkit-autofill:focus,
+.login-form-prop input:-webkit-autofill:active{
+    -webkit-text-fill-color: rgb(243, 243, 240) !important;
+    -webkit-box-shadow: 0 0 0 30px rgb(14, 14, 14) inset !important;
+}
