@@ -112,14 +112,6 @@
             "index": "pypi",
             "version": "==4.0.2"
         },
-        "flask-socketio": {
-            "hashes": [
-                "sha256:1cbd379c9bf68ac37bcc4750d01708922fa6365d13a5447d3f8893792879410c",
-                "sha256:564acfb24dcc9545cdae536cde0323653d9b547069a925f11eeb132338aa71c0"
-            ],
-            "index": "pypi",
-            "version": "==5.3.4"
-        },
         "flask-sqlalchemy": {
             "hashes": [
                 "sha256:16199f5b3ddfb69e0df2f52ae4c76aedbfec823462349dabb21a1b2e0a2b65e9",

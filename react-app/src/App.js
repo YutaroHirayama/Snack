@@ -12,7 +12,7 @@ import { Redirect } from "react-router-dom";
 import ThreadsPage from "./components/ThreadsPage";
 import Channels from "./components/Channels";
 import PageNotFound from "./components/PageNotFound";
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
 import "./index.css";
 import AboutPage from "./components/AboutPage";
 import Welcome from "./components/Welcome";

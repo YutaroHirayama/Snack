@@ -1,15 +1,17 @@
-from flask_socketio import SocketIO, emit, join_room, leave_room
-import os
-from app.models import Message, db
+# from flask_socketio import SocketIO, emit, join_room, leave_room
+# import os
+# from app.models import Message, db
 
 
-if os.environ.get("FLASK_ENV") == "production":
-    origins = [
-        "http://snack-slack.onrender.com",
-        "https://snack-slack.onrender.com"
-    ]
-else:
-    origins = "*"
+# if os.environ.get("FLASK_ENV") == "production":
+#     origins = [
+#         "http://snack-slack.onrender.com",
+#         "https://snack-slack.onrender.com",
+#         "http://snack-bucket.s3.amazonaws.com",
+#         "https://snack-bucket.s3.amazonaws.com"
+#     ]
+# else:
+#     origins = "*"
 
 # create your SocketIO instance
 # socketio = SocketIO(cors_allowed_origins=origins)

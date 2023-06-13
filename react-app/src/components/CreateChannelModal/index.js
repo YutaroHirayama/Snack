@@ -5,7 +5,7 @@ import { createChannelThunk } from "../../store/session";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
 
-const CreateChannelModal = ({ sessionUser, socket }) => {
+const CreateChannelModal = ({ sessionUser }) => {
   // const sessionUser = useSelector(state => state.user)
   const [channelName, setChannelName] = useState("");
   const [description, setDescription] = useState("");
@@ -48,7 +48,7 @@ const CreateChannelModal = ({ sessionUser, socket }) => {
     if (res?.errors) {
       setErrors(res.errors)
     } else {
-      socket.emit('chat', "created channel")
+      // socket.emit('chat', "created channel")
       closeModal()
       history.push(`/channel/${res}`)
     }
@@ -101,7 +101,7 @@ const CreateChannelModal = ({ sessionUser, socket }) => {
                 </div>
                 <div>
                   <button
-                    className={!channelUsers.includes(user.id) ?"add-user-to-channel-button" : "button-disabled"}
+                    className={!channelUsers.includes(user.id) ? "add-user-to-channel-button" : "button-disabled"}
                     disabled={channelUsers.includes(user.id)}
                     onClick={() => addUser(user.id)}
                   >

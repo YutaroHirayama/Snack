@@ -4,7 +4,7 @@ import { deleteChannelThunk } from "../../store/session";
 import { useHistory } from "react-router-dom";
 import "./ChannelInfoModal.css"
 
-const ConfirmDeleteModal = ({ channelId, socket }) => {
+const ConfirmDeleteModal = ({ channelId }) => {
   const { closeModal } = useModal();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -21,8 +21,8 @@ const ConfirmDeleteModal = ({ channelId, socket }) => {
       <div className="delete-channel-modal">
         <h2>Confirm Deletion?</h2>
         <div className="delete-channel-modal-buttons">
-        <button className="yes-button-delete" onClick={confirmDelete}>Yes</button>
-        <button className="no-button-delete" onClick={closeModal}>No</button>
+          <button className="yes-button-delete" onClick={confirmDelete}>Yes</button>
+          <button className="no-button-delete" onClick={closeModal}>No</button>
         </div>
       </div>
     </>
