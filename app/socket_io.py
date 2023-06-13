@@ -5,8 +5,8 @@ from app.models import Message, db
 
 if os.environ.get("FLASK_ENV") == "production":
     origins = [
-        "http://snack-slack.onrender.com",
-        "https://snack-slack.onrender.com"
+        "http://snack-app.onrender.com",
+        "https://snack-app.onrender.com"
     ]
 else:
     origins = "*"
