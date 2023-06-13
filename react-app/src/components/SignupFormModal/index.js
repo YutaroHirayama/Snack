@@ -50,6 +50,9 @@ function SignupFormModal() {
 
 			data = await dispatch(signUp(formData));
 
+			console.log('data ----> ', data);
+
+
 			if (data) {
 
 				setErrors(data);
@@ -92,7 +95,7 @@ function SignupFormModal() {
 						placeholder="Last name"
 					/>
 					<input
-						name="email"
+						name="Email"
 						type="text"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
@@ -100,7 +103,7 @@ function SignupFormModal() {
 						placeholder="Email"
 					/>
 					<input
-						name="username"
+						name="Username"
 						type="text"
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}

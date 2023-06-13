@@ -68,26 +68,11 @@ def sign_up():
 
         image=form.data['profilePic']
 
-        print()
-        print('--'*30)
-        print()
-        print("image ---> ", image)
-        print()
-        print('--'*30)
-        print()
-
         if image:
             image.filename = get_unique_filename(image.filename)
             upload = upload_file_to_s3(image)
 
             if "url" not in upload:
-                print()
-                print('--'*30)
-                print()
-                print("BEFORE return upload, 400")
-                print()
-                print('--'*30)
-                print()
                 return upload, 400
 
 
