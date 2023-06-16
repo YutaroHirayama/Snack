@@ -2,7 +2,7 @@ import React from "react";
 
 const Welcome = () => {
   return (
-    <div className="about-content">
+    <div className="about-content" style={{marginLeft:"40px"}}>
       <h2>About Snack</h2>
       <p>
         Snack is a Slack-clone project aimed at creating a live-chat application
