@@ -2,7 +2,7 @@
 
 Snack is a snack themed live chat web application inspired by Slack. We welcome you to live chat with other users and share your favorite snacks!
 
-Check out [Snack](https://snack-slack.onrender.com/) here.
+Check out [Snack](https://snack-app.onrender.com/) here.
 
 ## Technologies Used
 
