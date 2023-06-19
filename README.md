@@ -12,7 +12,7 @@ Check out [Snack](https://snack-slack.onrender.com/) here.
   <img src="https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white" />
   <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
   <img src="https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white" />
-  <img src="https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=sequelize&logoColor=white" />
+  <img src="https://img.shields.io/badge/SQLAlcehmy-E34?style=for-the-badge&logo=sqlalchemy&logoColor=white" />
   <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" />
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
@@ -33,27 +33,27 @@ Check out [Snack](https://snack-slack.onrender.com/) here.
 ## Features
 
 ### Channels
-Logged-in users can: 
+Logged-in users can:
 * Create a new channel with any number of users
 * Read/View all channels you are a member of
 * Update channels they have created
 * Delete channels they have created
 
 ### Messages
-Logged-in users can: 
+Logged-in users can:
 * Create a message in any channel or direct message they are a member of
 * Read/View all messages of any channel or direct message they are a member of
 * Update messages they have posted
 * Delete/Remove messages they have posted
 
 ### Threads/Replies
-Logged-in users can: 
+Logged-in users can:
 * Create a reply to a message
 * Read/View all replies of a message
 * Delete/Remove replies they have posted
 
 ### Reactions
-Logged-in users can: 
+Logged-in users can:
 * Add a reaction to any message
 * Read/View all reactions on messages
 * Delete/Remove reactions they have added
@@ -220,7 +220,7 @@ Logged-in users can:
 
 ```
     This route gets all messages in the specified channel
-    
+
 ```
 
 ### -------------
